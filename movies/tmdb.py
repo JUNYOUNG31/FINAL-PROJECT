@@ -15,15 +15,15 @@ for page in range(1, 51):
     
 import json
 
-file = open("../data/moviedata.json", "w+") 
+file = open("../data/moviedata.json", "w+", encoding="UTF-8") 
 
 with file as f:
-    file.write(json.dump(ret, f, indent=4))
+    file.write(json.dump(ret, f, indent=4, ensure_ascii=False))
 
 ############################################################
 
-file = open("../data/moviedata.json", "r") 
+# file = open("../data/moviedata.json", "r") 
 
-with file as f:
-    json_data = json.load(f)
-    json_data = json.dumps(f, ensure_ascii=False)
+# with file as f:
+#     json_data = json.load(f)
+#     json_data = json.dumps(f, ensure_ascii=False)
