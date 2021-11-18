@@ -1,18 +1,23 @@
 <template>
   <div>
-  <p>영화 리스트</p>
-  <p v-for="movie in movies" :key="movie.title">
-    {movie.title}
-  </p>
-  </div>
-  
+    <p>영화 리스트</p>
+    <movie-detail 
+    v-for="movie in movies" 
+    :key="movie.pk"
+    :movie="movie">   
+    </movie-detail>
+  </div>  
 </template>
 
 <script>
+import MovieDetail from '@/components/MovieDetail'
 import { mapGetters } from 'vuex'
 export default {
   name: 'MovieList',  
-  methods: {
+  components: {
+    MovieDetail
+  },
+  methods: {   
     setToken() {
       const token = localStorage.getItem('jwt')
       const config = {
