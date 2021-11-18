@@ -41,7 +41,7 @@ export default new Vuex.Store({
         // commit('GET_MOVIE_TITLES', res.data)
       })
       .catch(err => console.log(err))
-    },
+    },    
   },
   getters: {
     movies(state) {

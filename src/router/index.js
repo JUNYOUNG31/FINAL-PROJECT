@@ -4,6 +4,8 @@ import Signup from '@/views/accounts/Signup'
 import Login from '@/views/accounts/Login'
 import MovieList from '@/views/movies/MovieList'
 import ReviewList from '@/views/community/ReviewList'
+import ReviewDetail from '@/components/ReviewDetail'
+import MovieDetail from '@/components/MovieDetail'
 Vue.use(VueRouter)
 
 const routes = [
@@ -23,9 +25,19 @@ const routes = [
     component: MovieList,
   },
   {
-    path: '/movies/reviewList',
+    path: '/community/reviewList',
     name: 'ReviewList',
     component: ReviewList,
+  },
+  {
+    path: '/community/reviewdetail',
+    name: 'ReviewDetail',
+    component: ReviewDetail,
+  },
+  {
+    path: '/movies/moviedetail',
+    name: 'MovieDetail',
+    component: MovieDetail,
   },
 ]
 

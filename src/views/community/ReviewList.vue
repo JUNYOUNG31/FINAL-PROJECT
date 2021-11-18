@@ -4,7 +4,8 @@
     <review-detail 
     v-for="review in reviews" 
     :key="review.pk"
-    :review="review">   
+    :review="review"
+    @click.native="open">    
     </review-detail>
   </div>  
 </template>
@@ -18,7 +19,9 @@ export default {
     ReviewDetail
   },  
   methods: {   
-    
+    open: function() {
+      this.$router.push({name:'ReviewDetail'})
+    }
   },
   computed: {
     ...mapGetters(['reviews'])
@@ -26,7 +29,6 @@ export default {
   created() {
     this.$store.dispatch('getReviews')
   },
-
 }
 </script>
 
