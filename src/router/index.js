@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Signup from '@/views/accounts/Signup'
 import Login from '@/views/accounts/Login'
 import MovieList from '@/views/movies/MovieList'
+import ReviewList from '@/views/community/ReviewList'
 Vue.use(VueRouter)
 
 const routes = [
@@ -20,6 +21,11 @@ const routes = [
     path: '/movies/movielist',
     name: 'MovieList',
     component: MovieList,
+  },
+  {
+    path: '/movies/reviewList',
+    name: 'ReviewList',
+    component: ReviewList,
   },
 ]
 

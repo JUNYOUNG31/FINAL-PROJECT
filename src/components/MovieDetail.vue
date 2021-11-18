@@ -16,14 +16,6 @@ export default {
       required: true
     },
   },
-  data() {
-    return {
-      dialog: false,
-      notifications: false,
-      sound: true,
-      widgets: false,
-    }
-  },
 }
 </script>
 

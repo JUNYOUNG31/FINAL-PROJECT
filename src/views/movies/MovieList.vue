@@ -17,20 +17,13 @@ export default {
   components: {
     MovieDetail
   },
-  methods: {   
-    setToken() {
-      const token = localStorage.getItem('jwt')
-      const config = {
-        Authorization: `JWT ${token}`
-      }
-      return config
-    },
+  methods: {      
   },
   computed: {
     ...mapGetters(['movies'])
   },
   created() {
-    this.$store.dispatch('getMovies', this.setToken())
+    this.$store.dispatch('getMovies')
   },
 
 }
