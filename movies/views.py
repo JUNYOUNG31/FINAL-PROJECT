@@ -28,7 +28,7 @@ def movie_detail(request, movie_pk):
 @permission_classes([AllowAny])
 def getreview(request):
     reviews = get_list_or_404(Review)
-    serializer = ReviewListSerializer(reviews, many=True)
+    serializer = ReviewSerializer(reviews, many=True)
     return Response(serializer.data)
 
 @api_view(['GET'])
