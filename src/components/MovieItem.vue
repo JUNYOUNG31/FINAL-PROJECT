@@ -1,5 +1,5 @@
 <template>
-  <div class="col-mb-6">    
+  <div>    
       <h1>{{ movie.title }}</h1>        
       <img :src="`https://www.themoviedb.org/t/p/w500/${movie.poster_path}`" alt="movie_poster"> 
       <p>{{ movie.genre_ids }}</p>
@@ -9,7 +9,7 @@
 
 <script>
 export default {
-  name: 'MovieDetail',
+  name: 'MovieItem',
   props: {
     movie: {
       type: Object,

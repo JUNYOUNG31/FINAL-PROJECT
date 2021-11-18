@@ -4,8 +4,8 @@ import Signup from '@/views/accounts/Signup'
 import Login from '@/views/accounts/Login'
 import MovieList from '@/views/movies/MovieList'
 import ReviewList from '@/views/community/ReviewList'
-import ReviewDetail from '@/components/ReviewDetail'
-import MovieDetail from '@/components/MovieDetail'
+import MovieItem from '@/components/MovieItem'
+import ReviewItem from '@/components/ReviewItem'
 Vue.use(VueRouter)
 
 const routes = [
@@ -30,15 +30,15 @@ const routes = [
     component: ReviewList,
   },
   {
-    path: '/community/reviewdetail',
-    name: 'ReviewDetail',
-    component: ReviewDetail,
+    path: '/movies/movieitem',
+    name: 'MovieItem',
+    component: MovieItem,
   },
   {
-    path: '/movies/moviedetail',
-    name: 'MovieDetail',
-    component: MovieDetail,
-  },
+    path: '/community/reviewitem',
+    name: 'ReviewItem',
+    component: ReviewItem,
+  },  
 ]
 
 const router = new VueRouter({

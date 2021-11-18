@@ -1,21 +1,21 @@
 <template>
   <div>
     <p>영화 리스트</p>
-    <movie-detail 
+    <movie-item 
     v-for="movie in movies" 
     :key="movie.pk"
     :movie="movie">   
-    </movie-detail>
+    </movie-item>
   </div>  
 </template>
 
 <script>
-import MovieDetail from '@/components/MovieDetail'
+import MovieItem from '@/components/MovieItem'
 import { mapGetters } from 'vuex'
 export default {
   name: 'MovieList',  
   components: {
-    MovieDetail
+    MovieItem
   },
   methods: {      
   },
