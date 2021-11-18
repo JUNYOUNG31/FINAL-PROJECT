@@ -1,27 +1,27 @@
 from rest_framework import serializers
-from .models import Actor, Movie, Review
+from .models import Genre, Movie
 
 # 배우
-class ActorSerializer(serializers.ModelSerializer):
+# class ActorSerializer(serializers.ModelSerializer):
 
-    class MovieSerializer(serializers.ModelSerializer):
+#     class MovieSerializer(serializers.ModelSerializer):
         
-        class Meta:
-            model = Movie
-            fields = ('pk', 'title', )
+#         class Meta:
+#             model = Movie
+#             fields = ('pk', 'title', )
 
-    movie = MovieSerializer(many=True, read_only=True)
+#     movie = MovieSerializer(many=True, read_only=True)
 
-    class Meta:
-        model = Actor
-        fields = ('name', 'movie', )
+#     class Meta:
+#         model = Actor
+#         fields = ('name', 'movie', )
 
 
-class ActorListSerializer(serializers.ModelSerializer):
+# class ActorListSerializer(serializers.ModelSerializer):
 
-    class Meta:
-        model = Actor
-        fields = ('pk', 'name', )
+#     class Meta:
+#         model = Actor
+#         fields = ('pk', 'name', )
 
 
 # 영화
@@ -71,14 +71,6 @@ class ActorListSerializer(serializers.ModelSerializer):
 #         fields = ('pk', 'title', 'overview',
 #          'release_date', 'poster_path', 'actor', 'review', 'actor_pks')
 
-
-class MovieListSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Movie
-        fields = ('pk', 'title', )
-
-
 # # 리뷰
 # class ReviewSerializer(serializers.ModelSerializer):
 
@@ -100,3 +92,16 @@ class MovieListSerializer(serializers.ModelSerializer):
 #     class Meta:
 #         model = Review
 #         fields = ('pk', 'title', )
+
+class MovieListSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Movie
+        fields = ('pk', 'title', 'genres' 'overview', 'release_date', 'poster_path', 'vote_count', 'vote_average')
+
+
+class GenreSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Genre
+        fields = ('id', 'name')
