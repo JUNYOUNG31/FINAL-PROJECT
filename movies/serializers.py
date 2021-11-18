@@ -71,27 +71,6 @@ from .models import Genre, Movie
 #         fields = ('pk', 'title', 'overview',
 #          'release_date', 'poster_path', 'actor', 'review', 'actor_pks')
 
-# # 리뷰
-# class ReviewSerializer(serializers.ModelSerializer):
-
-#     class MovieSerializer(serializers.ModelSerializer):
-        
-#         class Meta:
-#             model = Movie
-#             fields = ('pk', 'title', )
-
-#     movie = MovieSerializer(read_only=True)
-
-#     class Meta:
-#         model = Review
-#         fields = ('pk', 'title', 'rank', 'content', 'movie', )
-
-
-# class ReviewListSerializer(serializers.ModelSerializer):
-
-#     class Meta:
-#         model = Review
-#         fields = ('pk', 'title', )
 
 class MovieListSerializer(serializers.ModelSerializer):
 
