@@ -1,5 +1,6 @@
 from rest_framework import serializers
-from .models import Genre, Movie, Review
+from rest_framework.utils import model_meta
+from .models import Genre, Movie, Review, Comment
 
 # 배우
 # class ActorSerializer(serializers.ModelSerializer):
@@ -85,6 +86,7 @@ class GenreSerializer(serializers.ModelSerializer):
         model = Genre
         fields = ('id', 'name')
 
+
 class ReviewSerializer(serializers.ModelSerializer):
 
     class MovieListSerializer(serializers.ModelSerializer):
@@ -109,3 +111,11 @@ class ReviewListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review
         fields = ('pk', 'title', )
+
+
+class CommentSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Comment
+        fields = ('id', 'content', 'created_at', 'updated_at')
+        read_only_fields = ('review',)

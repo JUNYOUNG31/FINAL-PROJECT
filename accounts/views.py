@@ -2,8 +2,10 @@ from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
+from django.shortcuts import get_object_or_404
 
 from .serializers import UserSerializer
+from django.contrib.auth import get_user_model
 
 
 @api_view(['POST'])
@@ -28,3 +30,25 @@ def signup(request):
         user.save()
         # password는 직렬화 과정에는 포함 되지만 → 표현(response)할 때는 나타나지 않는다.(write_only)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
+# # 유저 프로필
+# def profile(request, username):
+#     person = get_object_or_404(get_user_model(), username=username)
+#     serializer = UserSerializer(data=request.data)
+#     return Response(serializer.data)
+
+# # 팔로우
+# @require_POST
+# def follow(request, user_pk):
+#     if request.user.is_authenticated:
+#         me = request.user
+#         you = get_object_or_404(get_user_model(), pk=user_pk)
+
+#         if me != you:
+#             if you.followers.filter(pk=me.pk).exists():
+#                 you.followers.remove(me)
+#             else:
+#                 you.followers.add(me)
+#         return redirect('accounts:profile', you.username)
+#     return redirect('accounts:login')
