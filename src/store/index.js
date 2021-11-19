@@ -10,7 +10,7 @@ export default new Vuex.Store({
   state: {
     movies: [],
     reviews: [],
-    movieTitles: []
+    movieTitles: []    
   },
   mutations: {
     GET_MOVIES(state, res) {

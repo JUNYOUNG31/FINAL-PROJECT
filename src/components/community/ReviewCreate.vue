@@ -91,6 +91,7 @@ export default {
         title: null,
         content: null,
         rank: 2.5,
+        movie_title_id : 12
       },
       dialog: false,
     }
@@ -105,7 +106,7 @@ export default {
     },
     createReview() {
     const reviewcreate = {
-      reviewItem: this.reviewItem,
+      reviewItem: this.reviewItem,      
       token: this.setToken()
     }
     this.$store.dispatch('createReview', reviewcreate)
