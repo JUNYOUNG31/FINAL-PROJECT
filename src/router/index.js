@@ -3,9 +3,12 @@ import VueRouter from 'vue-router'
 import Signup from '@/views/accounts/Signup'
 import Login from '@/views/accounts/Login'
 import MovieList from '@/views/movies/MovieList'
-import ReviewList from '@/views/community/ReviewList'
+import Community from '@/views/community/Community'
 import MovieItem from '@/components/MovieItem'
-import ReviewItem from '@/components/ReviewItem'
+import ReviewList from '@/components/community/ReviewList'
+import ReviewItem from '@/components/community/ReviewItem'
+import ReviewCreate from '@/components/community/ReviewCreate'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -25,19 +28,29 @@ const routes = [
     component: MovieList,
   },
   {
-    path: '/community/reviewList',
-    name: 'ReviewList',
-    component: ReviewList,
-  },
-  {
     path: '/movies/movieitem',
     name: 'MovieItem',
     component: MovieItem,
   },
   {
-    path: '/community/reviewitem',
+    path: '/community',
+    name: 'Community',
+    component: Community,
+  },  
+  {
+    path: '/community/reviewlist/reviewitem',
     name: 'ReviewItem',
     component: ReviewItem,
+  },  
+  {
+    path: '/community/reviewlist',
+    name: 'ReviewList',
+    component: ReviewList,
+  },
+  {
+    path: '/community/ReviewCreate',
+    name: 'ReviewCreate',
+    component: ReviewCreate,
   },  
 ]
 

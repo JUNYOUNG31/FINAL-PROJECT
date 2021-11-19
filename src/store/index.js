@@ -10,6 +10,7 @@ export default new Vuex.Store({
   state: {
     movies: [],
     reviews: [],
+    movieTitles: []
   },
   mutations: {
     GET_MOVIES(state, res) {
@@ -18,6 +19,19 @@ export default new Vuex.Store({
     GET_REVIEWS(state, res) {
       state.reviews = res
     },
+    CREATE_REVIEWS(state, res) {
+      state.reviews = res
+    },
+    GET_MOVIE_TITLES(state, res) {
+      const tmp_list = []
+      for (var value of res) {
+        const tmp = {
+          name: value.title, value: value.title
+        }
+        tmp_list.push(tmp)
+      }
+      state.movieTitles = tmp_list
+    }
   },
   actions: {
     getMovies({commit}) {
@@ -27,7 +41,7 @@ export default new Vuex.Store({
       })
       .then(res => {
         commit('GET_MOVIES', res.data)
-        // commit('GET_MOVIE_TITLES', res.data)
+        commit('GET_MOVIE_TITLES', res.data)
       })
       .catch(err => console.log(err))
     },
@@ -37,10 +51,25 @@ export default new Vuex.Store({
         url: `${SERVER_URL}movies/community/`,
       })
       .then(res => {
-        commit('GET_REVIEWS', res.data)
-        // commit('GET_MOVIE_TITLES', res.data)
+        commit('GET_REVIEWS', res.data)   
       })
       .catch(err => console.log(err))
+    },    
+    createReview({commit}, reviewcreate) {
+      axios({
+        method: 'POST',
+        url: `${SERVER_URL}movies/community/create/`,
+        data: reviewcreate.reviewItem,
+        headers: reviewcreate.token
+      })
+      .then(res => {
+        console.log(reviewcreate)
+        commit('CREATE_REVIEWS', res.data)       
+      })
+      .catch(err => {
+        console.log(err)
+        console.log(reviewcreate)
+      })
     },    
   },
   getters: {
@@ -49,7 +78,10 @@ export default new Vuex.Store({
     },
     reviews(state) {
       return state.reviews
-    }
+    },
+    movieTitles(state) {
+      return state.movieTitles
+    },
   },
   modules: {
   }

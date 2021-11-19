@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import ReviewItem from '@/components/ReviewItem'
+import ReviewItem from '@/components/community/ReviewItem'
 import {mapGetters} from 'vuex'
 export default {
   name: 'ReviewList',  
