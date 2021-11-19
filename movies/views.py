@@ -38,14 +38,22 @@ def getreview(request):
     return Response(serializer.data)
 
 # 단일 review 생성
-@api_view(['POST'])
+@api_view(['GET','POST'])
 @authentication_classes([JSONWebTokenAuthentication])
 @permission_classes([IsAuthenticated])
 def create_review(request):
+    print(request.data)
+    # movie = get_object_or_404(Movie, pk=pk)
     serializer = ReviewSerializer(data=request.data)
     if serializer.is_valid(raise_exception=True):
         serializer.save(user=request.user)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+# def create_review(request):
+#     serializer = ReviewSerializer(data=request.data)
+#     # print(serializer.data)
+#     if serializer.is_valid(raise_exception=True):
+#         serializer.save(user=request.user)
+#         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 # 단일 review 조회, 수정, 삭제
 @api_view(['GET', 'PUT', 'DELETE'])
