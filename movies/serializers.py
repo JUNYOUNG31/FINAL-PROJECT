@@ -89,13 +89,13 @@ class GenreSerializer(serializers.ModelSerializer):
 
 class ReviewSerializer(serializers.ModelSerializer):
 
-    class MovieListSerializer(serializers.ModelSerializer):
+    # class MovieListSerializer(serializers.ModelSerializer):
         
-        class Meta:
-            model = Movie
-            fields = ('pk', 'title',)
+    #     class Meta:
+    #         model = Movie
+    #         fields = ('pk', 'title',)
 
-    movie_title = MovieListSerializer(write_only=True)
+    # movie_title = MovieListSerializer(write_only=True)
 
     class Meta:
         model = Review
