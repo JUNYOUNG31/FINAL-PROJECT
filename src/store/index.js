@@ -26,7 +26,7 @@ export default new Vuex.Store({
       const tmp_list = []
       for (var value of res) {
         const tmp = {
-          name: value.title, value: value.title
+          name: value.title, value: value.title ,id: value.pk
         }
         tmp_list.push(tmp)
       }

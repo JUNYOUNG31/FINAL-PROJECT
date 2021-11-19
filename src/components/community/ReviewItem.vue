@@ -15,6 +15,7 @@
         <hr>
         <p>작성 시각: {{ reviewItem.created_at }}</p>
         <p>수정 시각: {{ reviewItem.updated_at }}</p>
+        <p>장르 : {{ reviewItem.genre }}</p>
       </v-expansion-panel-content>
     </v-expansion-panel>
   </v-expansion-panels>    
@@ -34,6 +35,7 @@ export default {
     return {
       reviewItem: {
         movie_title: this.review.movie_title,
+        genre: this.review.movie_title.genre_ids,
         title: this.review.title,
         content: this.review.content,
         rank: this.review.rank,
