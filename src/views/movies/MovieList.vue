@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <p>영화 리스트</p>
+  <div class="movieform">
+    <h2>MOVIE LIST</h2>
     <movie-item 
     v-for="movie in movies" 
     :key="movie.pk"
@@ -30,5 +30,8 @@ export default {
 </script>
 
 <style>
-
+.movieform h2{
+  font-family: 'Bebas Neue', cursive;
+  color: lightskyblue
+}
 </style>

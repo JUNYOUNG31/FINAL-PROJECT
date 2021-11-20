@@ -40,5 +40,8 @@ export default {
 </script>
 
 <style>
-
+.Community h2{
+  font-family: 'Bebas Neue', cursive;
+  color: lightskyblue
+}
 </style>
