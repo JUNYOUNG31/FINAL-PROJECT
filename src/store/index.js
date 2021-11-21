@@ -53,7 +53,9 @@ export default new Vuex.Store({
       .then(res => {
         commit('GET_REVIEWS', res.data)   
       })
-      .catch(err => console.log(err))
+      .catch(err => {
+        console.log(err)        
+      })
     },    
     createReview({commit}, reviewcreate) {
       axios({

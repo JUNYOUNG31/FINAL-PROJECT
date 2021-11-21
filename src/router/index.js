@@ -38,18 +38,18 @@ const routes = [
     component: Community,
   },  
   {
-    path: '/community/reviewlist/reviewitem',
+    path: '/community',
     name: 'ReviewItem',
     component: ReviewItem,
   },  
   {
-    path: '/community/reviewlist',
+    path: '/community',
     name: 'ReviewList',
     component: ReviewList,
   },
   {
-    path: '/community/ReviewCreate',
-    name: 'ReviewCreate',
+    path: '/community',
+    name: 'ReviewCreate', 
     component: ReviewCreate,
   },  
 ]

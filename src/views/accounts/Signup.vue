@@ -54,8 +54,8 @@ export default {
         // console.log(res)
         this.$router.push({name:'Login'})
       })
-      .catch(err => {
-        console.log(err)
+      .catch(res => {
+        console.log(res)
       })
     }
   }
@@ -63,61 +63,61 @@ export default {
 </script>
 
 <style>
- .signup_container {
-   display: flex;
-   flex-direction: column;
-   justify-content: center;
-   align-items: center;
-   min-height: 660px;
-   background-color: #0009;
-   border-radius: 5px;
-   box-sizing: border-box;
-   width: 100%;
-   margin: auto;
-   max-width: 450px;
-   padding: 60px 68px 40px;
-   margin-bottom: 100px;
- }
+.signup_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 660px;
+  background-color: #0009;
+  border-radius: 5px;
+  box-sizing: border-box;
+  width: 100%;
+  margin: auto;
+  max-width: 450px;
+  padding: 60px 68px 40px;
+  margin-bottom: 100px;
+}
 
- .signup_container .signup{
-   display: flex;
-   flex-direction: column;
-   max-width: 450px;
-   width: 100%;
-   align-items: center;
- }
+.signup_container .signup{
+  display: flex;
+  flex-direction: column;
+  max-width: 450px;
+  width: 100%;
+  align-items: center;
+}
 
- .signup_container .signup h1{
-   font-family: 'Bebas Neue', cursive;
-   color: lightskyblue;
-   font-size: 32px;
-   margin-bottom: 28px;
- }
+.signup_container .signup h1{
+  font-family: 'Bebas Neue', cursive;
+  color: lightskyblue;
+  font-size: 32px;
+  margin-bottom: 28px;
+}
 
- .signup_container .signup input{
-   background: #333;
+.signup_container .signup input{
+  background: #333;
+border-radius: 4px;
+border: 0;
+color: white;  
+height: 50px;
+line-height: 40px;
+padding: 5px 20px;
+margin-bottom: 20px;
+}
+/* .signup input:last-child{
+  margin-bottom: 30px;
+} */
+
+.signup_container .signup button{
+  background: lightskyblue;
   border-radius: 4px;
+  font-size: 16px;
+  font-weight: bold;
+  margin: 24px 0 12px;
+  padding: 16px;
   border: 0;
-  color: white;  
-  height: 50px;
-  line-height: 40px;
-  padding: 5px 20px;
-  margin-bottom: 20px;
- }
- /* .signup input:last-child{
-   margin-bottom: 30px;
- } */
-
- .signup_container .signup button{
-   background: lightskyblue;
-   border-radius: 4px;
-   font-size: 16px;
-   font-weight: bold;
-   margin: 24px 0 12px;
-   padding: 16px;
-   border: 0;
-   color: white;
-   cursor: pointer;
-   width: 255px;   
- }
+  color: white;
+  cursor: pointer;
+  width: 255px;   
+}
 </style>
