@@ -99,9 +99,9 @@ class ReviewSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Review
-        fields = '__all__'
-        depth = 1
-        read_only_fields = ('user', 'like_users')
+        fields = ('title', 'content', 'movie_title', 'rank', 'created_at', 'updated_at',)
+        # depth = 1
+        read_only_fields = ('user',)
 
 
 class ReviewListSerializer(serializers.ModelSerializer):

@@ -38,7 +38,7 @@ def getreview(request):
     return Response(serializer.data)
 
 # 단일 review 생성
-@api_view(['GET','POST'])
+@api_view(['POST'])
 @authentication_classes([JSONWebTokenAuthentication])
 @permission_classes([IsAuthenticated])
 def create_review(request):
@@ -47,6 +47,7 @@ def create_review(request):
     serializer = ReviewSerializer(data=request.data)
     print(serializer)
     if serializer.is_valid(raise_exception=True):
+        print(serializer)
         serializer.save(user=request.user)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 # def create_review(request):
