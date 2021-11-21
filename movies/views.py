@@ -102,13 +102,14 @@ def create_comment(request, review_pk):
 @api_view(['GET', 'PUT', 'DELETE'])
 @authentication_classes([JSONWebTokenAuthentication])
 @permission_classes([IsAuthenticated])
-def comment_update_delete(request, comment_pk):
+def comment_update_delete(request, comment_pk, review_pk):
     comment = get_object_or_404(Comment, pk=comment_pk)
     if request.method == 'GET':
         serializer = CommentSerializer(comment)
         return Response(serializer.data)
     elif request.method == 'PUT':
         serializer = CommentSerializer(comment, data=request.data)
+        print(serializer)
         if not request.user.comments.filter(pk=comment_pk).exists():
             return Response({'detail': '권한이 없습니다.'}, status=status.HTTP_403_FORBIDDEN)
         if serializer.is_valid(raise_exception=True):
