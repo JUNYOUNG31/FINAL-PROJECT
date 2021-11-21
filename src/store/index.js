@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
-// import router from '@/router'
+import router from '@/router'
 
 const SERVER_URL = 'http://127.0.0.1:8000/'
 Vue.use(Vuex)
@@ -20,7 +20,7 @@ export default new Vuex.Store({
       state.reviews = res
     },
     CREATE_REVIEWS(state, res) {
-      state.reviews = res
+      state.reviews = res      
     },
     GET_MOVIE_TITLES(state, res) {
       const tmp_list = []
@@ -64,13 +64,14 @@ export default new Vuex.Store({
         data: reviewcreate.reviewItem,
         headers: reviewcreate.token
       })
-      .then(res => {
-        console.log(reviewcreate)
-        commit('CREATE_REVIEWS', res.data)       
+      .then(res => {       
+        console.log(res)
+        commit('CREATE_REVIEWS', res.data) 
+        router.push({name:'Community'})
+        router.go()       
       })
       .catch( err => {
-        console.log(err)
-        // console.log(reviewcreate)
+        console.log(err)        
       })
     },    
   },

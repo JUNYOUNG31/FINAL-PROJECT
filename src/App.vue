@@ -1,7 +1,7 @@
 <template>
   <v-app id="app">
       <div class="app">
-        <div class="logo"><img :src="require(`./assets/multiplus4.png`)" alt="logo"></div>      
+        <div class="logo"><img :src="require(`./assets/multiplus5.png`)" alt="logo"></div>      
         <div class="nav">          
           <span v-if="isLogin">
             <!-- <router-link :to="{ name: 'Profile' }">Profile</router-link>| -->

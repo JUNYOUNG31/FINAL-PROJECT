@@ -112,7 +112,7 @@ export default {
     this.movie_title = null,
     this.title = null,
     this.content = null,
-    this.dialog = false
+    this.dialog = false    
     }
   },
   computed: {
@@ -121,7 +121,7 @@ export default {
     ])
   },
   created() {
-    this.$store.dispatch('getMovies')
+    this.$store.dispatch('getMovies')    
   },  
 }
 </script>
