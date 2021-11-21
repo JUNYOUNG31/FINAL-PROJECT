@@ -1,11 +1,12 @@
 <template>
   <div>
     <p>리뷰 리스트</p>
-    <review-item 
+    <div
     v-for="review in reviews" 
-    :key="review.pk"
-    :review="review">
+    :key="review.pk">    
+    <review-item :review="review">
     </review-item>
+    </div>
   </div>  
 </template>
 
