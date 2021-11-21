@@ -16,13 +16,13 @@
       </v-expansion-panel-content> -->
       <v-expansion-panel-header>
         <h2 >리뷰 제목: {{ review.title }}</h2>   
-        <h2 >작성자: {{ review.user.username }}</h2>   
+        <!-- <h2 >작성자: {{ review.user.username }}</h2>    -->
       </v-expansion-panel-header>
       <v-expansion-panel-content>
         <p>영화 제목: {{ review.movie_title }}</p>
         <p>평점: {{ review.rank }}</p>
         <p>리뷰 내용: {{ review.content }}</p>
-        <p>이 글을 좋아한 사람: {{ review.like_users }}</p>
+        <!-- <p>이 글을 좋아한 사람: {{ review.like_users }}</p> -->
         <hr>
         <p>작성 시각: {{ review.created_at }}</p>
         <p>수정 시각: {{ review.updated_at }}</p>        
