@@ -18,7 +18,7 @@
           </span>
         </div>
       </div>
-    <router-view @login="isLogin = true"/>
+    <router-view :key="$route.fullPath" @login="isLogin = true"/>
     
   </v-app>
 </template>

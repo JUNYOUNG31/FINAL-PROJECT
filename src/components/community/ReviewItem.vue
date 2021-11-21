@@ -27,14 +27,25 @@
         <div><button class="btn btn-primary" @click="updateReview">UPDATE</button></div>  
         <div><button class="btn btn-danger" @click="deleteReview">DELETE</button></div>  
       </v-expansion-panel-content>
+      <v-expansion-panel-content>  
+      <comment-create :review="review"></comment-create>
+      <comment-list :review="review">
+      </comment-list>
+      </v-expansion-panel-content> 
   </div>
 </template>
 
 <script>
 import axios from 'axios'
+import CommentList from '@/components/community/CommentList'
+import CommentCreate from '@/components/community/CommentCreate'
 const SERVER_URL = 'http://127.0.0.1:8000/'
 export default {
   name: 'ReviewItem',
+  components: {
+    CommentList,
+    CommentCreate
+  },
   props: {
     review: {
       type: Object,
