@@ -19,8 +19,8 @@
               <v-autocomplete
                 :items="movieTitles"
                 item-text="name"
-                item-value="id"
-                v-model="reviewItem.movie_title_id"
+                item-value="value"
+                v-model="reviewItem.movie_title"
                 label="영화 선택"
                 required
               ></v-autocomplete>
@@ -90,8 +90,7 @@ export default {
         movie_title: null,
         title: null,
         content: null,
-        rank: 2.5,
-        movie_title_id : null
+        rank: 2.5,        
       },
       dialog: false,
     }
