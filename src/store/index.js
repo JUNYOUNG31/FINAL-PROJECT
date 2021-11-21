@@ -74,6 +74,18 @@ export default new Vuex.Store({
         console.log(err)        
       })
     },    
+    deleteReview({commit}, deleteItem) {
+      axios({
+        method: 'DELETE',
+        url: `${SERVER_URL}movies/community/${deleteItem.review_id}`,
+        data: deleteItem.reviewItem,
+        headers: deleteItem.token
+      })
+      .then(res => {       
+        console.log(res)
+        commit('DELETE_REVIEW', res.data)               
+      })
+    }
   },
   getters: {
     movies(state) {

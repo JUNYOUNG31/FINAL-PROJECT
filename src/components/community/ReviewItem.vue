@@ -1,19 +1,5 @@
 <template>
-  <div>        
-      <!-- <v-expansion-panel-header>
-        <h2 >리뷰 제목: {{ reviewItem.title }}</h2>   
-        <h2 >작성자: {{ reviewItem.user.username }}</h2>   
-      </v-expansion-panel-header>
-      <v-expansion-panel-content>
-        <p>영화 제목: {{ reviewItem.movie_title.title }}</p>
-        <p>평점: {{ reviewItem.rank }}</p>
-        <p>리뷰 내용: {{ reviewItem.content }}</p>
-        <p>이 글을 좋아한 사람: {{ reviewItem.like_users }}</p>
-        <hr>
-        <p>작성 시각: {{ reviewItem.created_at }}</p>
-        <p>수정 시각: {{ reviewItem.updated_at }}</p>
-        <p>장르 : {{ reviewItem.genre }}</p>
-      </v-expansion-panel-content> -->
+  <div>              
       <v-expansion-panel-header>
         <h2 >리뷰 제목: {{ review.title }}</h2>   
         <!-- <h2 >작성자: {{ review.user.username }}</h2>    -->
@@ -25,7 +11,9 @@
         <!-- <p>이 글을 좋아한 사람: {{ review.like_users }}</p> -->
         <hr>
         <p>작성 시각: {{ review.created_at }}</p>
-        <p>수정 시각: {{ review.updated_at }}</p>        
+        <p>수정 시각: {{ review.updated_at }}</p>      
+
+        <div><button class="btn btn-danger" @click="deleteReview">DELETE</button></div>  
       </v-expansion-panel-content>
   </div>
 </template>
@@ -42,8 +30,7 @@ export default {
   // data: function () {
   //   return {
   //     reviewItem: {
-  //       movie_title: this.review.movie_title,
-  //       genre: this.review.movie_title.genre_ids,
+  //       movie_title: this.review.movie_title,        
   //       title: this.review.title,
   //       content: this.review.content,
   //       rank: this.review.rank,
@@ -55,6 +42,21 @@ export default {
   //   }
   // },
   methods: {
+    setToken() {
+      const token = localStorage.getItem('jwt')
+      const config = {
+        Authorization: `JWT ${token}`
+      }
+      return config
+    },
+    deleteReview() {
+      const deleteItem = {
+        review_id: this.review.id,
+        token: this.setToken()
+      }
+      console.log(deleteItem)
+      this.$store.dispatch('deleteReview',deleteItem)
+    }
   },
   created() {
     console.log(this.review)

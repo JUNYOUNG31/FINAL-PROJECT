@@ -3,8 +3,8 @@
     <p>리뷰 리스트</p>
     <v-expansion-panels>
       <v-expansion-panel    
-    v-for="review in reviews" 
-    :key="review.pk">    
+    v-for="(review, id) in reviews" 
+    :key="id">    
     <review-item :review="review">
     </review-item>
     </v-expansion-panel> 
