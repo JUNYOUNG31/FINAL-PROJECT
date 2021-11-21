@@ -112,7 +112,6 @@ export default {
     this.movie_title = null,
     this.title = null,
     this.content = null,
-    this.movie_title_id = null,
     this.dialog = false
     }
   },
@@ -123,7 +122,6 @@ export default {
   },
   created() {
     this.$store.dispatch('getMovies')
-    this.$store.dispatch('getReviews') 
   },  
 }
 </script>
