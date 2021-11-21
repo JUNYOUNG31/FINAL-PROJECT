@@ -2,9 +2,11 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
 import router from '@/router'
+import vueMoment from 'vue-moment'
 
 const SERVER_URL = 'http://127.0.0.1:8000/'
 Vue.use(Vuex)
+Vue.use(vueMoment)
 
 export default new Vuex.Store({
   state: {
@@ -22,13 +24,13 @@ export default new Vuex.Store({
     CREATE_REVIEW(state, res) {
       state.reviews = res      
     },
-    UPDATE_REVIEW(state, res) {
+    UPDATE_REVIEW(state, reviewItem) {
       state.reviews = state.reviews.map((review) => {
-        if (review === res) {
+        if (review === reviewItem) {
           return { ...review,
-            title: res.title,
-            content: res.content,
-            rank: res.rank,
+            title: reviewItem.title,
+            content: reviewItem.content,
+            rank: reviewItem.rank,
           }
         }  
         return review
@@ -93,7 +95,7 @@ export default new Vuex.Store({
     updateReview({commit}, updateItem) {
       axios({
         method: 'PUT',
-        url: `${SERVER_URL}movies/community/${updateItem.review_id}`,    
+        url: `${SERVER_URL}movies/community/${updateItem.review_id}/`,    
         data: updateItem.reviewItem,
         headers: updateItem.token
       }) 

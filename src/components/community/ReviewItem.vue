@@ -21,8 +21,8 @@
         </v-expansion-panel-content>
         <!-- <p>이 글을 좋아한 사람: {{ review.like_users }}</p> -->
         <hr>
-        <p>작성 시각: {{ review.created_at }}</p>
-        <p>수정 시각: {{ review.updated_at }}</p>  
+        <p>작성 시각: {{ review.created_at | moment('from', 'now') }}</p>
+        <p>수정 시각: {{ review.updated_at | moment('from', 'now') }}</p>  
       <v-expansion-panel-content>    
         <div><button class="btn btn-primary" @click="updateReview">UPDATE</button></div>  
         <div><button class="btn btn-danger" @click="deleteReview">DELETE</button></div>  
@@ -43,7 +43,8 @@ export default {
   },  
   data: function () {
     return {
-      reviewItem: {      
+      reviewItem: {
+        movie_title: this.review.movie_title,      
         title: this.review.title,
         content: this.review.content,
         rank: this.review.rank,
