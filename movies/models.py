@@ -23,7 +23,7 @@ class Movie(models.Model):
 
 class Review(models.Model):
     title = models.CharField(max_length=100)
-    movie_title = models.ForeignKey(Movie, on_delete=models.CASCADE, null=True)
+    movie_title = models.CharField(max_length=100)
     rank = models.PositiveIntegerField()
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
