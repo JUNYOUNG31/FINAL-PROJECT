@@ -66,9 +66,9 @@ export default new Vuex.Store({
         console.log(reviewcreate)
         commit('CREATE_REVIEWS', res.data)       
       })
-      .catch(err => {
+      .catch( err => {
         console.log(err)
-        console.log(reviewcreate)
+        // console.log(reviewcreate)
       })
     },    
   },
