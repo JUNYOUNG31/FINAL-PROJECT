@@ -3,12 +3,14 @@ import Vuex from 'vuex'
 import axios from 'axios'
 import router from '@/router'
 import vueMoment from 'vue-moment'
+import createPersistedState from "vuex-persistedstate"; 
 
 const SERVER_URL = 'http://127.0.0.1:8000/'
 Vue.use(Vuex)
 Vue.use(vueMoment)
 
 export default new Vuex.Store({
+  plugins: [createPersistedState()],
   state: {
     movies: [],
     reviews: [],
