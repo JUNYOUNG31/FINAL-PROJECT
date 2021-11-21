@@ -6,11 +6,7 @@
       </review-create>
       <review-list>        
       </review-list>
-    </span>
-    <span v-else>          
-      <review-list>        
-      </review-list>    
-    </span>
+    </span>    
     <router-view @login="isLogin = true"/>      
   </div>
 </template>

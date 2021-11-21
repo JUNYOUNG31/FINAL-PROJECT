@@ -1,7 +1,7 @@
 <template>
-  <div>              
+  <div class="reviewitem">              
       <v-expansion-panel-header>
-        <v-alert v-model="reviewItem.title"></v-alert>   
+        <h2 >REVIEW: {{reviewItem.title }} </h2>   
         <h2 >작성자: {{ review.user.username }}</h2>   
       </v-expansion-panel-header>
       <v-expansion-panel-content>영화 제목: {{ review.movie_title }}</v-expansion-panel-content>
@@ -94,6 +94,8 @@ export default {
 }
 </script>
 
-<style>
-
+<style >
+.reviewitem{
+  font-family: 'Noto Sans KR', sans-serif; 
+}
 </style>

@@ -1,7 +1,7 @@
 <template>
   <v-app id="app">
       <div class="app">
-        <div class="logo"><img :src="require(`./assets/multiplus5.png`)" alt="logo"></div>      
+        <div class="logo" ><img :src="require(`./assets/multiplus5.png`)" alt="logo"></div>      
         <div class="nav">          
           <span v-if="isLogin">
             <!-- <router-link :to="{ name: 'Profile' }">Profile</router-link>| -->
@@ -54,7 +54,8 @@ export default {
 @import 'assets/styles/appstyle.css';
 #app {
   min-height: 100vh;
-  background: #111;
+  background-image:url("./assets/background.jpg");
+  background-size: cover;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

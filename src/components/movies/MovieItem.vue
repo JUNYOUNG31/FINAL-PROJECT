@@ -5,14 +5,17 @@
         <div class="content">
           <h1>{{ movie.title }}</h1>        
           <p>{{ movie.overview }}</p>    
-          <!-- <p>{{ movie.genre_ids }}</p> -->
-          <a href="#">MOVIE DETAIL</a>
+          <!-- <p>{{ movie.genre_ids }}</p> -->          
+          <movie-detail
+          :movie="moviedetail">   
+          </movie-detail>
         </div>
     </div>
   </div>
 </template>
 
 <script>
+import MovieDetail from '@/components/movies/MovieDetail'
 export default {
   name: 'MovieItem',
   props: {
@@ -21,6 +24,14 @@ export default {
       required: true
     },
   },
+  components: {
+    MovieDetail
+  },
+  data () {
+      return {
+        moviedetail: this.movie
+      }
+    },
 }
 </script>
 
@@ -47,7 +58,7 @@ export default {
 }
 
 .movielist img{
-  width: 100%;
+  max-width: 1200px;
   height: 100%;
   display: block;
   object-fit: cover;
@@ -84,14 +95,6 @@ export default {
   display: -webkit-box; 
   -webkit-line-clamp: 3; 
   -webkit-box-orient: vertical;
-}
-
-.movielist .content a{
-  display: inline-block;
-  text-decoration: none;
-  color: white;
-  background: #0009;
-  padding: 10px 15px;
 }
 
 .movielist .content a:hover{
