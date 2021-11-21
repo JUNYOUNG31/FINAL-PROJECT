@@ -10,6 +10,14 @@ import ReviewList from '@/components/community/ReviewList'
 // import ReviewItem from '@/components/community/ReviewItem'
 // import ReviewCreate from '@/components/community/ReviewCreate'
 
+const originalPush = VueRouter.prototype.push;
+VueRouter.prototype.push = function push(location) {
+    return originalPush.call(this, location).catch(() => {
+        return window.location.reload()
+    })
+};
+ 
+
 Vue.use(VueRouter)
 
 const routes = [

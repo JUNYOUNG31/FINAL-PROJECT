@@ -12,7 +12,9 @@ export default new Vuex.Store({
   state: {
     movies: [],
     reviews: [],
-    movieTitles: []    
+    movieTitles: [],
+    comments: [],
+    comment: null,
   },
   mutations: {
     GET_MOVIES(state, res) {
@@ -36,9 +38,28 @@ export default new Vuex.Store({
         return review
       })    
     },
-
-
-
+    
+    CREATE_COMMENT(state, res) {
+      state.comments.push(res)
+    },
+    READ_COMMENT(state, res) {
+      state.comment = res
+    },
+    UPDATE_COMMENT(state, commentItem) {
+      state.comments = state.comments.map((comment) => {
+        if (comment === commentItem) {
+          return { ...comment, content: commentItem.content }
+        }
+        return comment
+      })
+    },
+    DELETE_COMMENT(state, commentItem) {
+      const index = state.comments.indexOf(commentItem)
+      state.comments.splice(index, 1)
+    },
+    GET_COMMENTS(state, res) {
+      state.comments = res
+    },
 
     GET_MOVIE_TITLES(state, res) {
       const tmp_list = []
@@ -103,8 +124,67 @@ export default new Vuex.Store({
         console.log(res)
         commit('UPDATE_REVIEW')               
       })
-
-    }
+    },
+    // COMMUNITY - COMMENT ACTIONS
+    getComments({commit}, objs) {
+      axios({
+        method: 'GET',
+        url: `${SERVER_URL}movies/community/${objs.review_id}/comment_create/`,
+        headers: objs.token
+      })
+      .then((res) => {
+        commit('GET_COMMENTS', res.data)
+      })
+      .catch(err => console.log(err))
+    },
+    createComment({commit}, objs) {
+      axios({
+        method: 'POST',
+        url: `${SERVER_URL}movies/community/${objs.review_id}/comment_create/`,
+        data: objs.commentItem,
+        headers: objs.token
+      })
+      .then((res) => {
+        commit('CREATE_COMMENT', res.data)
+      })
+      .catch(err => console.log(err))
+    },
+    // readComment({commit}, objs) {
+    //   axios({
+    //     method: 'GET',
+    //     url: `${SERVER_URL}community/comments/${objs.comment_id}/`,
+    //     headers: objs.token
+    //   })
+    //   .then((res) => {
+    //     commit('READ_COMMENT', res.data)
+    //   })
+    //   .catch(err => console.log(err))
+    // },
+    updateComment({commit}, objs) {
+      axios({
+        method: 'PUT',
+        url: `${SERVER_URL}movies/community/${objs.review_id}/${objs.comment_id}/`,
+        data: objs.commentItem,
+        headers: objs.token
+      })
+      .then((res) => {
+        commit('UPDATE_COMMENT', res.data)
+        router.push({name:'Community'})
+      })
+      .catch(err => console.log(err))
+    },
+    deleteComment({commit}, objs) {
+      axios({
+        method: 'DELETE',
+        url: `${SERVER_URL}movies/community/${objs.review_id}/${objs.comment_id}/`,
+        headers: objs.token
+      })
+      .then((res) => {
+        commit('DELETE_COMMENT', res.data)
+        router.push({name:'Community'})
+      })
+      .catch(err => console.log(err))
+    },
   },
   getters: {
     movies(state) {
@@ -115,6 +195,9 @@ export default new Vuex.Store({
     },
     movieTitles(state) {
       return state.movieTitles
+    },
+    comments(state) {
+      return state.comments
     },
   },
   modules: {
