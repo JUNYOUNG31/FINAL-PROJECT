@@ -5,7 +5,7 @@ import Login from '@/views/accounts/Login'
 import MovieList from '@/views/movies/MovieList'
 import Community from '@/views/community/Community'
 import MovieItem from '@/components/MovieItem'
-// import ReviewList from '@/components/community/ReviewList'
+import ReviewList from '@/components/community/ReviewList'
 // import ReviewItem from '@/components/community/ReviewItem'
 // import ReviewCreate from '@/components/community/ReviewCreate'
 
@@ -42,11 +42,11 @@ const routes = [
   //   name: 'ReviewItem',
   //   component: ReviewItem,
   // },  
-  // {
-  //   path: '/community',
-  //   name: 'ReviewList',
-  //   component: ReviewList,
-  // },
+  {
+    path: '/community/list',
+    name: 'ReviewList',
+    component: ReviewList,
+  },
   // {
   //   path: '/community',
   //   name: 'ReviewCreate', 

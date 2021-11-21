@@ -19,9 +19,25 @@ export default new Vuex.Store({
     GET_REVIEWS(state, res) {
       state.reviews = res
     },
-    CREATE_REVIEWS(state, res) {
+    CREATE_REVIEW(state, res) {
       state.reviews = res      
     },
+    UPDATE_REVIEW(state, res) {
+      state.reviews = state.reviews.map((review) => {
+        if (review === res) {
+          return { ...review,
+            title: res.title,
+            content: res.content,
+            rank: res.rank,
+          }
+        }  
+        return review
+      })    
+    },
+
+
+
+
     GET_MOVIE_TITLES(state, res) {
       const tmp_list = []
       for (var value of res) {
@@ -66,25 +82,26 @@ export default new Vuex.Store({
       })
       .then(res => {       
         console.log(res)
-        commit('CREATE_REVIEWS', res.data) 
+        commit('CREATE_REVIEW', res.data) 
         router.push({name:'Community'})
         router.go()       
       })
       .catch( err => {
         console.log(err)        
       })
-    },    
-    deleteReview({commit}, deleteItem) {
+    },
+    updateReview({commit}, updateItem) {
       axios({
-        method: 'DELETE',
-        url: `${SERVER_URL}movies/community/${deleteItem.review_id}`,
-        data: deleteItem.reviewItem,
-        headers: deleteItem.token
-      })
+        method: 'PUT',
+        url: `${SERVER_URL}movies/community/${updateItem.review_id}`,    
+        data: updateItem.reviewItem,
+        headers: updateItem.token
+      }) 
       .then(res => {       
         console.log(res)
-        commit('DELETE_REVIEW', res.data)               
+        commit('UPDATE_REVIEW')               
       })
+
     }
   },
   getters: {
