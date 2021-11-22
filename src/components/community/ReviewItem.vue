@@ -4,7 +4,7 @@
         <h2 >REVIEW: {{reviewItem.title }} </h2>   
         <h2 >작성자: {{ review.user.username }}</h2>   
       </v-expansion-panel-header>
-      <v-expansion-panel-content>영화 제목: {{ review.movie_title }}</v-expansion-panel-content>
+      <v-expansion-panel-content>영화 제목: {{ review.movie_title.title }}</v-expansion-panel-content>
       <v-expansion-panel-content>별점 :
         <v-rating
           v-model="reviewItem.rank"
