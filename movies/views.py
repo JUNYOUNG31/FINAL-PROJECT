@@ -5,13 +5,14 @@ from django.shortcuts import get_object_or_404, get_list_or_404
 from rest_framework import serializers
 from .models import Movie, Review, Comment
 from .serializers import (MovieListSerializer, ReviewListSerializer, 
-ReviewSerializer, CommentSerializer)
+ReviewSerializer, CommentSerializer, MovieRecommendSerializer)
 from rest_framework.response import Response
 from rest_framework.decorators import permission_classes, authentication_classes
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 from rest_framework.decorators import api_view
 from rest_framework import status
+import random
 
 #전체 movie 목록 조회
 @api_view(['GET'])
@@ -126,3 +127,45 @@ def comment_update_delete(request, comment_pk, review_pk):
             'delete': f'data {comment_pk} is deleted!!',
         }
         return Response(data, status=status.HTTP_204_NO_CONTENT)
+
+
+@api_view(['GET'])
+@authentication_classes([JSONWebTokenAuthentication])
+@permission_classes([IsAuthenticated])
+def recommend(request):
+    reviews = get_list_or_404(Review)
+    pk_list = []
+    random_num = 0
+    for review in reviews:
+        if request.user == review.user:
+            if review.rank >= 3:
+                pk_list.append(review.movie_pk)
+
+    if len(pk_list) >= 1:
+        aa=random.sample(pk_list, 1)
+        random_num += aa[0]
+        movie = Movie.objects.filter(pk=random_num).first()
+        serializer = MovieRecommendSerializer(movie, data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            return Response(serializer.data)
+
+    # else:
+        
+    
+
+    # if request.user.articles.all():
+    #     gnr_cnt = dict()
+    #     articles = request.user.articles.all()
+    #     for article in articles:
+    #         movie = article.movie
+    #         genres = movie.genres.all()
+    #         for genre in genres:
+    #             gnr_cnt[genre.pk] = gnr_cnt.get(genre.pk, 0) + 1
+    #     fav_gnr = sorted(gnr_cnt.items(), key=lambda x:x[1], reverse=True)[0][0]
+    #     movies = list(Movie.objects.filter(genres=fav_gnr).all())
+    # else:
+    #     movies = list(Movie.objects.filter(vote_average__gte=8).all())
+    # movie = choice(movies)
+    # serializer = MovieArticleSerializer(movie)
+    # return Response(serializer.data)

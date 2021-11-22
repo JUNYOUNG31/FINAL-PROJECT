@@ -18,4 +18,7 @@ urlpatterns = [
     path('community/<int:review_pk>/comment_create/', views.create_comment),
     # 댓글 수정/삭제
     path('community/<int:review_pk>/<int:comment_pk>/', views.comment_update_delete),
+    
+    # 영화 추천
+    path('recommend/', views.recommend),
 ]
