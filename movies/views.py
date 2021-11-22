@@ -139,33 +139,27 @@ def recommend(request):
     for review in reviews:
         if request.user == review.user:
             if review.rank >= 3:
-                pk_list.append(review.movie_pk)
+                pk_list.append([review.movie_pk, review.rank])
 
+    arr = []
+    max_rank = 0
     if len(pk_list) >= 1:
-        aa=random.sample(pk_list, 1)
+        for i in range(len(pk_list)):
+            if pk_list[i][1] >= max_rank:
+                max_rank = pk_list[i][1]
+        for i in range(len(pk_list)):
+            if pk_list[i][1] == max_rank:
+                arr.append(pk_list[i][0])
+    
+    if len(arr) >= 2:
+        aa=random.sample(arr, 1)
         random_num += aa[0]
         movie = Movie.objects.filter(pk=random_num).first()
-        serializer = MovieRecommendSerializer(movie, data=request.data)
-        if serializer.is_valid(raise_exception=True):
-            serializer.save()
-            return Response(serializer.data)
-
-    # else:
-        
+        serializer = MovieRecommendSerializer(movie)
+        return Response(serializer.data)
     
-
-    # if request.user.articles.all():
-    #     gnr_cnt = dict()
-    #     articles = request.user.articles.all()
-    #     for article in articles:
-    #         movie = article.movie
-    #         genres = movie.genres.all()
-    #         for genre in genres:
-    #             gnr_cnt[genre.pk] = gnr_cnt.get(genre.pk, 0) + 1
-    #     fav_gnr = sorted(gnr_cnt.items(), key=lambda x:x[1], reverse=True)[0][0]
-    #     movies = list(Movie.objects.filter(genres=fav_gnr).all())
-    # else:
-    #     movies = list(Movie.objects.filter(vote_average__gte=8).all())
-    # movie = choice(movies)
-    # serializer = MovieArticleSerializer(movie)
-    # return Response(serializer.data)
+    elif len(arr) == 1:
+        random_num += arr[0]
+        movie = Movie.objects.filter(pk=random_num).first()
+        serializer = MovieRecommendSerializer(movie)
+        return Response(serializer.data)
