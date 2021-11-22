@@ -8,7 +8,8 @@
             <!-- <router-link :to="{ name: 'Community' }">Community</router-link>| -->
             <router-link @click.native="logout" to="#">Logout</router-link>|
             <router-link :to="{ name: 'MovieList' }">MovieList</router-link>|
-            <router-link :to="{ name: 'Community' }">Community</router-link>
+            <router-link :to="{ name: 'Community' }">Community</router-link>|
+            <router-link :to="{ name: 'Article' }">Article</router-link>
           </span>
           <span v-else>
             <router-link :to="{ name: 'Signup' }">Signup</router-link>|

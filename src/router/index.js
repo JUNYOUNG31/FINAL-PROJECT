@@ -7,6 +7,7 @@ import MovieList from '@/views/movies/MovieList'
 import Community from '@/views/community/Community'
 import MovieItem from '@/components/movies/MovieItem'
 import ReviewList from '@/components/community/ReviewList'
+import Article from '@/views/articles/Article'
 // import ReviewItem from '@/components/community/ReviewItem'
 // import ReviewCreate from '@/components/community/ReviewCreate'
 
@@ -66,6 +67,11 @@ const routes = [
   //   name: 'ReviewCreate', 
   //   component: ReviewCreate,
   // },  
+  {
+    path: '/articles',
+    name: 'Article',
+    component: Article,
+  },
 ]
 
 const router = new VueRouter({
