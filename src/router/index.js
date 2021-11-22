@@ -8,6 +8,7 @@ import Community from '@/views/community/Community'
 import MovieItem from '@/components/movies/MovieItem'
 import ReviewList from '@/components/community/ReviewList'
 import Article from '@/views/articles/Article'
+import Recommend from '@/views/recommend/Recommend'
 // import ReviewItem from '@/components/community/ReviewItem'
 // import ReviewCreate from '@/components/community/ReviewCreate'
 
@@ -71,6 +72,11 @@ const routes = [
     path: '/articles',
     name: 'Article',
     component: Article,
+  },
+  {
+    path: '/recommend',
+    name: 'Recommend',
+    component: Recommend,
   },
 ]
 

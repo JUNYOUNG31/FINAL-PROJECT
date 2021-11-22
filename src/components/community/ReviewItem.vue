@@ -55,10 +55,11 @@ export default {
     return {
       reviewItem: {
         movie_title: this.review.movie_title,      
+        movie_pk: this.review.pk,
         title: this.review.title,
         content: this.review.content,
         rank: this.review.rank,
-
+        
       },
     }
   },

@@ -1,7 +1,7 @@
 <template>
   <div class="movie_container">
     <div class="movielist">    
-        <img :src="`https://www.themoviedb.org/t/p/w500/${movie.poster_path}`" alt="movie_poster">         
+        <img :src="`https://www.themoviedb.org/t/p/original/${movie.poster_path}`" alt="movie_poster">         
         <div class="content">
           <h1>{{ movie.title }}</h1>        
           <p>{{ movie.overview }}</p>    
