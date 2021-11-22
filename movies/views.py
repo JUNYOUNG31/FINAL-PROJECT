@@ -47,16 +47,11 @@ def create_review(request):
     serializer = ReviewSerializer(data=request.data)
     print(serializer)
     print('1111111111111111111111111111')
-    if serializer.is_valid(raise_exception=True):
-        error_id = serializer.save(commit=False)
-        print(error_id)
-        error_id.movie_title_id = request.movie_title_id
-        error_id.user = request.user
-        error_id.save()
-        # serializer.save(user=request.user)
-        # print(serializer.data)
+    if serializer.is_valid(raise_exception=True):        
+        serializer.save(user=request.user)
+        print(serializer.data)
         print('222222222222222222222222222222')
-        return Response(error_id.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 # def create_review(request):
 #     serializer = ReviewSerializer(data=request.data)
 #     # print(serializer.data)
