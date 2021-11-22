@@ -6,6 +6,10 @@ from django.shortcuts import get_object_or_404
 
 from .serializers import UserSerializer
 from django.contrib.auth import get_user_model
+from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework_jwt.authentication import JSONWebTokenAuthentication
+from rest_framework.decorators import permission_classes, authentication_classes
+from rest_framework.decorators import api_view
 
 
 @api_view(['POST'])
@@ -32,23 +36,30 @@ def signup(request):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
-# # 유저 프로필
-# def profile(request, username):
-#     person = get_object_or_404(get_user_model(), username=username)
-#     serializer = UserSerializer(data=request.data)
-#     return Response(serializer.data)
+# 유저 프로필
+@api_view(['GET'])
+@authentication_classes([JSONWebTokenAuthentication])
+@permission_classes([IsAuthenticated])
+def profile(request, user_id):
+    user_id = request.user.id
+    person = get_object_or_404(get_user_model(), id=user_id)
+    serializer = UserSerializer(person)
+    return Response(serializer.data)
 
-# # 팔로우
-# @require_POST
-# def follow(request, user_pk):
-#     if request.user.is_authenticated:
-#         me = request.user
-#         you = get_object_or_404(get_user_model(), pk=user_pk)
 
-#         if me != you:
-#             if you.followers.filter(pk=me.pk).exists():
-#                 you.followers.remove(me)
-#             else:
-#                 you.followers.add(me)
-#         return redirect('accounts:profile', you.username)
-#     return redirect('accounts:login')
+# 팔로우
+@api_view(['POST'])
+@authentication_classes([JSONWebTokenAuthentication])
+@permission_classes([IsAuthenticated])
+def follow(request, user_pk):
+    me = request.user
+    you = get_object_or_404(get_user_model(), pk=user_pk)
+    if me != you:
+        if you.followers.filter(pk=me.pk).exists():
+            you.followers.remove(me)
+            followed = False
+        else:
+            you.followers.add(me)
+            followed = True
+    serializer = UserSerializer(me)
+    return Response(serializer.data)
