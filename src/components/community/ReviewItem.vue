@@ -8,7 +8,7 @@
       <v-expansion-panel-content>별점 :
         <v-rating
           v-model="reviewItem.rank"
-          color="yellow darken-3"
+          color="light-blue accent-"
           background-color="grey darken-1"
           empty-icon="$ratingFull"
           half-increments

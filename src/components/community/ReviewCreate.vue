@@ -1,17 +1,18 @@
 <template>
-  <v-dialog
-        v-model="dialog"
-        persistent
-        max-width="600px"
-      >
+  <div class="createform">
+    <v-dialog
+      v-model="dialog"
+      persistent
+      max-width="600px"
+    >
       <template v-slot:activator="{ on, attrs }">
-        <v-btn color="#831010" dark v-bind="attrs" v-on="on">
-          리뷰 작성하기
+        <v-btn color="light-blue accent-" v-bind="attrs" v-on="on">
+          Create
         </v-btn>
       </template>
       <v-card dark>
         <v-card-title>
-          <span class="headline">Review Form</span>
+          <span class="headline">Review Create</span>
         </v-card-title>
         <v-card-text>
           <v-container>
@@ -23,18 +24,16 @@
                 v-model="movie_data"
                 label="영화 선택"
                 required
-              ></v-autocomplete>
-              <v-col cols="12">
-                <v-text-field
-                  label="제목*"
-                  v-model.trim="reviewItem.title"
-                  required
-                ></v-text-field>
-              </v-col>
+              ></v-autocomplete>              
+              <v-text-field
+                label="제목"
+                v-model.trim="reviewItem.title"
+                required
+              ></v-text-field>              
               <v-col cols="6">
                 <v-rating
                   v-model="reviewItem.rank"
-                  color="yellow darken-3"
+                  color="light-blue accent-"
                   background-color="grey darken-1"
                   empty-icon="$ratingFull"
                   half-increments
@@ -42,42 +41,44 @@
                   large
                 ></v-rating>
               </v-col>
-              <v-col cols="6">
-                <span class="grey--text text--lighten-2 caption mr-2">
-                  ({{ reviewItem.rank }})
-                </span>
+              <v-col cols="6" class="rank_text">
+                <h5>
+                  {{ reviewItem.rank }}
+                </h5>
               </v-col>
               <v-col cols="12">
                 <v-textarea
                   solo
-                  label="*내용"
+                  label="내용"
                   v-model.trim="reviewItem.content"
                   required
                 ></v-textarea>
               </v-col>
             </v-row>
           </v-container>
-          <small>*영화와 상관없는 리뷰 글의 경우 사전 고지 없이 삭제 될 수 있습니다.</small>
+          <large>평점에 따라 추천영화가 달라질 수 있습니다.</large>
         </v-card-text>
-        <v-card-actions>
+        <v-card-actions>          
+          <v-btn
+          
+          color="light-blue accent-"
+
+          @click="dialog = false"
+          >
+            취소
+          </v-btn>
           <v-spacer></v-spacer>
           <v-btn
-            color="blue darken-1"
-            text
-            @click="dialog = false"
+          
+          color="light-blue accent-"         
+          @click="createReview"
           >
-            닫기
-          </v-btn>
-          <v-btn
-            color="blue darken-1"
-            text
-            @click="createReview"
-          >
-            저장
+            작성
           </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
+  </div>
 </template>
 
 <script>
@@ -92,6 +93,7 @@ export default {
         title: null,
         content: null,
         rank: 2.5,  
+        movie_pk: null
       },
       dialog: false,
     }
@@ -107,7 +109,7 @@ export default {
     
     createReview() {     
       this.reviewItem.movie_title = this.movie_data.title
-      // this.reviewItem.movie_title_id = this.movie_data.pk
+      this.reviewItem.movie_pk = this.movie_data.pk
       const reviewcreate = {
       reviewItem: this.reviewItem,      
       token: this.setToken()
@@ -115,6 +117,7 @@ export default {
     console.log(reviewcreate)
     this.$store.dispatch('createReview', reviewcreate)
     this.movie_title = null,
+    this.movie_pk = null,
     this.title = null,
     this.content = null,
     this.dialog = false    
@@ -132,5 +135,16 @@ export default {
 </script>
 
 <style>
+.createform{
+  margin-top: 20px;
+  display: flex;
+  justify-content: right;
+  font-family: 'Noto Sans KR', sans-serif;     
+}
 
+.rank_text {    
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}  
 </style>

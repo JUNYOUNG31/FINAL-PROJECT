@@ -1,10 +1,10 @@
 <template>
-  <div>
-    <p>리뷰 리스트</p>
-    <v-expansion-panels>
+  <div class="reviewlist">
+    <p>list</p>
+    <v-expansion-panels class="reviewitems">
       <v-expansion-panel    
     v-for="(review, id) in reviews" 
-    :key="id">    
+    :key="id" class="review_item">    
     <review-item :review="review">
     </review-item>
     </v-expansion-panel> 
@@ -30,5 +30,14 @@ export default {
 </script>
 
 <style>
-
+.reviewlist {
+  font-family: 'Noto Sans KR', sans-serif;    
+  background-color: #0009;
+}
+.reviewitems{
+  padding: 0 50px;
+}
+.review_item{
+  padding: 5px;
+}
 </style>
