@@ -19,8 +19,8 @@
               <v-autocomplete
                 :items="movieTitles"
                 item-text="name"
-                item-value="id"
-                v-model="reviewItem.movie_title_id"
+                item-value="value"
+                v-model="movie_data"
                 label="영화 선택"
                 required
               ></v-autocomplete>
@@ -86,12 +86,13 @@ export default {
   name: 'ReviewCreate',  
   data() {
     return {
+      movie_data: null ,
       reviewItem: {
         movie_title: null,
+        movie_title_id: null,      
         title: null,
         content: null,
         rank: 2.5,  
-        movie_title_id: null,      
       },
       dialog: false,
     }
@@ -104,11 +105,15 @@ export default {
       }
       return config
     },
-    createReview() {
-    const reviewcreate = {
+    
+    createReview() {     
+      this.reviewItem.movie_title = this.movie_data.title
+      this.reviewItem.movie_title_id = this.movie_data.pk
+      const reviewcreate = {
       reviewItem: this.reviewItem,      
       token: this.setToken()
     }
+    console.log(reviewcreate)
     this.$store.dispatch('createReview', reviewcreate)
     this.movie_title = null,
     this.title = null,

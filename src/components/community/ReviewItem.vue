@@ -36,10 +36,9 @@
 </template>
 
 <script>
-import axios from 'axios'
 import CommentList from '@/components/community/CommentList'
 import CommentCreate from '@/components/community/CommentCreate'
-const SERVER_URL = 'http://127.0.0.1:8000/'
+
 export default {
   name: 'ReviewItem',
   components: {
@@ -77,16 +76,7 @@ export default {
         token: this.setToken()
       }      
       console.log(deleteItem)
-      axios({
-        method: 'DELETE',
-        url: `${SERVER_URL}movies/community/${deleteItem.review_id}`,        
-        headers: deleteItem.token
-      })
-      .then(res => {       
-        console.log(res)
-        this.$router.push({name:'Community'}) 
-        this.$router.go()             
-      }) 
+      this.$store.dispatch('deleteReview', deleteItem)
     },
     updateReview() {
       const updateItem = {

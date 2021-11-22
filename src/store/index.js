@@ -3,14 +3,14 @@ import Vuex from 'vuex'
 import axios from 'axios'
 import router from '@/router'
 import vueMoment from 'vue-moment'
-import createPersistedState from "vuex-persistedstate"; 
+// import createPersistedState from "vuex-persistedstate"; 
 
 const SERVER_URL = 'http://127.0.0.1:8000/'
 Vue.use(Vuex)
 Vue.use(vueMoment)
 
 export default new Vuex.Store({
-  plugins: [createPersistedState()],
+  plugins: [],
   state: {
     movies: [],
     reviews: [],
@@ -40,6 +40,10 @@ export default new Vuex.Store({
         return review
       })    
     },
+    DELETE_REVIEW(state, reviewItem) {
+      const index = state.reviews.indexOf(reviewItem)
+      state.reviews.splice(index, 1)
+    },
     
     CREATE_COMMENT(state, res) {
       state.comments.push(res)
@@ -67,7 +71,7 @@ export default new Vuex.Store({
       const tmp_list = []
       for (var value of res) {
         const tmp = {
-          name: value.title, value: value.title, id: value.pk
+          name: value.title, value: value, id: value.pk
         }
         tmp_list.push(tmp)
       }
@@ -127,6 +131,23 @@ export default new Vuex.Store({
         commit('UPDATE_REVIEW')               
       })
     },
+    deleteReview({commit}, deleteItem) {
+      axios({
+        method: 'PUT',
+        url: `${SERVER_URL}movies/community/${deleteItem.review_id}/`,
+        headers: deleteItem.token
+      }) 
+      .then(res => {       
+        console.log(res)
+        commit('DELETE_REVIEW')   
+        router.go()            
+      })
+    },
+
+
+
+
+
     // COMMUNITY - COMMENT ACTIONS
     getComments({commit}, objs) {
       axios({
