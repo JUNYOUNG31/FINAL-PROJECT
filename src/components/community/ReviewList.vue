@@ -1,14 +1,25 @@
 <template>
   <div class="reviewlist">
     <p>list</p>
-    <v-expansion-panels class="reviewitems">
+
+    <div class="reviewitems"> 
+      <div v-for="(review, id) in reviews" 
+    :key="id" class="review_item">
+      <v-row justify="center">      
+        <review-item :review="review">
+        </review-item>
+      </v-row>
+      </div>
+    </div>
+
+    <!-- <v-expansion-panels class="reviewitems">
       <v-expansion-panel    
     v-for="(review, id) in reviews" 
     :key="id" class="review_item">    
     <review-item :review="review">
     </review-item>
     </v-expansion-panel> 
-    </v-expansion-panels>
+    </v-expansion-panels> -->
   </div>  
 </template>
 
