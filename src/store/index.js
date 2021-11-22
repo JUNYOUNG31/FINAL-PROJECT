@@ -133,7 +133,7 @@ export default new Vuex.Store({
     },
     deleteReview({commit}, deleteItem) {
       axios({
-        method: 'PUT',
+        method: 'DELETE',
         url: `${SERVER_URL}movies/community/${deleteItem.review_id}/`,
         headers: deleteItem.token
       }) 

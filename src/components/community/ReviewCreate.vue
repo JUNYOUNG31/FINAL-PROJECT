@@ -88,8 +88,7 @@ export default {
     return {
       movie_data: null ,
       reviewItem: {
-        movie_title: null,
-        movie_title_id: null,      
+        movie_title: null,            
         title: null,
         content: null,
         rank: 2.5,  
@@ -108,7 +107,7 @@ export default {
     
     createReview() {     
       this.reviewItem.movie_title = this.movie_data.title
-      this.reviewItem.movie_title_id = this.movie_data.pk
+      // this.reviewItem.movie_title_id = this.movie_data.pk
       const reviewcreate = {
       reviewItem: this.reviewItem,      
       token: this.setToken()
