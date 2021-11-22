@@ -98,6 +98,6 @@ export default {
 
 <style >
 .reviewitem{
-  font-family: 'Noto Sans KR', sans-serif; 
+  font-family: 'Noto Sans KR', sans-serif;   
 }
 </style>

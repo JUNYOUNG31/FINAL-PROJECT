@@ -9,6 +9,7 @@ import MovieItem from '@/components/movies/MovieItem'
 import ReviewList from '@/components/community/ReviewList'
 import Article from '@/views/articles/Article'
 import Recommend from '@/views/recommend/Recommend'
+import Profile from '@/views/accounts/Profile'
 // import ReviewItem from '@/components/community/ReviewItem'
 // import ReviewCreate from '@/components/community/ReviewCreate'
 
@@ -37,6 +38,11 @@ const routes = [
     path: '/accounts/login',
     name: 'Login',
     component: Login,
+  },
+  {
+    path: '/accounts/Profile',
+    name: 'Profile',
+    component: Profile,
   },
   {
     path: '/movies/movielist',
