@@ -18,7 +18,7 @@ from rest_framework import status
 @permission_classes([AllowAny])
 def index(request):
     articles = Article.objects.all()
-    serializer = ArticleListSerializer(articles, many=True)
+    serializer = ArticleSerializer(articles, many=True)
     return Response(serializer.data)
 
 # 단일 article 생성
