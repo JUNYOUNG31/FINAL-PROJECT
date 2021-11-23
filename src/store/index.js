@@ -365,7 +365,6 @@ export default new Vuex.Store({
       })
       .catch(err => console.log(err))
     },
-
   },
   getters: {
     movies(state) {

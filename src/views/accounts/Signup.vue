@@ -56,6 +56,7 @@ export default {
       })
       .catch(res => {
         console.log(res)
+        alert("아이디, 비밀번호를 다시 확인하세요")
       })
     }
   }

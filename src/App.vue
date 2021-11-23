@@ -6,7 +6,7 @@
           <span v-if="isLogin">
             <!-- <router-link :to="{ name: 'Profile' }">Profile</router-link>| -->
             <!-- <router-link :to="{ name: 'Community' }">Community</router-link>| -->
-            <router-link :to="{ name: 'Profile' }">Profile</router-link>|
+            <router-link @click.native="getCurrentUser" to="#">Profile</router-link>|
             <router-link @click.native="logout" to="#">Logout</router-link>|
             <router-link :to="{ name: 'Recommend' }">Recommend</router-link>|
             <router-link :to="{ name: 'MovieList' }">MovieList</router-link>|
@@ -21,18 +21,21 @@
           </span>
         </div>
       </div>
-    <router-view :key="$route.fullPath" @login="isLogin = true"/>
+    <router-view :key="$route.fullPath" 
+      @login="isLogin = true"/>
     
   </v-app>
 </template>
 
 <script>
+const SERVER_URL = 'http://127.0.0.1:8000/'
+import axios from 'axios'
 export default {
   name: "App",
-
   data: function () {
     return {
-      isLogin: false
+      isLogin: false,
+      currentUser: {},
     }
   },
   methods: {
@@ -40,7 +43,28 @@ export default {
       this.isLogin = false
       localStorage.removeItem('jwt')
       this.$router.push({name:'Community'})
-    }
+    },
+    setToken() {
+      const token = localStorage.getItem('jwt')
+      const config = {
+        Authorization: `JWT ${token}`
+      }
+      return config
+    },
+    getCurrentUser() {
+      axios({
+        method: 'GET',
+        url: `${SERVER_URL}accounts/`, 
+        headers: this.setToken()
+      }) 
+      .then(res => {
+        console.log(res)
+        this.currentUser = res.data
+        this.$router.push({ name: 'Profile', params: { id: this.currentUser.id, currentUser: this.currentUser } })
+      })
+      .catch(err => console.log(err))
+    },
+
   },
   created: function () {
     const token = localStorage.getItem('jwt')

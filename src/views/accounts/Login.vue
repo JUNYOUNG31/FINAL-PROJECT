@@ -34,7 +34,7 @@ export default {
       credentials: {
         username: null,
         password: null
-      }
+      },
     }
   },
   methods: {
@@ -47,13 +47,15 @@ export default {
         .then(res=>{
           console.log(res)
           localStorage.setItem('jwt', res.data.token)
-          this.$emit('login')          
+          this.$emit('login') 
           this.$router.push({name:'MovieList'})
         })
         .catch(err=> {
           console.log(err)
+          alert("로그인에 실패했습니다. 아이디/비밀번호를 확인하세요")
         })
-    } 
+      this.$emit('submit-login-data', this.loginData)
+    }
   }
 }
 </script>
