@@ -40,26 +40,25 @@ def signup(request):
 @api_view(['GET'])
 @authentication_classes([JSONWebTokenAuthentication])
 @permission_classes([IsAuthenticated])
-def profile(request, user_id):
-    user_id = request.user.id
-    person = get_object_or_404(get_user_model(), id=user_id)
-    serializer = UserSerializer(person)
+def profile(request):
+    user = request.user
+    serializer = UserSerializer(user)
     return Response(serializer.data)
 
 
-# 팔로우
-@api_view(['POST'])
-@authentication_classes([JSONWebTokenAuthentication])
-@permission_classes([IsAuthenticated])
-def follow(request, user_pk):
-    me = request.user
-    you = get_object_or_404(get_user_model(), pk=user_pk)
-    if me != you:
-        if you.followers.filter(pk=me.pk).exists():
-            you.followers.remove(me)
-            followed = False
-        else:
-            you.followers.add(me)
-            followed = True
-    serializer = UserSerializer(me)
-    return Response(serializer.data)
+# # 팔로우
+# @api_view(['POST'])
+# @authentication_classes([JSONWebTokenAuthentication])
+# @permission_classes([IsAuthenticated])
+# def follow(request, user_pk):
+#     me = request.user
+#     you = get_object_or_404(get_user_model(), pk=user_pk)
+#     if me != you:
+#         if you.followers.filter(pk=me.pk).exists():
+#             you.followers.remove(me)
+#             followed = False
+#         else:
+#             you.followers.add(me)
+#             followed = True
+#     serializer = UserSerializer(me)
+#     return Response(serializer.data)
