@@ -1,58 +1,103 @@
 <template>
-<div>
-      <div class="reviewitem">      
-      <h2>
-      REVIEW: {{review.title }}
-
-      </h2>
-      <h2>
-      작성자: {{ review.user.username }}
-      </h2>
-      <h2>{{ review.title }}</h2>
-      <h2>{{ review.movie_title }}</h2>             
-        <!-- <v-rating
-        v-model="reviewItem.rank"
-        color="light-blue accent-"
-        background-color="grey darken-1"
-        empty-icon="$ratingFull"
-        half-increments
-        hover
-        large
-        ></v-rating>    -->
-      <p>{{review.content}}</p>
-      <!-- <textarea name="reviewContent" cols="80" rows="5" v-model="reviewItem.content" placeholder="내용"></textarea> -->
-
-      <p>작성 시각: {{ review.created_at | moment('from', 'now') }}</p>          
-      <p>수정 시각: {{ review.updated_at | moment('from', 'now') }}</p>
-
-      <p>Likes</p>
-      <p>이 글을 좋아한 사람: {{ review.like_users }}</p>
-      <v-btn class="btn btn-primary" @click="updateReview">UPDATE</v-btn>
-      <v-btn class="btn btn-danger" @click="deleteReview">DELETE</v-btn>               
-      </div>
-
-    <button @click="getReview">ewqewqewqewqewq</button>
-    <h2></h2>
+  <div class="reviewitem">   
+    <v-card>
+      <v-toolbar dark>          
+        <v-spacer></v-spacer>
+        <v-toolbar-items>
+          <v-btn icon dark>
+          <v-icon>mdi-close</v-icon>
+          </v-btn>
+        </v-toolbar-items>
+      </v-toolbar>
+      <v-list three-line>         
+        <v-list-item>
+          <v-list-item-content>
+            <v-list-item-title>{{ review.title }}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <v-list-item>
+          <v-list-item-content>
+            <v-list-item-title>{{ review.movie_title }}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <v-list-item>
+          <v-list-item-content>
+            <v-list-item-title>Rank              
+            </v-list-item-title>
+            <v-list-item-subtitle><v-rating
+              v-model="review.rank"
+              color="light-blue accent-"
+              background-color="grey darken-1"
+              empty-icon="$ratingFull"
+              half-increments
+              hover
+              large
+            ></v-rating></v-list-item-subtitle>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+      <v-divider></v-divider>
+      <v-list three-line subheader>          
+        <v-list-item>            
+          <v-list-item-content>
+            <v-list-item-title>Content</v-list-item-title>            
+            <v-list-item-title>
+              <v-textarea outlined name="reviewContent" cols="80" rows="5" v-model="review.content" placeholder="내용"></v-textarea>
+              </v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>          
+        <v-list-item>    
+        <v-spacer></v-spacer>   
+        <v-spacer></v-spacer>    
+        <v-subheader>작성 시각: {{ review.created_at | moment('from', 'now') }}</v-subheader>          
+        <v-subheader>수정 시각: {{ review.updated_at | moment('from', 'now') }}</v-subheader>
+          <v-list-item-content>
+            <v-list-item-title>Likes</v-list-item-title>
+            <v-list-item-subtitle>이 글을 좋아한 사람: {{ review.like_users }}</v-list-item-subtitle>
+          </v-list-item-content>
+          <v-spacer></v-spacer> 
+          <v-spacer></v-spacer> 
+          <v-list-item-content>
+            <v-btn class="btn btn-primary" @click="updateReview">UPDATE</v-btn>
+            <v-btn class="btn btn-danger" @click="deleteReview">DELETE</v-btn>
+          </v-list-item-content>
+        </v-list-item>
+        <v-divider></v-divider>
+        <v-list-item>            
+          <v-list-item-content>
+            <comment-create :review="review"></comment-create>
+            <comment-list :review="review">
+            </comment-list>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </v-card>
   </div>
 </template>
 
 <script>
+import CommentList from '@/components/reviews/CommentList'
+import CommentCreate from '@/components/reviews/CommentCreate'
 import axios from 'axios'
 const SERVER_URL = 'http://127.0.0.1:8000/'
 export default {
   name: 'ReviewDetail',
+  components: {
+  CommentList,
+  CommentCreate
+  },
   data: function(){
     return  {
       review: null,
       // comment: null,
-      // reviewItem: {
-      //   movie_title: this.review.movie_title,      
-      //   movie_pk: this.review.pk,
-      //   title: this.review.title,
-      //   content: this.review.content,
-      //   rank: this.review.rank,
-      //   id: this.review.id
-      // },
+      reviewItem: {
+        movie_title: null  ,  
+        movie_pk: null,
+        title: null,
+        content: null,
+        rank: null,
+        id: null
+      },
     }
   },
   methods : {
@@ -73,31 +118,33 @@ export default {
         this.review = res.data
       })
     },
-    // deleteReview() {
-    //   const deleteItem = {
-    //     review_id: this.review.id,
-    //     token: this.setToken()
-    //   }      
-    //   console.log(deleteItem)
-    //   this.$store.dispatch('deleteReview', deleteItem)
-    // },
-    // updateReview() {
-    //   const updateItem = {
-    //     reviewItem: this.reviewItem,
-    //     review_id: this.review.id,
-    //     token: this.setToken()
-    //   }
-    //   console.log(updateItem)  
-    //   this.$store.dispatch("updateReview", updateItem)    
-    // }
+    deleteReview() {
+      const deleteItem = {
+        review_id: this.review.id,
+        token: this.setToken()
+      }      
+      console.log(deleteItem)
+      this.$store.dispatch('deleteReview', deleteItem)
+    },
+    updateReview() {
+      this.reviewItem.movie_title= this.review.movie_title,      
+      this.reviewItem.movie_pk= this.review.movie_pk,
+      this.reviewItem.title= this.review.title,
+      this.reviewItem.content= this.review.content,
+      this.reviewItem.rank= this.review.rank,
+      this.reviewItem.id =  this.review.id
+      const updateItem = {
+        reviewItem: this.reviewItem,
+        review_id: this.review.id,
+        token: this.setToken()
+      }
+      console.log(updateItem)  
+      this.$store.dispatch("updateReview", updateItem)    
+    }
   },
   created(){
     this.getReview()
   }
-  // mounted() {
-  //   this.getReview()
-  // }
-
 }
 
 </script>

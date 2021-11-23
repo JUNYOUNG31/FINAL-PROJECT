@@ -197,8 +197,8 @@ export default new Vuex.Store({
       }) 
       .then(res => {       
         console.log(res)
-        commit('DELETE_REVIEW')   
-        router.go()            
+        commit('DELETE_REVIEW') 
+        router.push({name:'Reviews'})
       })
     },
 
@@ -210,7 +210,9 @@ export default new Vuex.Store({
         headers: objs.token
       })
       .then((res) => {
+        console.log(res)
         commit('GET_COMMENTS', res.data)
+        // router.push({name:'ReviewDetail', params:{id: res.id}})
       })
       .catch(err => console.log(err))
     },
