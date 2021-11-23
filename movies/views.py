@@ -18,7 +18,7 @@ import random
 @api_view(['GET'])
 @permission_classes([AllowAny])
 def getmovie(request):
-    movies = Movie.objects.all()
+    movies = Movie.objects.order_by('-release_date')[30:250]
     serializer = MovieListSerializer(movies, many=True)
     return Response(serializer.data)
 
