@@ -84,9 +84,9 @@ export default {
 </script>
 
 <style >
-/* .detail_container{
+.detail_container{
   margin: 50px;
-} */
+}
 .detailbtn {
   display: flex;
   align-items: center;

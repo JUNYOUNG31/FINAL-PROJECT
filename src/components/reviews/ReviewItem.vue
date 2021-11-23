@@ -1,5 +1,9 @@
 <template>
-  <div class="reviewitem">  
+<div>
+  <h2>{{ reviewItem.title }}</h2>
+  <router-link :to="{ name: 'ReviewDetail', params: { id : reviewItem.id }}">{{ reviewItem.title }}</router-link>
+</div>
+  <!-- <div class="reviewitem">  
     <v-dialog v-model="dialog"
       fullscreen
       hide-overlay
@@ -98,19 +102,19 @@
         </v-list>
       </v-card>
     </v-dialog>
-  </div>
+  </div> -->
 </template>
 
 <script>
-import CommentList from '@/components/reviews/CommentList'
-import CommentCreate from '@/components/reviews/CommentCreate'
+// import CommentList from '@/components/reviews/CommentList'
+// import CommentCreate from '@/components/reviews/CommentCreate'
 
 export default {
   name: 'ReviewItem',
-  components: {
-    CommentList,
-    CommentCreate
-  },
+  // components: {
+  //   CommentList,
+  //   CommentCreate
+  // },
   props: {
     review: {
       type: Object,
@@ -125,7 +129,7 @@ export default {
         title: this.review.title,
         content: this.review.content,
         rank: this.review.rank,
-        
+        id: this.review.id
       },
       dialog : false
     }

@@ -13,6 +13,7 @@ import Recommend from '@/views/recommend/Recommend'
 import Profile from '@/views/accounts/Profile'
 import ReviewItem from '@/components/reviews/ReviewItem'
 // import ReviewCreate from '@/components/community/ReviewCreate'
+import ReviewDetail from '@/components/reviews/ReviewDetail'
 
 const originalPush = VueRouter.prototype.push;
 VueRouter.prototype.push = function push(location) {
@@ -71,6 +72,12 @@ const routes = [
     path: '/reviews/item',
     name: 'ReviewItem',
     component: ReviewItem,
+  },
+  {
+    path: '/reviews/reviewdetail/:id',
+    name: 'ReviewDetail',
+    component: ReviewDetail,
+    props:true
   },
   // {
   //   path: '/community',
