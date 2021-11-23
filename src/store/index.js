@@ -167,7 +167,7 @@ export default new Vuex.Store({
       .then(res => {       
         console.log(res)
         commit('CREATE_REVIEW', res.data) 
-        router.push({name:'Community'})
+        router.push({name:'Reviews'})
         router.go()       
       })
       .catch( err => {
@@ -238,7 +238,7 @@ export default new Vuex.Store({
       })
       .then((res) => {
         commit('UPDATE_COMMENT', res.data)
-        router.push({name:'Community'})
+        router.push({name:'Reviews'})
       })
       .catch(err => console.log(err))
     },
@@ -250,7 +250,7 @@ export default new Vuex.Store({
       })
       .then((res) => {
         commit('DELETE_COMMENT', res.data)
-        router.push({name:'Community'})
+        router.push({name:'Reviews'})
       })
       .catch(err => console.log(err))
     },
@@ -278,7 +278,7 @@ export default new Vuex.Store({
       .then(res => {       
         console.log(res)
         commit('CREATE_ARTICLE', res.data) 
-        router.push({name:'Article'})
+        router.push({name:'Community'})
         router.go()       
       })
       .catch( err => {
@@ -349,7 +349,7 @@ export default new Vuex.Store({
       })
       .then((res) => {
         commit('UPDATE_ARTICLE_COMMENT', res.data)
-        router.push({name:'Article'})
+        router.push({name:'Community'})
       })
       .catch(err => console.log(err))
     },
@@ -361,7 +361,7 @@ export default new Vuex.Store({
       })
       .then((res) => {
         commit('DELETE_ARTICLE_COMMENT', res.data)
-        router.push({name:'Article'})
+        router.push({name:'Community'})
       })
       .catch(err => console.log(err))
     },

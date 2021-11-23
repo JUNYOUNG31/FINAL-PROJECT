@@ -9,7 +9,7 @@
 export default {
   name: 'CommentCreate',
   props: {
-    review: {
+    article: {
       type: Object,
       required: true,
     }
@@ -32,10 +32,10 @@ export default {
     createComment() {
       const commentItemSet = {
         commentItem: this.commentItem,
-        review_id: this.review.id,
+        article_id: this.article.id,
         token: this.setToken()
       }
-      this.$store.dispatch('createComment', commentItemSet)
+      this.$store.dispatch('createArticleComment', commentItemSet)
       this.commentItem.content = null
     },
   },

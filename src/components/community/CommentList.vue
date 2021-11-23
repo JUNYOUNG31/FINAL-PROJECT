@@ -1,10 +1,10 @@
 <template>
   <div>
     <comment-item
-      v-for="(comment, idx) in comments"
+      v-for="(comment, idx) in article_comments"
       :key="idx"
       :comment="comment"
-      :review="reviewdetail"
+      :article="articledetail"
     >
     </comment-item>
   </div>
@@ -16,14 +16,14 @@ import { mapGetters } from 'vuex'
 export default {
   name: 'CommentList',
   props: {
-    review: {
+    article: {
       type: Object,
       required: true,
     }
   },
   data () {
     return {
-      reviewdetail: this.review.id
+      articledetail: this.article.id
     }
   },
   components: {
@@ -40,16 +40,16 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'comments'
+      'article_comments'
     ])
   },
   created() {
     const commentListSet = {
-      review_id: this.review.id,
+      article_id: this.article.id,
       token: this.setToken()
     }
     console.log(commentListSet)
-    this.$store.dispatch('getComments', commentListSet)
+    this.$store.dispatch('getArticleComments', commentListSet)
   },
 }
 </script>

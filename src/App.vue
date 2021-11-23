@@ -10,14 +10,15 @@
             <router-link @click.native="logout" to="#">Logout</router-link>|
             <router-link :to="{ name: 'Recommend' }">Recommend</router-link>|
             <router-link :to="{ name: 'MovieList' }">MovieList</router-link>|
-            <router-link :to="{ name: 'Community' }">Community</router-link>|
-            <router-link :to="{ name: 'Article' }">Article</router-link>
+            <router-link :to="{ name: 'Reviews' }">Reviews</router-link>|
+            <router-link :to="{ name: 'Community' }">Community</router-link>
           </span>
           <span v-else>
             <router-link :to="{ name: 'Signup' }">Signup</router-link>|
             <router-link :to="{ name: 'Login' }">Login</router-link>|
             <router-link :to="{ name: 'MovieList' }">MovieList</router-link>|
-            <router-link :to="{ name: 'Community' }">Community</router-link>
+            <router-link :to="{ name: 'Login' }">Reviews</router-link>|
+            <router-link :to="{ name: 'Login' }">Community</router-link>
           </span>
         </div>
       </div>

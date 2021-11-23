@@ -25,7 +25,7 @@
 
 <script>
 import {mapGetters} from 'vuex'
-import ReviewItem from '@/components/community/ReviewItem'
+import ReviewItem from '@/components/reviews/ReviewItem'
 export default {
   name: 'ReviewList',  
   components: {

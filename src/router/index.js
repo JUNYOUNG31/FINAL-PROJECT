@@ -4,13 +4,14 @@ import VueRouter from 'vue-router'
 import Signup from '@/views/accounts/Signup'
 import Login from '@/views/accounts/Login'
 import MovieList from '@/views/movies/MovieList'
-import Community from '@/views/community/Community'
 import MovieItem from '@/components/movies/MovieItem'
-import ReviewList from '@/components/community/ReviewList'
-import Article from '@/views/articles/Article'
+import Reviews from '@/views/reviews/Reviews'
+// import ReviewList from '@/components/reviews/ReviewList'
+import Community from '@/views/community/Community'
+import ArticleList from '@/components/community/ArticleList'
 import Recommend from '@/views/recommend/Recommend'
 import Profile from '@/views/accounts/Profile'
-// import ReviewItem from '@/components/community/ReviewItem'
+import ReviewItem from '@/components/reviews/ReviewItem'
 // import ReviewCreate from '@/components/community/ReviewCreate'
 
 const originalPush = VueRouter.prototype.push;
@@ -29,6 +30,8 @@ const routes = [
   //   name: 'Home',
   //   component: Home,
   // },
+
+  // accounts
   {
     path: '/accounts/signup',
     name: 'Signup',
@@ -45,6 +48,8 @@ const routes = [
     component: Profile,
     props: true,
   },
+
+  // movies
   {
     path: '/movies/movielist',
     name: 'MovieList',
@@ -55,20 +60,17 @@ const routes = [
     name: 'MovieItem',
     component: MovieItem,
   },
+
+  // reviews
   {
-    path: '/community',
-    name: 'Community',
-    component: Community,
+    path: '/reviews',
+    name: 'Reviews',
+    component: Reviews,
   },  
-  // {
-  //   path: '/community',
-  //   name: 'ReviewItem',
-  //   component: ReviewItem,
-  // },  
   {
-    path: '/community/list',
-    name: 'ReviewList',
-    component: ReviewList,
+    path: '/reviews/item',
+    name: 'ReviewItem',
+    component: ReviewItem,
   },
   // {
   //   path: '/community',
@@ -76,9 +78,15 @@ const routes = [
   //   component: ReviewCreate,
   // },  
   {
-    path: '/articles',
-    name: 'Article',
-    component: Article,
+    path: '/community',
+    name: 'Community',
+    component: Community,
+  },
+  {
+    path: '/community/articles',
+    name: 'ArticleList',
+    component: ArticleList,
+    props: true
   },
   {
     path: '/recommend',

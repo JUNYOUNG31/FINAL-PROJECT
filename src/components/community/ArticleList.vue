@@ -15,7 +15,7 @@
 
 <script>
 import {mapGetters} from 'vuex'
-import ArticleItem from '@/components/articles/ArticleItem'
+import ArticleItem from '@/components/community/ArticleItem'
 export default {
   name: 'ArticleList',  
   components: {

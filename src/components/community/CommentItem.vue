@@ -12,7 +12,7 @@
 export default {
   name: 'CommentItem',
   props: {
-    review: {
+    article: {
       type: Number,
       required: true,
     },
@@ -40,19 +40,19 @@ export default {
       const commentItemSet = {
         commentItem: this.commentItem,
         comment_id: this.comment.id,
-        review_id: this.review,
+        article_id: this.article,
         token: this.setToken()
       }
       console.log(commentItemSet)
-      this.$store.dispatch('updateComment', commentItemSet)
+      this.$store.dispatch('updateArticleComment', commentItemSet)
     },
     deleteComment() {
       const commentItemSet = {
         comment_id: this.comment.id,
-        review_id: this.review,
+        article_id: this.article,
         token: this.setToken()
       }
-      this.$store.dispatch('deleteComment', commentItemSet)
+      this.$store.dispatch('deleteArticleComment', commentItemSet)
     }
   },
 }

@@ -99,8 +99,8 @@
 </template>
 
 <script>
-import CommentList from '@/components/articles/CommentList'
-import CommentCreate from '@/components/articles/CommentCreate'
+import CommentList from '@/components/community/CommentList'
+import CommentCreate from '@/components/community/CommentCreate'
 
 export default {
   name: 'ArticleItem',
