@@ -37,8 +37,9 @@
               <v-list-item-content>
               <h2>{{ Movietitle}}</h2>
               </v-list-item-content>
-              <v-list-item-content>
-              <h5>{{movie.genre_ids}}</h5>
+              <v-list-item-content v-for="genre in movie.genre_ids"
+                :key="genre.id">
+                <v-span>,{{genre.name}}</v-span>
               </v-list-item-content>
               <v-rating
                   v-model="rank"                  

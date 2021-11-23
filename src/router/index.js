@@ -10,7 +10,7 @@ import Reviews from '@/views/reviews/Reviews'
 import Community from '@/views/community/Community'
 import ArticleList from '@/components/community/ArticleList'
 import Recommend from '@/views/recommend/Recommend'
-import Profile from '@/views/accounts/Profile'
+import MyPage from '@/views/accounts/MyPage'
 import ReviewItem from '@/components/reviews/ReviewItem'
 // import ReviewCreate from '@/components/community/ReviewCreate'
 import ReviewDetail from '@/components/reviews/ReviewDetail'
@@ -44,9 +44,9 @@ const routes = [
     component: Login,
   },
   {
-    path: '/accounts/Profile',
-    name: 'Profile',
-    component: Profile,
+    path: '/accounts/MyPage',
+    name: 'MyPage',
+    component: MyPage,
     props: true,
   },
 

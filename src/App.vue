@@ -6,7 +6,7 @@
           <span v-if="isLogin">
             <!-- <router-link :to="{ name: 'Profile' }">Profile</router-link>| -->
             <!-- <router-link :to="{ name: 'Community' }">Community</router-link>| -->
-            <router-link @click.native="getCurrentUser" to="#">Profile</router-link>|
+            <router-link @click.native="getCurrentUser" to="#">MyPage</router-link>|
             <router-link @click.native="logout" to="#">Logout</router-link>|
             <router-link :to="{ name: 'Recommend' }">Recommend</router-link>|
             <router-link :to="{ name: 'MovieList' }">MovieList</router-link>|
@@ -61,7 +61,7 @@ export default {
       .then(res => {
         console.log(res)
         this.currentUser = res.data
-        this.$router.push({ name: 'Profile', params: { id: this.currentUser.id, currentUser: this.currentUser } })
+        this.$router.push({ name: 'MyPage', params: { id: this.currentUser.id, currentUser: this.currentUser } })
       })
       .catch(err => console.log(err))
     },

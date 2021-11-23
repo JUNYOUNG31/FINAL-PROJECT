@@ -6,13 +6,13 @@
         <h1 class="profile-body-articles-label">
           {{ profileUser.username }}가 작성한 리뷰
         </h1>
-        <div v-if="profileUser.articles" class="profile-body-articles-items">
+        <div v-if="profileUser.reviews" class="profile-body-articles-items">
           <router-link
-            v-for="article in profileUser.articles" 
-            :key="article.id"
-            :to="{ name: 'ArticleDetail', params: { id: article.id, article: article, currentUser: currentUser } }" >
+            v-for="review in profileUser.reviews" 
+            :key="review.id"
+            :to="{ name: 'ReviewDetail', params: { id: review.id } }" >
             <div class="profile-body-articles-item" >
-              {{ article.title }}
+              {{ review.title }}
             </div>
           </router-link>
         </div>
@@ -44,7 +44,7 @@
 
 <script>
 export default {
-  name: 'Profile',
+  name: 'MyPage',
   data() {
     return {
       profileUser: {}
