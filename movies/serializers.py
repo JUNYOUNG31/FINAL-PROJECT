@@ -4,9 +4,19 @@ from .models import Genre, Movie, Review, Comment
 
 class MovieListSerializer(serializers.ModelSerializer):
 
+    class GenreSerializer(serializers.ModelSerializer):
+
+        class Meta:
+            model = Genre
+            fields = '__all__'
+    
+    genre_ids = GenreSerializer(many=True, read_only=True)
+
     class Meta:
         model = Movie
-        fields = ('pk', 'title', 'genre_ids', 'overview', 'release_date', 'poster_path', 'vote_count', 'vote_average')
+        fields = ('pk', 'title', 'genre_ids', 'overview', 'release_date', 
+        'poster_path', 'vote_count', 'vote_average',
+        )
 
 
 class GenreSerializer(serializers.ModelSerializer):
