@@ -38,7 +38,7 @@ export default {
 }
 </script>
 
-<style>
+<style >
 .movie_container {
   width: 100%;
   height: 800px;
@@ -94,7 +94,7 @@ export default {
   font-size: 2em;  
 }
 
-.movielist .content p{
+.movielist .content > p{
   
   display: inline-flex;
   width: 100%; 
