@@ -1,5 +1,6 @@
 <template>
-  <v-row justify="center" class="detailbtn">
+<div class="detailbtn">
+  <v-row>
     <v-dialog
       v-model="dialog"
       fullscreen
@@ -8,14 +9,15 @@
       transition="dialog-bottom-transition"
     >
       <template v-slot:activator="{ on, attrs }">
-        <v-btn          
+        <v-btn  class="detailbtn"
           v-bind="attrs"
-          v-on="on"          
+          v-on="on" 
         >Movie Detail
         </v-btn>
       </template>
-      <v-card>
+      <v-card class="moviedetailcard">
         <v-toolbar dark>   
+          <v-spacer></v-spacer>
           <v-toolbar-title>{{ Movietitle}}</v-toolbar-title>
           <v-spacer></v-spacer>
           <v-btn
@@ -26,10 +28,11 @@
           </v-btn>          
         </v-toolbar>
         <v-img 
-        max-height="500"
-        max-width="250"
+        max-height="700"
+        max-width="350"
         :src="`https://www.themoviedb.org/t/p/w500/${movie.poster_path}`" alt="movie_poster">
         </v-img>
+        <v-spacer></v-spacer>
         <v-list
           three-line          
         >          
@@ -44,6 +47,7 @@
       </v-card>
     </v-dialog>
   </v-row>
+  </div>
 </template>
 
 <script>
@@ -67,10 +71,16 @@ export default {
 
 <style>
 .detailbtn {
+  display: flex;
+  align-items: center;
   display: inline-block;
   text-decoration: none;
   color: white;
   background: #0009;
   padding: 10px 15px;
+}
+.moviedetailcard {
+  display: flex;
+  
 }
 </style>

@@ -1,14 +1,17 @@
 <template>
   <div class="movie_container">
     <div class="movielist">    
-        <img :src="`https://www.themoviedb.org/t/p/original/${movie.poster_path}`" alt="movie_poster">         
+      <div class="img">
+        <img :src="`https://www.themoviedb.org/t/p/original/${movie.poster_path}`" alt="movie_poster">               </div>
         <div class="content">
           <h1>{{ movie.title }}</h1>        
           <p>{{ movie.overview }}</p>    
-          <!-- <p>{{ movie.genre_ids }}</p> -->          
+          <!-- <p>{{ movie.genre_ids }}</p> -->
+          <div>
           <movie-detail
           :movie="moviedetail">   
           </movie-detail>
+          </div>          
         </div>
     </div>
   </div>
@@ -40,13 +43,18 @@ export default {
   width: 100%;
   height: 800px;
   position: relative;
+  display: flex;
 }
 
 .movielist {
+  display:flex;
+  justify-content: space-between;
   width: 100%;
   height: 100%;
+  justify-content: center;
   position: relative;
   animation: fade 1s ease-in-out;
+  
 }
 @keyframes fade{
   to{
@@ -56,37 +64,44 @@ export default {
     opacity: 0;
   }
 }
+.movielist .img{
+  display: flex;
+  object-fit: contain;   
+}
+.movielist img{  
 
-.movielist img{
-  max-width: 1200px;
-  height: 100%;
+  max-width: 100%;
+  height: 90%;
   display: block;
   object-fit: cover;
-  filter: brightness(80%);
+  filter: brightness(80%);  
 }
 
 .movielist .content {
-  position: absolute;
-  left: 50px;
+  display: flex;
+  flex-direction: column;
+  background-color: #0009;
+  justify-content: center;
+  position: absolute;  
   bottom: 100px;
   color: white;
-  max-width: 500px;
+  max-width: 80%;
   text-shadow: 0 0 1px #000;  
   text-align: left;
 }
 
-.movielist .content h1{
+.movielist .content h1{  
   font-size: 2em;  
 }
 
 .movielist .content p{
-  /* 한 줄 자르기 */ 
-  display: inline-block;
-  width: 500px; 
+  
+  display: inline-flex;
+  width: 100%; 
   white-space: nowrap; 
   overflow: hidden; 
   text-overflow: ellipsis;
-  /* 여러 줄 자르기 추가 스타일 */
+
   white-space: normal; 
   line-height: 1.2; 
   height: 3.6em; 
