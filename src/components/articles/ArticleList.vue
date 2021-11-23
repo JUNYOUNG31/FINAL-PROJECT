@@ -1,15 +1,16 @@
 <template>
-  <div>
-    <p>게시글 리스트</p>
-    <v-expansion-panels>
-      <v-expansion-panel    
-    v-for="(article, id) in articles" 
-    :key="id">    
+  <div class="articlewlist">
+    <p>Article list</p>
+    <div class="articleitems"> 
+      <div v-for="(article, id) in articles" 
+    :key="id" class="article_item">   
+    <v-row justify="center">   
     <article-item :article="article">
     </article-item>
-    </v-expansion-panel> 
-    </v-expansion-panels>
+    </v-row>
   </div>  
+  </div>
+  </div>
 </template>
 
 <script>
