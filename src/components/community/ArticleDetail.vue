@@ -33,8 +33,11 @@
         <v-subheader>수정 시각: {{ article.updated_at | moment('from', 'now') }}</v-subheader>
           <v-list-item-content>
             <v-list-item-title>Likes</v-list-item-title>
-            <!-- 이쪽에for문 -->
-            <v-list-item-subtitle>이 글을 좋아한 사람: {{ article.like_users }}</v-list-item-subtitle>
+            <span>이 글을 좋아한 사람</span>
+            <v-list-item-subtitle
+             v-for="user in article.like_users" 
+            :key="user.id">
+            {{ user.username }}</v-list-item-subtitle>
           </v-list-item-content>
           <v-spacer></v-spacer> 
           <v-spacer></v-spacer>
@@ -142,6 +145,7 @@ export default {
         console.log(res)
         this.article = res.data
         this.likeUser = this.article.like_users
+        console.log(this.likeUser)
         this.likeCount = res.data.count
       })
     },

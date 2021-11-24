@@ -60,6 +60,25 @@
         <v-spacer></v-spacer>    
         <v-subheader>작성 시각: {{ review.created_at | moment('from', 'now') }}</v-subheader>          
         <v-subheader>수정 시각: {{ review.updated_at | moment('from', 'now') }}</v-subheader>
+        
+        <v-list-item-content>
+            <v-list-item-title>Likes</v-list-item-title>
+            <span>이 글을 좋아한 사람</span>
+            <v-list-item-subtitle
+             v-for="user in review.like_users" 
+            :key="user.id">
+            {{ user.username }}</v-list-item-subtitle>
+          </v-list-item-content>
+          <v-spacer></v-spacer> 
+          <v-spacer></v-spacer>
+
+        <div v-if="reviewLiked" class="article-detail-like">
+          <i @click="toggleLike" style="color: crimson" class="fas fa-heart article-detail-like-button"></i> {{ likeUser.length }}
+        </div>
+        <div v-else class="article-detail-like">
+          <i @click="toggleLike" class="fas fa-heart article-detail-like-button"></i> {{ likeUser.length }}
+        </div>
+        
           <v-list-item-content>
             <v-list-item-title>Likes</v-list-item-title>
             <v-list-item-subtitle>이 글을 좋아한 사람: {{ review.like_users }}</v-list-item-subtitle>
@@ -109,6 +128,9 @@ export default {
   data: function(){
     return  {
       review: null,
+      currentUser: null,
+      likeUser: null,
+      reviewLiked: null,
       // comment: null,
       reviewItem: {
         movie_title: null  ,  
@@ -128,6 +150,50 @@ export default {
       }
       return config
     },
+    getCurrentUser() {
+      axios({
+        method: 'GET',
+        url: `${SERVER_URL}accounts/`, 
+        headers: this.setToken()
+      }) 
+      .then(res => {
+        console.log(res)
+        this.currentUser = res.data
+        this.reviewLiked = !!this.likeUser.some(user => user.username === this.currentUser.username)
+      })
+      .catch(err => console.log(err))
+    },
+
+    
+    toggleLike() {
+      const likeBtn = document.querySelector(".article-detail-like-button")
+      axios({
+      method: 'POST',
+      url: `${SERVER_URL}movies/community/${this.$route.params.id}/like/`,
+      headers: this.setToken()})
+      .then(res => {
+        if (res.data.liked) {
+          likeBtn.style.color = "crimson"
+          this.likeUser.push(this.currentUser)
+          }
+      else {
+          likeBtn.style.color = "black"
+          this.likeUser = this.likeUser.filter(user => {
+          return this.currentUser.username !== user.username
+            })
+        }
+      })
+      .catch(err=>console.log(err))
+    },
+    likedColor() {
+      const likeBtn = document.querySelector(".article-detail-like-button")
+      console.log(this.reviewLiked)
+      if (this.reviewLiked) {
+          likeBtn.style.color = 'crimson'
+      } else {likeBtn.style.color = 'black'}
+    },
+
+
     getReview(){
       axios({
       method: 'GET',
@@ -136,6 +202,7 @@ export default {
       .then(res => {
         console.log(res)
         this.review = res.data
+        this.likeUser = this.review.like_users
       })
     },
     deleteReview() {
@@ -167,6 +234,7 @@ export default {
   },
   created(){
     this.getReview()
+    this.getCurrentUser()
   }
 }
 
