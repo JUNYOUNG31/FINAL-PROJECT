@@ -4,8 +4,7 @@ from django.views.decorators.http import require_safe
 from django.shortcuts import get_object_or_404, get_list_or_404
 from rest_framework import serializers
 from .models import Article, ArticleComment
-from .serializers import (ArticleListSerializer, 
-ArticleSerializer, CommentSerializer)
+from .serializers import (ArticleSerializer, CommentSerializer)
 from rest_framework.response import Response
 from rest_framework.decorators import permission_classes, authentication_classes
 from rest_framework.permissions import AllowAny, IsAuthenticated
@@ -31,6 +30,7 @@ def create(request):
         serializer.save(user=request.user)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
+
 # 단일 article 조회, 수정, 삭제
 @api_view(['GET', 'PUT', 'DELETE'])
 @authentication_classes([JSONWebTokenAuthentication])
@@ -41,6 +41,8 @@ def article_update_delete(request, article_pk):
     if request.method == 'GET':
         serializer = ArticleSerializer(article)
         return Response(serializer.data)
+        # serializer = UserArticleSerializer(user)
+        # return Response(serializer.data)
     # 수정
     elif request.method == 'PUT':
         serializer = ArticleSerializer(article, data=request.data)
