@@ -240,7 +240,6 @@ export default new Vuex.Store({
         headers: objs.token
       })
       .then((res) => {
-        console.log(objs)
         commit('UPDATE_COMMENT', res.data)
         router.push({name:'ReviewDetail', params:{id: objs.review_id }})
       })

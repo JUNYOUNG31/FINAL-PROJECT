@@ -1,4 +1,5 @@
 <template>
+  
   <div>    
     <comment-item
       v-for="(comment, idx) in comments"
