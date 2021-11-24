@@ -1,12 +1,12 @@
 <template>
-  <div>
+  <div>    
     <comment-item
       v-for="(comment, idx) in comments"
       :key="idx"
       :comment="comment"
       :review="reviewdetail"
-    >
-    </comment-item>
+      >
+    </comment-item>             
   </div>
 </template>
 

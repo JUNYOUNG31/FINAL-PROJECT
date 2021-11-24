@@ -45,7 +45,7 @@
         </v-list-item>
       </v-list>
       <v-divider></v-divider>
-      <v-list three-line subheader>          
+      <v-list subheader>          
         <v-list-item>            
           <v-list-item-content>
             <v-list-item-title>Content</v-list-item-title>            
@@ -72,18 +72,29 @@
           </v-list-item-content>
         </v-list-item>
         <v-divider></v-divider>
-        <v-list-item>            
-          <v-list-item-content>
-            <comment-create :review="review"></comment-create>
-            <comment-list :review="review">
-            </comment-list>
-          </v-list-item-content>
-        </v-list-item>
+    <v-card max-width="900">
+    <v-toolbar color="light-blue lighten-2">
+      <v-spacer></v-spacer> 
+      <v-toolbar-title>Comments</v-toolbar-title>
+      <v-spacer></v-spacer>      
+    </v-toolbar>
+    <v-list three-line>
+      <v-list-item>
+        <v-list-item-content class="marginplz2">          
+      <comment-create :review="review"></comment-create>
+      </v-list-item-content>
+      </v-list-item>
+      <v-list-item>
+      <v-list-item-content>
+      <comment-list :review="review"></comment-list>
+        </v-list-item-content>
+      </v-list-item>      
+    </v-list>
+  </v-card>     
       </v-list>
     </v-card>
   </div>
 </template>
-
 <script>
 import CommentList from '@/components/reviews/CommentList'
 import CommentCreate from '@/components/reviews/CommentCreate'
@@ -177,5 +188,9 @@ export default {
 }
 .reviewitems .marginplz {
   margin-top: 10px;
+}
+.reviewitems .marginplz2 {
+  margin-top: 10px;
+  margin-bottom: 20px;
 }
 </style>

@@ -1,10 +1,20 @@
 <template>
   <div>
-    <v-text-field v-model="commentItem.content"></v-text-field>
-    <span>댓글 작성일 : {{ comment.created_at | moment('YYYY-MM-DD HH:mm:ss') }}</span>
-    <span>댓글 수정일 : {{ comment.updated_at | moment('YYYY-MM-DD HH:mm:ss') }}</span>
-    <button class="btn btn-primary" @click="updateComment">댓글 수정</button>
-    <button class="btn btn-danger" @click="deleteComment">댓글 삭제</button>
+    <template>
+      <v-list class="plzmin">
+        <v-list-item class="marginminus">
+        <v-list-item-content class="marginminus2"> 
+        <v-text-field v-model="commentItem.content"></v-text-field>
+        </v-list-item-content>         
+        </v-list-item>
+        <v-list-item class="marginminus">
+        <v-list-item-subtitle><span>작성일 : {{ comment.created_at | moment('YYYY-MM-DD HH:mm') }}</span>---------<span>수정일 : {{ comment.updated_at | moment('YYYY-MM-DD HH:mm') }}</span></v-list-item-subtitle>
+        <v-btn class="btn btn-primary" @click="updateComment">UPDATE</v-btn>
+        <v-btn class="btn btn-danger" @click="deleteComment">DELETE</v-btn>
+        </v-list-item>
+        <v-divider></v-divider>
+      </v-list>
+      </template>    
   </div>
 </template>
 
@@ -59,4 +69,22 @@ export default {
 </script>
 
 <style>
+.marginminus {
+  height: 30px;
+  box-sizing: border-box;
+  padding: 0;
+  margin-left: 5px;
+}
+.marginminus2 {
+  height: 50px;
+  box-sizing: border-box;
+  padding: 0;
+  margin-left: 5px;
+}
+.plzmin {
+  min-height: 50px;
+}
+.plzmin .v-list-item {
+  min-height: 45px;
+}
 </style>
