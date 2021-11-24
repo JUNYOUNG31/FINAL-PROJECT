@@ -4,7 +4,7 @@
       v-for="(comment, idx) in article_comments"
       :key="idx"
       :comment="comment"
-      :article="articledetail"
+      :article="article"
     >
     </comment-item>
   </div>

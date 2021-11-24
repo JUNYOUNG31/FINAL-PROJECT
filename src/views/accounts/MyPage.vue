@@ -34,7 +34,9 @@
             :key="review.id"
             :to="{ name: 'ReviewDetail', params: { id: review.id } }" >
             <div class="profile-body-like-articles-item" >
-              {{ review.title }}
+              <h2>제목: {{ review.title }}</h2>
+              <hr>
+              <p>내용: {{ review.content }}</p>
             </div>
           </router-link>
         </div>
@@ -74,7 +76,9 @@
             :key="article.id"
             :to="{ name: 'ArticleDetail', params: { id: article.id, article: article, currentUser: currentUser } }" >
             <div class="profile-body-like-articles-item" >
-              {{ article.title }}
+              <h2>제목: {{ article.title }}</h2>
+              <hr>
+              <p>내용: {{ article.content }}</p>
             </div>
           </router-link>
         </div>
