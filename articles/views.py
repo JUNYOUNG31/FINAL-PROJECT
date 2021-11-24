@@ -123,3 +123,26 @@ def like(request, article_pk):
         "liked": liked,
         "count": article.like_users.count()
     })
+
+@api_view(['POST'])
+@authentication_classes([JSONWebTokenAuthentication])
+@permission_classes([IsAuthenticated])
+def commentlike(request, article_pk, comment_pk):
+    user = request.user
+
+    comment = get_object_or_404(ArticleComment, pk=comment_pk)
+    serializer = CommentSerializer(comment)
+
+    print(serializer.data)
+
+    if user in comment.like_users.all():
+        comment.like_users.remove(user)
+        liked = False
+    else:
+        comment.like_users.add(user)
+        liked = True
+
+    return Response({
+        "liked": liked,
+        "count": comment.like_users.count()
+    })
