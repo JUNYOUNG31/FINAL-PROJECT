@@ -2,6 +2,7 @@
   <div class="profile container">
     <div class="profile-header">{{ profileUser.username }}'s Page</div>
     <div class="profile-body">
+
       <div class="profile-body-articles">
         <h1 class="profile-body-articles-label">
           {{ profileUser.username }}가 작성한 리뷰
@@ -12,7 +13,9 @@
             :key="review.id"
             :to="{ name: 'ReviewDetail', params: { id: review.id } }" >
             <div class="profile-body-articles-item" >
-              {{ review.title }}
+              <h2>제목: {{ review.title }}</h2>
+              <hr>
+              <p>내용: {{ review.content }}</p>
             </div>
           </router-link>
         </div>
@@ -20,9 +23,50 @@
           <h1>아직 작성한 리뷰가 없습니다</h1>
         </div>
       </div>
+
       <div class="profile-body-like-articles">
         <h1 class="profile-body-like-articles-label">
           {{ profileUser.username }}가 좋아하는 리뷰
+        </h1>
+        <div v-if="profileUser.like_reviews" class="profile-body-like-articles-items">
+          <router-link
+            v-for="review in profileUser.like_reviews" 
+            :key="review.id"
+            :to="{ name: 'ReviewDetail', params: { id: review.id } }" >
+            <div class="profile-body-like-articles-item" >
+              {{ review.title }}
+            </div>
+          </router-link>
+        </div>
+        <div v-else class="profile-body-like-articles-items">
+          <h1>아직 좋아하는 리뷰가 없습니다</h1>
+        </div>
+      </div>
+
+      <div class="profile-body-articles">
+        <h1 class="profile-body-articles-label">
+          {{ profileUser.username }}가 작성한 게시글
+        </h1>
+        <div v-if="profileUser.articles" class="profile-body-articles-items">
+          <router-link
+            v-for="article in profileUser.articles" 
+            :key="article.id"
+            :to="{ name: 'ArticleDetail', params: { id: article.id } }" >
+            <div class="profile-body-articles-item" >
+              <h2>제목: {{ article.title }}</h2>
+              <hr>
+              <p>내용: {{ article.content }}</p>
+            </div>
+          </router-link>
+        </div>
+        <div v-else class="profile-body-articles-items">
+          <h1>아직 작성한 게시글이 없습니다</h1>
+        </div>
+      </div>
+
+      <div class="profile-body-like-articles">
+        <h1 class="profile-body-like-articles-label">
+          {{ profileUser.username }}가 좋아하는 게시글
         </h1>
         <div v-if="profileUser.like_articles" class="profile-body-like-articles-items">
           <router-link
@@ -35,9 +79,10 @@
           </router-link>
         </div>
         <div v-else class="profile-body-like-articles-items">
-          <h1>아직 좋아하는 리뷰가 없습니다</h1>
+          <h1>아직 좋아하는 게시글이 없습니다</h1>
         </div>
       </div>
+
     </div>
   </div>
 </template>

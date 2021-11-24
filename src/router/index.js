@@ -1,20 +1,29 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '@/views/Home'
+
+// accounts
 import Signup from '@/views/accounts/Signup'
 import Login from '@/views/accounts/Login'
 import MyPage from '@/views/accounts/MyPage'
+import Profile from '@/views/accounts/Profile'
+
+// movies
 import MovieList from '@/views/movies/MovieList'
 import MovieItem from '@/components/movies/MovieItem'
 import Recommend from '@/views/recommend/Recommend'
-// import ReviewList from '@/components/reviews/ReviewList'
+
+// reviews
 import Reviews from '@/views/reviews/Reviews'
 import ReviewItem from '@/components/reviews/ReviewItem'
 import ReviewDetail from '@/components/reviews/ReviewDetail'
-// import ReviewCreate from '@/components/community/ReviewCreate'
+
+// community
 import Community from '@/views/community/Community'
 import ArticleList from '@/components/community/ArticleList'
 import ArticleDetail from '@/components/community/ArticleDetail'
+
+
 const originalPush = VueRouter.prototype.push;
 VueRouter.prototype.push = function push(location) {
     return originalPush.call(this, location).catch(() => {
@@ -49,6 +58,12 @@ const routes = [
     component: MyPage,
     props: true,
   },
+  {
+    path: '/accounts/:id',
+    name: 'Profile',
+    component: Profile,
+    props: true,
+  },
 
   // movies
   {
@@ -60,6 +75,11 @@ const routes = [
     path: '/movies/movieitem',
     name: 'MovieItem',
     component: MovieItem,
+  },
+  {
+    path: '/recommend',
+    name: 'Recommend',
+    component: Recommend,
   },
 
   // reviews
@@ -75,16 +95,13 @@ const routes = [
     component: ReviewItem,
   },
   {
-    path: 'reviews/item/reviewdetail/:id',
+    path: '/reviews/:id',
     name: 'ReviewDetail',
     component: ReviewDetail,
     props:true
   },
-  // {
-  //   path: '/community',
-  //   name: 'ReviewCreate', 
-  //   component: ReviewCreate,
-  // },  
+
+  // community
   {
     path: '/community',
     name: 'Community',
@@ -97,15 +114,10 @@ const routes = [
     props: true
   },
   {
-    path: '/community/articles/articledetail/:id',
+    path: '/community/:id',
     name: 'ArticleDetail',
     component: ArticleDetail,
     props: true
-  },
-  {
-    path: '/recommend',
-    name: 'Recommend',
-    component: Recommend,
   },
 ]
 
