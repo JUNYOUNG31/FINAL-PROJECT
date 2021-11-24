@@ -28,7 +28,8 @@ export default {
       commentItem: {
         content: null,
         currentUser: null,
-      }
+      },
+      rules: [v => v.length <= 100 || 'Max 100 characters']
     }
   },
   methods: {

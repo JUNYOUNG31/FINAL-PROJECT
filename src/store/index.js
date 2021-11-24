@@ -253,7 +253,7 @@ export default new Vuex.Store({
       })
       .then((res) => {        
         commit('DELETE_COMMENT', res.data)
-        router.push({name:'Reviews' })
+        router.push({name:'ReviewDetail', params:{id: objs.review_id }})
       })
       .catch(err => console.log(err))
     },

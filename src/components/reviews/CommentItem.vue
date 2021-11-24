@@ -53,7 +53,7 @@ export default {
       const commentItemSet = {
         commentItem: this.commentItem,
         comment_id: this.comment.id,
-        review_id: this.review,
+        review_id: this.review.id,
         token: this.setToken()
       }      
       this.$store.dispatch('updateComment', commentItemSet)
@@ -61,7 +61,7 @@ export default {
     deleteComment() {
       const commentItemSet = {
         comment_id: this.comment.id,
-        review_id: this.review,
+        review_id: this.review.id,
         token: this.setToken()
       }
       this.$store.dispatch('deleteComment', commentItemSet)

@@ -56,38 +56,30 @@
           </v-list-item-content>
         </v-list-item>          
         <v-list-item>    
-        <v-spacer></v-spacer>   
-        <v-spacer></v-spacer>    
         <v-subheader>작성 시각: {{ review.created_at | moment('from', 'now') }}</v-subheader>          
         <v-subheader>수정 시각: {{ review.updated_at | moment('from', 'now') }}</v-subheader>
-        
         <v-list-item-content>
-            <v-list-item-title>Likes</v-list-item-title>
-            <span>이 글을 좋아한 사람</span>
-            <v-list-item-subtitle
+            <v-list-item-subtitle>Likes</v-list-item-subtitle>
+            <v-list-item-title
              v-for="user in review.like_users" 
             :key="user.id">
-            {{ user.username }}</v-list-item-subtitle>
-          </v-list-item-content>
-          <v-spacer></v-spacer> 
-          <v-spacer></v-spacer>
-
-        <div v-if="reviewLiked" class="article-detail-like">
+            {{ user.username }}</v-list-item-title>
+          </v-list-item-content>         
+        <v-list-item-content v-if="reviewLiked" class="article-detail-like">
           <i @click="toggleLike" style="color: crimson" class="fas fa-heart article-detail-like-button"></i> {{ likeUser.length }}
-        </div>
-        <div v-else class="article-detail-like">
+        </v-list-item-content>
+        <v-list-item-content v-else class="article-detail-like">
           <i @click="toggleLike" class="fas fa-heart article-detail-like-button"></i> {{ likeUser.length }}
-        </div>
-        
-          <v-list-item-content>
-            <v-list-item-title>Likes</v-list-item-title>
-            <v-list-item-subtitle>이 글을 좋아한 사람: {{ review.like_users }}</v-list-item-subtitle>
           </v-list-item-content>
-          <v-spacer></v-spacer> 
-          <v-spacer></v-spacer> 
-          <v-list-item-content>
+          <v-list-item-content >
+            <v-row class="btn_x">
+              <v-col col="6">                
+              </v-col>
+              <v-col col="6">
             <v-btn class="btn btn-primary" @click="updateReview">UPDATE</v-btn>
-            <v-btn class="btn btn-danger" @click="deleteReview">DELETE</v-btn>
+            <v-btn class="btn btn-danger" @click="deleteReview">DELETE</v-btn>                
+              </v-col>
+              </v-row>            
           </v-list-item-content>
         </v-list-item>
         <v-divider></v-divider>
@@ -260,5 +252,13 @@ export default {
 .reviewitems .marginplz2 {
   margin-top: 10px;
   margin-bottom: 20px;
+}
+.article-detail-like{
+  display: flex;
+  justify-content: center;
+}
+.btn_x{
+  display: flex;
+  justify-content: left;
 }
 </style>
