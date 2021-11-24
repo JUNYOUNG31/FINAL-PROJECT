@@ -92,5 +92,11 @@ export default {
 </script>
 
 <style>
+.createform{
+  margin-top: 20px;
+  display: flex;
+  justify-content: right;
+  font-family: 'Noto Sans KR', sans-serif;     
+}
 
 </style>

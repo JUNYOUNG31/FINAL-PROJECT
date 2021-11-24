@@ -1,7 +1,7 @@
 <template>
   <v-app id="app">
       <div class="app">
-        <div class="logo" ><img :src="require(`./assets/multiplus5.png`)" alt="logo"></div>      
+        <div class="logo" ><img :src="require(`./assets/multiplus5.png`)" alt="logo" @click="gohome"></div>      
         <div class="nav">          
           <span v-if="isLogin">
             <!-- <router-link :to="{ name: 'Profile' }">Profile</router-link>| -->
@@ -44,7 +44,7 @@ export default {
       this.isLogin = false
       localStorage.removeItem('jwt')
       this.currentUser = {}
-      this.$router.push({name:'Community'})
+      this.$router.push({name:'Home'})
       
     },
     setToken() {
@@ -67,6 +67,9 @@ export default {
       })
       .catch(err => console.log(err))
     },
+    gohome() {
+      this.$router.push({name:'Home'})
+    }
 
   },
   created: function () {
@@ -93,6 +96,16 @@ export default {
   /* 기본 서체 */
   font-family: 'Noto Sans KR', sans-serif;     
 }
+.v-application--wrap {
+  flex: 1 1 auto;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    display: flex;
+    align-items: center;
+    min-height: 100vh;
+    max-width: 100%;
+    position: relative;
+}
 
 .app {
   margin: 0;
@@ -101,11 +114,9 @@ export default {
   width: 100%;
   min-height:  80px;
   overflow:  hidden;
-  display: flex;  
+  display: flex;   
   align-items: center;
-  position: relative;  
-  background-image:url("./assets/background.jpg");
-  background-size: cover;
+  position: relative;    
 }
 
 .app .logo {

@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-// import Home from '@/views/Home'
+import Home from '@/views/Home'
 import Signup from '@/views/accounts/Signup'
 import Login from '@/views/accounts/Login'
 import MyPage from '@/views/accounts/MyPage'
@@ -26,11 +26,11 @@ VueRouter.prototype.push = function push(location) {
 Vue.use(VueRouter)
 
 const routes = [
-  // {
-  //   path: '/home',
-  //   name: 'Home',
-  //   component: Home,
-  // },
+  {
+    path: '',
+    name: 'Home',
+    component: Home,
+  },
 
   // accounts
   {
@@ -75,7 +75,7 @@ const routes = [
     component: ReviewItem,
   },
   {
-    path: 'reviews/reviewdetail/:id',
+    path: 'reviews/item/reviewdetail/:id',
     name: 'ReviewDetail',
     component: ReviewDetail,
     props:true

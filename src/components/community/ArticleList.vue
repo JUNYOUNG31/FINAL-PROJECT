@@ -31,5 +31,14 @@ export default {
 </script>
 
 <style>
-
+.articlewlist {
+  font-family: 'Noto Sans KR', sans-serif;    
+  background-color: #0009;
+}
+.articleitems{
+  padding: 0 50px;
+}
+.article_item{
+  padding: 5px;
+}
 </style>

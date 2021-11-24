@@ -116,7 +116,7 @@ export default {
       this.$store.dispatch("updateArticle", updateItem)     
     },
     goback() {
-      this.$router.push({name:'ArticleList'})
+      this.$router.push({name:'Community'})
     }
   },
   created(){
