@@ -1,10 +1,10 @@
 <template>
-  <div class="reviewitem">   
+  <div class="reviewitems">   
     <v-card>
       <v-toolbar dark>          
         <v-spacer></v-spacer>
         <v-toolbar-items>
-          <v-btn icon dark>
+          <v-btn icon dark @click="goback">
           <v-icon>mdi-close</v-icon>
           </v-btn>
         </v-toolbar-items>
@@ -140,6 +140,9 @@ export default {
       }
       console.log(updateItem)  
       this.$store.dispatch("updateReview", updateItem)    
+    },
+    goback() {
+      this.$router.push({name:'Reviews'})
     }
   },
   created(){

@@ -1,8 +1,7 @@
 <template>
   <div class="reviewlist">
     <p>list</p>
-
-    <div class="reviewitems"> 
+    <div class="review_items"> 
       <div v-for="(review, id) in reviews" 
     :key="id" class="review_item">
       <v-row justify="center">      
@@ -45,10 +44,11 @@ export default {
   font-family: 'Noto Sans KR', sans-serif;    
   background-color: #0009;
 }
-.reviewitems{
+.review_items{
   padding: 0 50px;
 }
 .review_item{
   padding: 5px;
 }
+
 </style>

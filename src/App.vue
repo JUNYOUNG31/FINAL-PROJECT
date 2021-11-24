@@ -43,7 +43,9 @@ export default {
     logout: function() {
       this.isLogin = false
       localStorage.removeItem('jwt')
+      this.currentUser = {}
       this.$router.push({name:'Community'})
+      
     },
     setToken() {
       const token = localStorage.getItem('jwt')

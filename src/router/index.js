@@ -3,18 +3,18 @@ import VueRouter from 'vue-router'
 // import Home from '@/views/Home'
 import Signup from '@/views/accounts/Signup'
 import Login from '@/views/accounts/Login'
+import MyPage from '@/views/accounts/MyPage'
 import MovieList from '@/views/movies/MovieList'
 import MovieItem from '@/components/movies/MovieItem'
-import Reviews from '@/views/reviews/Reviews'
+import Recommend from '@/views/recommend/Recommend'
 // import ReviewList from '@/components/reviews/ReviewList'
+import Reviews from '@/views/reviews/Reviews'
+import ReviewItem from '@/components/reviews/ReviewItem'
+import ReviewDetail from '@/components/reviews/ReviewDetail'
+// import ReviewCreate from '@/components/community/ReviewCreate'
 import Community from '@/views/community/Community'
 import ArticleList from '@/components/community/ArticleList'
-import Recommend from '@/views/recommend/Recommend'
-import MyPage from '@/views/accounts/MyPage'
-import ReviewItem from '@/components/reviews/ReviewItem'
-// import ReviewCreate from '@/components/community/ReviewCreate'
-import ReviewDetail from '@/components/reviews/ReviewDetail'
-
+import ArticleDetail from '@/components/community/ArticleDetail'
 const originalPush = VueRouter.prototype.push;
 VueRouter.prototype.push = function push(location) {
     return originalPush.call(this, location).catch(() => {
@@ -67,6 +67,7 @@ const routes = [
     path: '/reviews',
     name: 'Reviews',
     component: Reviews,
+    props: true
   },  
   {
     path: '/reviews/item',
@@ -74,7 +75,7 @@ const routes = [
     component: ReviewItem,
   },
   {
-    path: '/reviews/reviewdetail/:id',
+    path: 'reviews/reviewdetail/:id',
     name: 'ReviewDetail',
     component: ReviewDetail,
     props:true
@@ -93,6 +94,12 @@ const routes = [
     path: '/community/articles',
     name: 'ArticleList',
     component: ArticleList,
+    props: true
+  },
+  {
+    path: '/community/articles/articledetail/:id',
+    name: 'ArticleDetail',
+    component: ArticleDetail,
     props: true
   },
   {

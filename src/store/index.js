@@ -309,8 +309,7 @@ export default new Vuex.Store({
       }) 
       .then(res => {       
         console.log(res)
-        commit('DELETE_ARTICLE')   
-        router.go()            
+        commit('DELETE_ARTICLE')                      
       })
     },
 
