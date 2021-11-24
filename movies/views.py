@@ -163,3 +163,20 @@ def recommend(request):
         movie = Movie.objects.filter(pk=random_num).first()
         serializer = MovieRecommendSerializer(movie)
         return Response(serializer.data)
+
+@api_view(['POST'])
+@authentication_classes([JSONWebTokenAuthentication])
+@permission_classes([IsAuthenticated])
+def like(request, review_pk):
+    user = request.user
+    review = get_object_or_404(Review, pk=review_pk)
+    if user in review.like_users.all():
+        review.like_users.remove(user)
+        liked = False
+    else:
+        review.like_users.add(user)
+        liked = True
+    return Response({
+        "liked": liked,
+        "count": review.like_users.count()
+    })

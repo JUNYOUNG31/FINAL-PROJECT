@@ -14,6 +14,8 @@ urlpatterns = [
     path('community/create/', views.create_review),
     # 리뷰 단일 조회/수정/삭제
     path('community/<int:review_pk>/', views.review_update_delete),
+    # 리뷰 좋아요
+    path('community/<int:review_pk>/like/', views.like),
     # 댓글 생성
     path('community/<int:review_pk>/comment_create/', views.create_comment),
     # 댓글 단일 조회/수정/삭제
