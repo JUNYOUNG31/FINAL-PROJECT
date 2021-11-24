@@ -6,7 +6,7 @@
       max-width="600px"
     >
       <template v-slot:activator="{ on, attrs }">
-        <v-btn color="light-blue accent-" v-bind="attrs" v-on="on">
+        <v-btn color="light-blue lighten-3" v-bind="attrs" v-on="on">
           Create
         </v-btn>
       </template>

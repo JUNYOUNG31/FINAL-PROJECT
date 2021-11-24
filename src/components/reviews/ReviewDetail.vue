@@ -1,7 +1,15 @@
 <template>
   <div class="reviewitems">   
     <v-card>
-      <v-toolbar dark>          
+      <v-toolbar dark>   
+        <v-spacer></v-spacer>       
+        <v-toolbar-title>{{review.id}}</v-toolbar-title>
+        <v-spacer></v-spacer>
+        <v-spacer></v-spacer> 
+        <v-spacer></v-spacer>  
+        <v-toolbar-title>{{review.user.username}}</v-toolbar-title>
+        <v-spacer></v-spacer>
+        <v-spacer></v-spacer>
         <v-spacer></v-spacer>
         <v-toolbar-items>
           <v-btn icon dark @click="goback">
@@ -12,11 +20,11 @@
       <v-list three-line>         
         <v-list-item>
           <v-list-item-content>
+            <v-list-item-title>Title </v-list-item-title>
             <v-list-item-title>{{ review.title }}</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-        <v-list-item>
+          </v-list-item-content>          
           <v-list-item-content>
+            <v-list-item-title>Movie Title</v-list-item-title>
             <v-list-item-title>{{ review.movie_title }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
@@ -42,8 +50,9 @@
           <v-list-item-content>
             <v-list-item-title>Content</v-list-item-title>            
             <v-list-item-title>
+              <div class="marginplz">
               <v-textarea outlined name="reviewContent" cols="80" rows="5" v-model="review.content" placeholder="내용"></v-textarea>
-              </v-list-item-title>
+              </div></v-list-item-title>
           </v-list-item-content>
         </v-list-item>          
         <v-list-item>    
@@ -153,5 +162,20 @@ export default {
 </script>
 
 <style>
-
+.reviewitems {
+  font-family: 'Noto Sans KR', sans-serif;    
+  background-color: #0009;
+  display: flex;
+  flex-direction: column;
+  align-items: left;   
+  border-radius: 5px;
+  box-sizing: border-box;
+  width:900px;
+  margin: 0;
+  max-width: 900px;
+  padding: 10px 30px 20px;  
+}
+.reviewitems .marginplz {
+  margin-top: 10px;
+}
 </style>

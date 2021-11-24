@@ -51,6 +51,7 @@ export default {
     console.log(commentListSet)
     this.$store.dispatch('getComments', commentListSet)
   },
+  
 }
 </script>
 
