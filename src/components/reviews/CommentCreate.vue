@@ -1,7 +1,14 @@
 <template>
-  <div>
-    <input type="text" class="input-box" placeholder="댓글 내용" v-model="commentItem.content">
-    <button class="btn btn-create" @click="makeCreate">댓글 작성</button>
+  <div class="commentform1">    
+      <v-text-field class="inputcomments"
+      v-model="commentItem.content"
+      :rules="rules"
+      counter
+      maxlength="100"
+      hint="This field uses maxlength attribute"
+      label="Comments"
+    ></v-text-field> 
+    <v-btn  class="btn btn-primary" @click="makeCreate">댓글 작성</v-btn>
   </div>
 </template>
 
@@ -65,4 +72,12 @@ export default {
 </script>
 
 <style>
+.commentform1{
+  display: flex;
+  justify-content: center;
+  align-items: center;  
+}
+.inputcomments{
+  margin-right: 5px;
+}
 </style>

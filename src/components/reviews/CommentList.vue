@@ -1,11 +1,11 @@
 <template>
-  
+
   <div>    
     <comment-item
       v-for="(comment, idx) in comments"
       :key="idx"
       :comment="comment"
-      :review="reviewdetail"
+      :review="review"
       >
     </comment-item>             
   </div>
@@ -17,16 +17,11 @@ import { mapGetters } from 'vuex'
 export default {
   name: 'CommentList',
   props: {
-    review: {
+    review: { //모든 정보
       type: Object,
-      required: true,
+      required: true,  
     }
-  },
-  data () {
-    return {
-      reviewdetail: this.review.id
-    }
-  },
+  },  
   components: {
     CommentItem
   },
@@ -49,7 +44,6 @@ export default {
       review_id: this.review.id,
       token: this.setToken()
     }
-    console.log(commentListSet)
     this.$store.dispatch('getComments', commentListSet)
   },
   

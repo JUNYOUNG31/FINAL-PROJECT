@@ -4,11 +4,13 @@
       <v-list class="plzmin">
         <v-list-item class="marginminus">
         <v-list-item-content class="marginminus2"> 
+        
         <v-text-field v-model="commentItem.content"></v-text-field>
+        
         </v-list-item-content>         
         </v-list-item>
         <v-list-item class="marginminus">
-        <v-list-item-subtitle><span>작성일 : {{ comment.created_at | moment('YYYY-MM-DD HH:mm') }}</span>---------<span>수정일 : {{ comment.updated_at | moment('YYYY-MM-DD HH:mm') }}</span></v-list-item-subtitle>
+        <v-list-item-subtitle>username: {{review.user.username}} ----- 작성일 : {{ comment.created_at | moment('YYYY-MM-DD HH:mm') }} ----- 수정일 : {{ comment.updated_at | moment('YYYY-MM-DD HH:mm') }}</v-list-item-subtitle>
         <v-btn class="btn btn-primary" @click="updateComment">UPDATE</v-btn>
         <v-btn class="btn btn-danger" @click="deleteComment">DELETE</v-btn>
         </v-list-item>
@@ -24,7 +26,7 @@ export default {
   name: 'CommentItem',
   props: {
     review: {
-      type: Number,
+      type: Object,
       required: true,
     },
     comment: {
@@ -35,7 +37,7 @@ export default {
   data() {
     return {
       commentItem: {
-        content: this.comment.content
+        content: this.comment.content,      
       }
     }
   },
@@ -53,8 +55,7 @@ export default {
         comment_id: this.comment.id,
         review_id: this.review,
         token: this.setToken()
-      }
-      console.log(commentItemSet)
+      }      
       this.$store.dispatch('updateComment', commentItemSet)
     },
     deleteComment() {
