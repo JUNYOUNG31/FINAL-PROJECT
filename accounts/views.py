@@ -16,6 +16,8 @@ from rest_framework.decorators import api_view
 @permission_classes([AllowAny])
 def signup(request):
 	# 1-1. Client에서 온 데이터를 받아서
+    print('12312313123123')
+    print(request.data)
     password = request.data.get('password')
     password_confirmation = request.data.get('passwordConfirmation')
 		

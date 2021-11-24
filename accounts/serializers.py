@@ -15,22 +15,30 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = get_user_model()
-        fields = ('reviews', 'username', 'id', 'comments', 'password')
+        fields = ('username', 'id', 'password')
+
+
+class UserProfileSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(write_only=True)
+
+    class Meta:
+        model = get_user_model()
+        fields = ('username', 'id', 'password', 'reviews', 'comments')
 
 
 ###리뷰###
 
 class CommentsRelatedReviewSerializer(serializers.ModelSerializer):
-    user = UserSerializer(required=False)
+    user = UserProfileSerializer(required=False)
     class Meta:
         model = Comment
         fields = ['id', 'user', 'content', 'created_at', ]
 
 
 class ReviewListSerializer(serializers.ModelSerializer):
-    user = UserSerializer()
+    user = UserProfileSerializer()
     comments = CommentsRelatedReviewSerializer(many=True)
-    like_users = UserSerializer(many=True)
+    like_users = UserProfileSerializer(many=True)
     class Meta:
         model = Review
         fields = ['id', 'movie_title', 'user', 'title', 'content', 'rank', 'created_at', 'updated_at', 'like_users', 'comments']
@@ -39,16 +47,16 @@ class ReviewListSerializer(serializers.ModelSerializer):
 ###게시글###
 
 class CommentsRelatedArticleSerializer(serializers.ModelSerializer):
-    user = UserSerializer(required=False)
+    user = UserProfileSerializer(required=False)
     class Meta:
         model = ArticleComment
         fields = ['id', 'user', 'content', 'created_at', ]
 
 
 class ArticleListSerializer(serializers.ModelSerializer):
-    user = UserSerializer()
+    user = UserProfileSerializer()
     comments = CommentsRelatedArticleSerializer(many=True)
-    like_users = UserSerializer(many=True)
+    like_users = UserProfileSerializer(many=True)
     class Meta:
         model = Article
         fields = ['id', 'user', 'title', 'content', 'created_at', 'updated_at', 'like_users', 'comments']
@@ -62,8 +70,8 @@ class UserReviewArticleSerializer(UserSerializer):
     articles = ArticleListSerializer(many=True)
     like_articles = ArticleListSerializer(many=True)
     article_comments = CommentsRelatedArticleSerializer(many=True)
-    class Meta(UserSerializer.Meta):
-        fields = UserSerializer.Meta.fields + ('reviews', 'like_reviews', 'comments', 
+    class Meta(UserProfileSerializer.Meta):
+        fields = UserProfileSerializer.Meta.fields + ('reviews', 'like_reviews', 'comments', 
                                                 'articles', 'like_articles', 'article_comments',)
 
 

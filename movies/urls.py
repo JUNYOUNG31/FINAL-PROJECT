@@ -12,11 +12,11 @@ urlpatterns = [
     path('community/', views.getreview),
     # 리뷰 생성
     path('community/create/', views.create_review),
-    # 리뷰 수정/삭제
+    # 리뷰 단일 조회/수정/삭제
     path('community/<int:review_pk>/', views.review_update_delete),
     # 댓글 생성
     path('community/<int:review_pk>/comment_create/', views.create_comment),
-    # 댓글 수정/삭제
+    # 댓글 단일 조회/수정/삭제
     path('community/<int:review_pk>/<int:comment_pk>/', views.comment_update_delete),
     
     # 영화 추천

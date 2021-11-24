@@ -92,7 +92,7 @@ def review_update_delete(request, review_pk):
 def create_comment(request, review_pk):
     review = get_object_or_404(Review, pk=review_pk)
     if request.method == 'GET':
-        comments = review.comment_set.order_by('-pk')
+        comments = review.comments.order_by('-pk')
         serializer = CommentSerializer(comments, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
     elif request.method == 'POST':

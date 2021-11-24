@@ -104,3 +104,20 @@ def comment_update_delete(request, comment_pk, article_pk):
             'delete': f'data {comment_pk} is deleted!!',
         }
         return Response(data, status=status.HTTP_204_NO_CONTENT)
+
+@api_view(['POST'])
+@authentication_classes([JSONWebTokenAuthentication])
+@permission_classes([IsAuthenticated])
+def like(request, article_pk):
+    user = request.user
+    article = get_object_or_404(Article, pk=article_pk)
+    if user in article.like_users.all():
+        article.like_users.remove(user)
+        liked = False
+    else:
+        article.like_users.add(user)
+        liked = True
+    return Response({
+        "liked": liked,
+        "count": article.like_users.count()
+    })
