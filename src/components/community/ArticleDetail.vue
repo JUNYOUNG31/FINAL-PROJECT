@@ -36,11 +36,19 @@
             <v-list-item-subtitle>이 글을 좋아한 사람: {{ article.like_users }}</v-list-item-subtitle>
           </v-list-item-content> -->
           <v-spacer></v-spacer> 
-          <v-spacer></v-spacer> 
-          <v-list-item-content>
-            <v-btn class="btn btn-primary" @click="updateArticle">UPDATE</v-btn>
-            <v-btn class="btn btn-danger" @click="deleteArticle">DELETE</v-btn>
-          </v-list-item-content>
+          <v-spacer></v-spacer>
+
+        <div v-if="articleLiked" class="article-detail-like">
+          <i @click="toggleLike" style="color: crimson" class="fas fa-heart article-detail-like-button"></i> {{ likeCount }}
+        </div>
+        <div v-else class="article-detail-like">
+          <i @click="toggleLike" class="fas fa-heart article-detail-like-button"></i> {{ likeCount }}
+        </div>
+
+        <v-list-item-content>
+          <v-btn class="btn btn-primary" @click="updateArticle">UPDATE</v-btn>
+          <v-btn class="btn btn-danger" @click="deleteArticle">DELETE</v-btn>
+        </v-list-item-content>
         </v-list-item>
         <v-divider></v-divider>
         <v-list-item>            
@@ -73,7 +81,12 @@ export default {
       articleItem: {   
         title: null,
         content: null,        
-        id: null
+        id: null,
+
+        currentUser:null,
+        likeUser:null,
+        articleLiked: null,
+        likeCount: null,
       },
     }
   },
@@ -85,6 +98,48 @@ export default {
       }
       return config
     },
+    getCurrentUser() {
+      axios({
+        method: 'GET',
+        url: `${SERVER_URL}accounts/`, 
+        headers: this.setToken()
+      }) 
+      .then(res => {
+        console.log(res)
+        this.currentUser = res.data
+        this.articleLiked = !!this.likeUser.some(user => user.username === this.currentUser.username)
+      })
+      .catch(err => console.log(err))
+    },
+    
+    toggleLike() {
+      const likeBtn = document.querySelector(".article-detail-like-button")
+      axios({
+      method: 'POST',
+      url: `${SERVER_URL}articles/${this.$route.params.id}/like/`,
+      headers: this.setToken()})
+      .then(res => {
+        if (res.data.liked) {
+          likeBtn.style.color = "crimson"
+          this.likeUser.push(this.currentUser)
+          }
+      else {
+          likeBtn.style.color = "black"
+          this.likeUser = this.likeUser.filter(user => {
+          return this.currentUser.username !== user.username
+            })
+        }
+      })
+      .catch(err=>console.log(err))
+    },
+    likedColor() {
+      const likeBtn = document.querySelector(".article-detail-like-button")
+      console.log(this.articleLiked)
+      if (this.articleLiked) {
+          likeBtn.style.color = 'crimson'
+      } else {likeBtn.style.color = 'black'}
+    },
+
     getArticle(){
       axios({
       method: 'GET',
@@ -93,6 +148,8 @@ export default {
       .then(res => {
         console.log(res)
         this.article = res.data
+        this.likeUser = this.article.like_users
+        this.likeCount = res.data.count
       })
     },
     deleteArticle() {
@@ -121,11 +178,15 @@ export default {
   },
   created(){
     this.getArticle()
+    this.getCurrentUser()
   }
 }
 
 </script>
 
 <style>
-
+.article-detail-like {
+  font-size: 22px;
+  margin-top: 3px;
+}
 </style>
