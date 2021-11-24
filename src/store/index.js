@@ -239,8 +239,9 @@ export default new Vuex.Store({
         headers: objs.token
       })
       .then((res) => {
+        console.log(objs)
         commit('UPDATE_COMMENT', res.data)
-        router.push({name:'Reviews'})
+        router.push({name:'ReviewDetail', params:{id: objs.review_id }})
       })
       .catch(err => console.log(err))
     },
@@ -250,9 +251,9 @@ export default new Vuex.Store({
         url: `${SERVER_URL}movies/community/${objs.review_id}/${objs.comment_id}/`,
         headers: objs.token
       })
-      .then((res) => {
+      .then((res) => {        
         commit('DELETE_COMMENT', res.data)
-        router.push({name:'Reviews'})
+        router.push({name:'Reviews' })
       })
       .catch(err => console.log(err))
     },

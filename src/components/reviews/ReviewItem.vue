@@ -1,9 +1,13 @@
 <template>
 <div>
-  <span class="review_name">
-  <router-link :to="{ name: 'ReviewDetail', params: { id : reviewItem.id }}">{{ reviewItem.title }}</router-link>
-  </span>
+  <div class="review_name">
+    <span>    
+    <router-link :to="{ name: 'ReviewDetail', params: { id : reviewItem.id }}">{{ reviewItem.title }}</router-link>
+    </span>
+  </div>
+  
 </div>
+
 </template>
 
 <script>
@@ -61,9 +65,16 @@ export default {
 </script>
 
 <style >
-
-.btnclass {
-  
-  margin: 8px;
+.review_name a{
+  text-decoration: none;   
+}
+.review_name a:link{
+  color: white;   
+}
+.review_name a:visited{
+  color: white;   
+}
+.review_name a:hover{
+  color: lightskyblue;   
 }
 </style>

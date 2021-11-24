@@ -1,6 +1,6 @@
 <template>
-  <div class="community_container">
-    <div class="Community">
+  <div class="reviews_container">
+    <div class="reviews">
       <h2>REVIEWS</h2>
       <span v-if="isLogin">           
         <review-list>        
@@ -38,12 +38,12 @@ export default {
 </script>
 
 <style>
-.Community > h2{
+.reviews > h2{
   font-family: 'Bebas Neue', cursive;
   color: lightskyblue
 }
 
-.community_container {
+.reviews_container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -51,7 +51,7 @@ export default {
   background-color: #0009;
   border-radius: 5px;
   box-sizing: border-box;
-  width: 100%;
+  width: 900px;
   margin: 0;
   max-width: 1000px;
   padding: 10px 30px 20px;
