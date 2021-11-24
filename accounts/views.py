@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
 from django.shortcuts import get_object_or_404
 
-from .serializers import UserSerializer, UserReviewSerializer
+from .serializers import UserSerializer, UserReviewArticleSerializer
 from django.contrib.auth import get_user_model
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
@@ -42,7 +42,7 @@ def signup(request):
 @permission_classes([IsAuthenticated])
 def profile(request):
     user = request.user
-    serializer = UserReviewSerializer(user)
+    serializer = UserReviewArticleSerializer(user)
     return Response(serializer.data)
 
 

@@ -3,7 +3,7 @@ from django.http.response import HttpResponse
 from django.views.decorators.http import require_safe
 from django.shortcuts import get_object_or_404, get_list_or_404
 from rest_framework import serializers
-from .models import Article, Comment
+from .models import Article, ArticleComment
 from .serializers import (ArticleListSerializer, 
 ArticleSerializer, CommentSerializer)
 from rest_framework.response import Response
@@ -65,7 +65,7 @@ def create_comment(request, article_pk):
     article = get_object_or_404(Article, pk=article_pk)
     # 댓글 목록 조회
     if request.method == 'GET':
-        comments = article.comment_set.order_by('-pk')
+        comments = article.comments.order_by('-pk')
         serializer = CommentSerializer(comments, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
     # 댓글 생성
@@ -80,7 +80,7 @@ def create_comment(request, article_pk):
 @authentication_classes([JSONWebTokenAuthentication])
 @permission_classes([IsAuthenticated])
 def comment_update_delete(request, comment_pk, article_pk):
-    comment = get_object_or_404(Comment, pk=comment_pk)
+    comment = get_object_or_404(ArticleComment, pk=comment_pk)
     # 댓글 조회
     if request.method == 'GET':
         serializer = CommentSerializer(comment)
