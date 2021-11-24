@@ -31,18 +31,19 @@
         <v-spacer></v-spacer>    
         <v-subheader>작성 시각: {{ article.created_at | moment('from', 'now') }}</v-subheader>          
         <v-subheader>수정 시각: {{ article.updated_at | moment('from', 'now') }}</v-subheader>
-          <!-- <v-list-item-content>
+          <v-list-item-content>
             <v-list-item-title>Likes</v-list-item-title>
+            <!-- 이쪽에for문 -->
             <v-list-item-subtitle>이 글을 좋아한 사람: {{ article.like_users }}</v-list-item-subtitle>
-          </v-list-item-content> -->
+          </v-list-item-content>
           <v-spacer></v-spacer> 
           <v-spacer></v-spacer>
 
         <div v-if="articleLiked" class="article-detail-like">
-          <i @click="toggleLike" style="color: crimson" class="fas fa-heart article-detail-like-button"></i> {{ likeCount }}
+          <i @click="toggleLike" style="color: crimson" class="fas fa-heart article-detail-like-button"></i> {{ likeUser.length }}
         </div>
         <div v-else class="article-detail-like">
-          <i @click="toggleLike" class="fas fa-heart article-detail-like-button"></i> {{ likeCount }}
+          <i @click="toggleLike" class="fas fa-heart article-detail-like-button"></i> {{ likeUser.length }}
         </div>
 
         <v-list-item-content>
@@ -74,20 +75,12 @@ export default {
   CommentList,
   CommentCreate
   },
-  data: function(){
-    return  {
+  data: function() {
+    return {
       article: null,
-      // comment: null,
-      articleItem: {   
-        title: null,
-        content: null,        
-        id: null,
-
-        currentUser:null,
-        likeUser:null,
-        articleLiked: null,
-        likeCount: null,
-      },
+      currentUser:null,
+      likeUser:null,
+      articleLiked: null,
     }
   },
   methods : {

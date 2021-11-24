@@ -18,6 +18,7 @@ export default {
     return {
       commentItem: {
         content: null,
+        user: null,
       }
     }
   },
@@ -37,6 +38,7 @@ export default {
       }
       this.$store.dispatch('createComment', commentItemSet)
       this.commentItem.content = null
+      this.commentItem.user = null
     },
   },
 }

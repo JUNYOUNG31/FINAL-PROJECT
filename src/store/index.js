@@ -224,6 +224,7 @@ export default new Vuex.Store({
         headers: objs.token
       })
       .then((res) => {
+        console.log(res)
         commit('CREATE_COMMENT', res.data)
       })
       .catch(err => console.log(err))
