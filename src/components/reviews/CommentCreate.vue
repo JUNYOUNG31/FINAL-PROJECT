@@ -27,7 +27,7 @@ export default {
     return {
       commentItem: {
         content: null,
-        currentUser: null,
+        user: null,
       },
       rules: [v => v.length <= 100 || 'Max 100 characters']
     }
@@ -47,8 +47,8 @@ export default {
         headers: this.setToken()
       }) 
       .then(res => {        
-        this.commentItem.currentUser = res.data.username    
-        console.log(this.commentItem.currentUser)
+        this.commentItem.user = res.data.id    
+        console.log(this.commentItem.user)
       })
       .catch(err => console.log(err))
     },    
@@ -61,7 +61,7 @@ export default {
       console.log(commentItemSet)
       this.$store.dispatch('createComment', commentItemSet)
       this.commentItem.content = null
-      this.commentItem.currentUser = null
+      this.commentItem.user = null
     },
     makeCreate () {
       this.getCurrentUser()

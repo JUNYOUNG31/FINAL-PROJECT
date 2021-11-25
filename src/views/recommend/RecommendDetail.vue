@@ -84,9 +84,6 @@ export default {
 </script>
 
 <style >
-.detail_container{
-  margin: 50px;
-}
 .detailbtn {
   font-family: 'Noto Sans KR', sans-serif;    
   background-color: #0009;

@@ -160,7 +160,7 @@ export default {
 
     
     toggleLike() {
-      const likeBtn = document.querySelector(".article-detail-like-button")
+      const likeBtn = document.querySelector(".review-detail-like-button")
       axios({
       method: 'POST',
       url: `${SERVER_URL}movies/community/${this.$route.params.id}/like/`,
@@ -180,7 +180,7 @@ export default {
       .catch(err=>console.log(err))
     },
     likedColor() {
-      const likeBtn = document.querySelector(".article-detail-like-button")
+      const likeBtn = document.querySelector(".review-detail-like-button")
       console.log(this.reviewLiked)
       if (this.reviewLiked) {
           likeBtn.style.color = 'crimson'

@@ -58,8 +58,8 @@
               <v-col col="6">                
               </v-col>
               <v-col col="6">
-            <v-btn class="btn btn-primary" @click="articleReview">UPDATE</v-btn>
-            <v-btn class="btn btn-danger" @click="articleReview">DELETE</v-btn>                
+            <v-btn class="btn btn-primary" @click="updateArticle">UPDATE</v-btn>
+            <v-btn class="btn btn-danger" @click="deleteArticle">DELETE</v-btn>                
               </v-col>
               </v-row>            
           </v-list-item-content>
@@ -102,6 +102,11 @@ export default {
   },
   data: function() {
     return {
+      articleItem : {
+        title : null,
+        content : null,
+        id : null
+      },       
       article: null,
       currentUser:null,
       likeUser:null,

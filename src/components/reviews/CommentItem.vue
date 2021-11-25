@@ -13,10 +13,10 @@
         <v-list-item-subtitle>username: {{review.user.username}} ----- 작성일 : {{ comment.created_at | moment('YYYY-MM-DD HH:mm') }} ----- 수정일 : {{ comment.updated_at | moment('YYYY-MM-DD HH:mm') }}</v-list-item-subtitle>
       
         <div v-if="commentLiked" class="comment-detail-like">
-          <i @click="toggleLike" style="color: crimson" class="fas fa-heart comment-detail-like-button"></i> {{ likeUser }}
+          <i @click="toggleLike" style="color: crimson" class="fas fa-heart comment-detail-like-button"></i> {{ likeUser.length }}
         </div>
         <div v-else class="comment-detail-like">
-          <i @click="toggleLike" class="fas fa-heart comment-detail-like-button"></i> {{ likeUser }}
+          <i @click="toggleLike" class="fas fa-heart comment-detail-like-button"></i> {{ likeUser.length }}
         </div>    
 
       
@@ -88,7 +88,10 @@ export default {
       }) 
       .then(res => {
         console.log(res)
+        console.log("12312412421412421421")
         this.currentUser = res.data
+        console.log(this.likeUser)
+        console.log(this.currentUser)
         this.commentLiked = !!this.likeUser.some(user => user.username === this.currentUser.username)
       })
       .catch(err => console.log(err))
