@@ -1,7 +1,7 @@
 <template>
   <div class="detailbtn">
-    <div v-for="movie in movies" :key="movie.pk">   
-      <div v-if="movie_id == movie.pk">
+    <div>   
+      <div >
         <v-row>
           <v-card dark>
             <v-toolbar dark>   
@@ -14,7 +14,8 @@
               ><v-icon>mdi-close</v-icon>
               </v-btn>          
             </v-toolbar>
-            <v-container class="detail_container"><v-row>
+            <v-container>
+              <v-row>
               <v-col cols="5">
               <img class="detailimg"
               max-height="700"
@@ -34,7 +35,7 @@
                       <span>{{genre.name}}</span>
                       </v-span>                   
                     </v-list-item>
-                    <v-list-item-subtitle :rank="movie.vote_average">Rank</v-list-item-subtitle>
+                    <v-list-item-subtitle>Rank</v-list-item-subtitle>
                     <v-rating
                       v-model="rank"                  
                       color="light-blue accent-"
@@ -60,33 +61,42 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import axios from 'axios'
+const SERVER_URL = 'http://127.0.0.1:8000/'
 export default {
+  
   name: 'MovieDetail',
   data () {
       return {
         movie_id : this.$route.params.id,
-        rank : null
+        movie: null,
+        rank: null
       }
     },
   methods : {
     golist() {
       this.$router.push({name: 'MovieList'})
-    }
-  },
-  computed: {
-    ...mapGetters(['movies'])
-  },
+    },
+    getMoviesDetail() {
+      axios({
+        method: 'GET',
+        url: `${SERVER_URL}movies/${this.$route.params.id}/`,
+      })
+      .then(res => {
+        this.movie = res.data
+        this. rank = (Math.round(this.movie.vote_average))/2
+        console.log(this.movie)
+      })
+      .catch(err => console.log(err))
+    },
+  },  
   created() {
-    this.$store.dispatch('getMovies')
+    this.getMoviesDetail()
   },
 }
 </script>
 
 <style >
-.detail_container{
-  margin: 50px;
-}
 .detailbtn {
   font-family: 'Noto Sans KR', sans-serif;    
   background-color: #0009;

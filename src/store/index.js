@@ -141,7 +141,7 @@ export default new Vuex.Store({
         commit('GET_MOVIE_TITLES', res.data)
       })
       .catch(err => console.log(err))
-    },
+    },   
 
 
     //리뷰 조회 생성

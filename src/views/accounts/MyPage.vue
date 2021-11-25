@@ -1,8 +1,141 @@
-<template>
-  <div class="profile container">
-    <div class="profile-header">{{ profileUser.username }}'s Page</div>
-    <div class="profile-body">
+<template>  
+  <div class="profile_container">
+      <div class="profile_header">{{ profileUser.username }}'s Page</div>
+      <v-row>
+        <v-col >
+          <v-card
+        max-width="400"
+        class="mx-auto" >
+        <v-app-bar>   
+          <v-toolbar-title>My Reviews</v-toolbar-title>
+          <v-spacer></v-spacer>
+        </v-app-bar>
+        <v-container v-if="profileUser.reviews">
+          <v-rol>            
+          <router-link
+            v-for="review in profileUser.reviews" 
+            :key="review.id"
+            :to="{name: 'ReviewDetail', params: { id: review.id }}" >         
+            <v-col cols="12"> 
+            <v-card  color="#385F73" dark >
+              <v-card-title class="text-h5">
+                Title : {{ review.title }}</v-card-title>
+              <v-card-subtitle>Content : {{ review.content }}</v-card-subtitle>
+            </v-card>
+            </v-col>
+          </router-link>
+          </v-rol>   
+        </v-container>
+        <v-container v-else>
+        <v-card>
+          <v-card-title class="text-h5">아직 작성한 리뷰가 없습니다</v-card-title> 
+        </v-card>
+        </v-container>
+        </v-card> 
+        </v-col>
+        <v-col>
+           <v-card
+        max-width="400"
+        class="mx-auto">
+        <v-app-bar>   
+          <v-toolbar-title>Likes Reviews</v-toolbar-title>
+          <v-spacer></v-spacer>
+        </v-app-bar>
+        <v-container v-if="profileUser.like_reviews">
+            <v-rol>
+          <router-link
+            v-for="review in profileUser.like_reviews" 
+            :key="review.id"
+            :to="{ name: 'ReviewDetail', params: { id: review.id } }" > 
+            <v-col cols="12"> 
+            <v-card  color="#385F73" dark >
+              <v-card-title class="text-h5">
+                Title : {{ review.title }}</v-card-title>
+              <v-card-subtitle>Content : {{ review.content }}</v-card-subtitle>
+            </v-card>
+            </v-col>           
+          </router-link>
+           </v-rol>
+        </v-container>
+        <v-container v-else>
+        <v-card>
+          <v-card-title class="text-h5">아직 좋아하는 리뷰가 없습니다</v-card-title> 
+        </v-card>
+        </v-container>
+        </v-card> 
+        </v-col>
+          
+        </v-row>
+        <v-row>
+        <v-col>
+           <v-card
+        max-width="400"
+        class="mx-auto" >
+        <v-app-bar>   
+          <v-toolbar-title>My Articles</v-toolbar-title>
+          <v-spacer></v-spacer>
+        </v-app-bar>
+        <v-container v-if="profileUser.articles">
+            <v-rol>
+            
+         
+          <router-link
+            v-for="article in profileUser.articles" 
+            :key="article.id"
+            :to="{name: 'ReviewDetail', params: { id: article.id }}" >       
+            <v-col cols="12"> 
+            <v-card  color="#385F73" dark >
+              <v-card-title class="text-h5">
+                Title : {{ article.title }}</v-card-title>
+              <v-card-subtitle>Content : {{ article.content }}</v-card-subtitle>
+            </v-card>
+            </v-col>     
+          </router-link>
+           </v-rol>
+        </v-container>
+        <v-container v-else>
+        <v-card>
+          <v-card-title class="text-h5">아직 작성한 게시글이 없습니다</v-card-title> 
+        </v-card>
+        </v-container>
+        </v-card> 
+        </v-col>
+        <v-col>
+           <v-card
+        max-width="400"
+        class="mx-auto" >
+        <v-app-bar>   
+          <v-toolbar-title>Likes Articles</v-toolbar-title>
+          <v-spacer></v-spacer>
+        </v-app-bar>
+        <v-container v-if="profileUser.like_articles">
+          <v-row>
 
+          <router-link
+            v-for="article in profileUser.like_articles" 
+            :key="article.id"
+            :to="{ name: 'ArticleDetail', params: { id: article.id, article: article, currentUser: currentUser } }">            
+            <v-col cols="12">
+
+            <v-card  color="#385F73" dark >
+              <v-card-title class="text-h5">
+                Title : {{ article.title }}</v-card-title>
+              <v-card-subtitle>Content : {{ article.content }}</v-card-subtitle>
+            </v-card>
+            </v-col>
+          </router-link>
+          </v-row>
+        </v-container>
+        <v-container v-else>
+        <v-card>
+          <v-card-title class="text-h5">아직 좋아하는 게시글이 없습니다</v-card-title> 
+        </v-card>
+        </v-container>
+        </v-card> 
+        </v-col>
+      </v-row>
+
+    <!-- <div class="profile-body">
       <div class="profile-body-articles">
         <h1 class="profile-body-articles-label">
           {{ profileUser.username }}가 작성한 리뷰
@@ -87,7 +220,7 @@
         </div>
       </div>
 
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -114,44 +247,30 @@ export default {
 </script>
 
 <style>
-.profile {
-  font-family: 'Nanum Gothic', sans-serif;
+.profile_container {
+  font-family: 'Noto Sans KR', sans-serif;    
+  background-color: #0009;
+  display: flex;
+  flex-direction: column;
+  align-items: left;   
+  border-radius: 5px;
+  box-sizing: border-box;
+  width:900px;
+  margin: 0;
+  max-width: 900px;
+  padding: 10px 30px 20px;  
 }
-.profile-header {
-  font-family: 'Overpass';
-  font-size: 16px;
-  text-align: center;
+.profile_header {
+  font-family: 'Bebas Neue', cursive;
+  color: lightskyblue;
+  font-size: 32px;
+  margin-bottom: 28px;
 }
-.profile-body {
-  margin-top: 15px;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+.profile_container a {
+  display: block;
 }
-.profile-body-articles-label,
-.profile-body-like-articles-label {
-  text-align: center;
-}
-.profile-body-articles-items,
-.profile-body-like-articles-items {
-  padding: 5px;
-}
-.profile-body-articles-item,
-.profile-body-like-articles-item {
-  margin: 10px 5px;
-  padding: 10px;
-  background-color: #535c68;
-  border: 1px solid #535c68;
-  border-radius: 10px;
-  color: #fcfcfc;
-  font-size: 14px;
-  box-shadow: 3px 3px 3px gainsboro;
-  white-space: pre;
-  position: relative;
-}
-.profile-body-like-articles-item {
-  background-color: #fcfcfc;
-  color: #535c68;
-}
+
+
 /* media */
 @media screen and (min-width: 576px) { 
   .profile {
