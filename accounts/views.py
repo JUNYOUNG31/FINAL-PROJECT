@@ -1,15 +1,17 @@
+from re import M
 from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
 from django.shortcuts import get_object_or_404
 
-from .serializers import UserSerializer, UserReviewArticleSerializer
+from .serializers import UserSerializer, UserReviewArticleSerializer, UserProfileSerializer
 from django.contrib.auth import get_user_model
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 from rest_framework.decorators import permission_classes, authentication_classes
 from rest_framework.decorators import api_view
+from .models import User
 
 
 @api_view(['POST'])
@@ -38,29 +40,44 @@ def signup(request):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
-# 유저 프로필
+# 마이페이지
 @api_view(['GET'])
 @authentication_classes([JSONWebTokenAuthentication])
 @permission_classes([IsAuthenticated])
-def profile(request):
+def mypage(request):
     user = request.user
     serializer = UserReviewArticleSerializer(user)
     return Response(serializer.data)
 
+# 유저 프로필
+@api_view(['GET'])
+@authentication_classes([JSONWebTokenAuthentication])
+@permission_classes([IsAuthenticated])
+def profile(request, user_pk):
+    user = get_object_or_404(User, pk=user_pk)
+    serializer = UserProfileSerializer(user)
+    return Response(serializer.data)
 
-# # 팔로우
-# @api_view(['POST'])
-# @authentication_classes([JSONWebTokenAuthentication])
-# @permission_classes([IsAuthenticated])
-# def follow(request, user_pk):
-#     me = request.user
-#     you = get_object_or_404(get_user_model(), pk=user_pk)
-#     if me != you:
-#         if you.followers.filter(pk=me.pk).exists():
-#             you.followers.remove(me)
-#             followed = False
-#         else:
-#             you.followers.add(me)
-#             followed = True
-#     serializer = UserSerializer(me)
-#     return Response(serializer.data)
+
+# 팔로우
+@api_view(['POST'])
+@authentication_classes([JSONWebTokenAuthentication])
+@permission_classes([IsAuthenticated])
+#username으로 해야할수도............아닌듯......
+def follow(request, user_pk):
+    me = request.user
+    you = get_object_or_404(User, pk=user_pk)
+    if me != you:
+        if you.followers.filter(pk=me.pk).exists():
+            you.followers.remove(me)
+            followed = False
+
+        else:
+            you.followers.add(me)
+            followed = True
+        
+        return Response({
+            'followed': followed,
+            'followers_count': you.followers.count(),
+            'followings_count': you.followings.count(),
+        })

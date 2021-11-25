@@ -28,7 +28,7 @@ def getmovie(request):
 def movie_detail(request, movie_pk):
     movie = get_object_or_404(Movie, pk=movie_pk)
     serializer = MovieListSerializer(movie)
-    return response(serializer.data)
+    return Response(serializer.data)
 
 # 전체 review 조회
 @api_view(['GET'])
@@ -179,4 +179,28 @@ def like(request, review_pk):
     return Response({
         "liked": liked,
         "count": review.like_users.count()
+    })
+
+
+@api_view(['POST'])
+@authentication_classes([JSONWebTokenAuthentication])
+@permission_classes([IsAuthenticated])
+def commentlike(request, review_pk, comment_pk):
+    user = request.user
+
+    comment = get_object_or_404(Comment, pk=comment_pk)
+    serializer = CommentSerializer(comment)
+
+    print(serializer.data)
+
+    if user in comment.like_users.all():
+        comment.like_users.remove(user)
+        liked = False
+    else:
+        comment.like_users.add(user)
+        liked = True
+
+    return Response({
+        "liked": liked,
+        "count": comment.like_users.count()
     })

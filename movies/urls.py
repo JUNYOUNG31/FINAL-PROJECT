@@ -23,4 +23,7 @@ urlpatterns = [
     
     # 영화 추천
     path('recommend/', views.recommend),
+
+    # 리뷰 댓글 좋아요
+    path('community/<int:review_pk>/<int:comment_pk>/like/', views.commentlike),
 ]
