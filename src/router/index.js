@@ -11,7 +11,9 @@ import Profile from '@/views/accounts/Profile'
 // movies
 import MovieList from '@/views/movies/MovieList'
 import MovieItem from '@/components/movies/MovieItem'
+import MovieDetail from '@/components/movies/MovieDetail'
 import Recommend from '@/views/recommend/Recommend'
+import RecommendDetail from '@/views/recommend/RecommendDetail'
 
 // reviews
 import Reviews from '@/views/reviews/Reviews'
@@ -77,9 +79,20 @@ const routes = [
     component: MovieItem,
   },
   {
+    path: '/movies/:id',
+    name: 'MovieDetail',
+    component: MovieDetail,
+    props: true,
+  },
+  {
     path: '/recommend',
     name: 'Recommend',
     component: Recommend,
+  },
+  {
+    path: '/recommend/:id',
+    name: 'RecommendDetail',
+    component: RecommendDetail,
   },
 
   // reviews

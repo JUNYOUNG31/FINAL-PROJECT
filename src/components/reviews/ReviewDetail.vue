@@ -52,7 +52,8 @@
             <v-list-item-title>
               <div class="marginplz">
               <v-textarea outlined name="reviewContent" cols="80" rows="5" v-model="review.content" placeholder="내용"></v-textarea>
-              </div></v-list-item-title>
+              </div>
+              </v-list-item-title>
           </v-list-item-content>
         </v-list-item>          
         <v-list-item>    
@@ -65,11 +66,11 @@
             :key="user.id">
             {{ user.username }}</v-list-item-title>
           </v-list-item-content>         
-        <v-list-item-content v-if="reviewLiked" class="article-detail-like">
-          <i @click="toggleLike" style="color: crimson" class="fas fa-heart article-detail-like-button"></i> {{ likeUser.length }}
+        <v-list-item-content v-if="reviewLiked" class="review-detail-like">
+          <i @click="toggleLike" style="color: crimson" class="fas fa-heart review-detail-like-button"></i> {{ likeUser.length }}
         </v-list-item-content>
-        <v-list-item-content v-else class="article-detail-like">
-          <i @click="toggleLike" class="fas fa-heart article-detail-like-button"></i> {{ likeUser.length }}
+        <v-list-item-content v-else class="review-detail-like">
+          <i @click="toggleLike" class="fas fa-heart review-detail-like-button"></i> {{ likeUser.length }}
           </v-list-item-content>
           <v-list-item-content >
             <v-row class="btn_x">
@@ -106,6 +107,7 @@
     </v-card>
   </div>
 </template>
+
 <script>
 import CommentList from '@/components/reviews/CommentList'
 import CommentCreate from '@/components/reviews/CommentCreate'
@@ -253,7 +255,7 @@ export default {
   margin-top: 10px;
   margin-bottom: 20px;
 }
-.article-detail-like{
+.review-detail-like{
   display: flex;
   justify-content: center;
 }

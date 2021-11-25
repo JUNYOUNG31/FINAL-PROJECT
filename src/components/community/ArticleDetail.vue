@@ -1,7 +1,15 @@
 <template>
   <div class="articleitems">   
     <v-card>
-      <v-toolbar dark>          
+      <v-toolbar dark>
+        <v-spacer></v-spacer>       
+        <v-toolbar-title>{{article.id}}</v-toolbar-title>
+        <v-spacer></v-spacer>
+        <v-spacer></v-spacer> 
+        <v-spacer></v-spacer>  
+        <v-toolbar-title>{{article.user.username}}</v-toolbar-title>
+        <v-spacer></v-spacer>
+        <v-spacer></v-spacer>
         <v-spacer></v-spacer>
         <v-toolbar-items>
           <v-btn icon dark @click="goback">
@@ -12,56 +20,70 @@
       <v-list three-line>         
         <v-list-item>
           <v-list-item-content>
+            <v-list-item-title>Title </v-list-item-title>
             <v-list-item-title>{{ article.title }}</v-list-item-title>
           </v-list-item-content>    
         </v-list-item>
       </v-list>
       <v-divider></v-divider>
-      <v-list three-line subheader>          
+      <v-list subheader>          
         <v-list-item>            
           <v-list-item-content>
             <v-list-item-title>Content</v-list-item-title>            
             <v-list-item-title>
+              <div class="marginplz">
               <v-textarea outlined name="articleContent" cols="80" rows="5" v-model="article.content" placeholder="내용"></v-textarea>
+              </div>
               </v-list-item-title>
           </v-list-item-content>
         </v-list-item>          
-        <v-list-item>    
-        <v-spacer></v-spacer>   
-        <v-spacer></v-spacer>    
+        <v-list-item>     
         <v-subheader>작성 시각: {{ article.created_at | moment('from', 'now') }}</v-subheader>          
         <v-subheader>수정 시각: {{ article.updated_at | moment('from', 'now') }}</v-subheader>
           <v-list-item-content>
-            <v-list-item-title>Likes</v-list-item-title>
-            <span>이 글을 좋아한 사람</span>
-            <v-list-item-subtitle
+            <v-list-item-subtitle>Likes</v-list-item-subtitle>
+            <v-list-item-title
              v-for="user in article.like_users" 
             :key="user.id">
-            {{ user.username }}</v-list-item-subtitle>
+            {{ user.username }}</v-list-item-title>
           </v-list-item-content>
-          <v-spacer></v-spacer> 
-          <v-spacer></v-spacer>
-
-        <div v-if="articleLiked" class="article-detail-like">
+        <v-list-item-content v-if="articleLiked" class="article-detail-like">
           <i @click="toggleLike" style="color: crimson" class="fas fa-heart article-detail-like-button"></i> {{ likeUser.length }}
-        </div>
-        <div v-else class="article-detail-like">
-          <i @click="toggleLike" class="fas fa-heart article-detail-like-button"></i> {{ likeUser.length }}
-        </div>
-
-        <v-list-item-content>
-          <v-btn class="btn btn-primary" @click="updateArticle">UPDATE</v-btn>
-          <v-btn class="btn btn-danger" @click="deleteArticle">DELETE</v-btn>
         </v-list-item-content>
+        <v-list-item-content v-else class="article-detail-like">
+          <i @click="toggleLike" class="fas fa-heart article-detail-like-button"></i> {{ likeUser.length }}
+        </v-list-item-content>
+        <v-list-item-content >
+            <v-row class="btn_x">
+              <v-col col="6">                
+              </v-col>
+              <v-col col="6">
+            <v-btn class="btn btn-primary" @click="articleReview">UPDATE</v-btn>
+            <v-btn class="btn btn-danger" @click="articleReview">DELETE</v-btn>                
+              </v-col>
+              </v-row>            
+          </v-list-item-content>
         </v-list-item>
         <v-divider></v-divider>
-        <v-list-item>            
-          <v-list-item-content>
-            <comment-create :article="article"></comment-create>
-            <comment-list :article="article">
-            </comment-list>
-          </v-list-item-content>
-        </v-list-item>
+        <v-card max-width="900">
+    <v-toolbar color="light-blue lighten-2">
+      <v-spacer></v-spacer> 
+      <v-toolbar-title>Comments</v-toolbar-title>
+      <v-spacer></v-spacer>      
+    </v-toolbar>
+    <v-list three-line>
+      <v-list-item>
+        <v-list-item-content class="marginplz2">          
+      <comment-create :article="article"></comment-create>
+      </v-list-item-content>
+      </v-list-item>
+      <v-list-item>
+      <v-list-item-content>
+      <comment-list :article="article"></comment-list>
+        </v-list-item-content>
+      </v-list-item>      
+    </v-list>
+  </v-card>  
       </v-list>
     </v-card>
   </div>
@@ -182,8 +204,32 @@ export default {
 </script>
 
 <style>
-.article-detail-like {
-  font-size: 22px;
-  margin-top: 3px;
+.articleitems {
+  font-family: 'Noto Sans KR', sans-serif;    
+  background-color: #0009;
+  display: flex;
+  flex-direction: column;
+  align-items: left;   
+  border-radius: 5px;
+  box-sizing: border-box;
+  width:900px;
+  margin: 0;
+  max-width: 900px;
+  padding: 10px 30px 20px;  
+}
+.articleitems .marginplz {
+  margin-top: 10px;
+}
+.articleitems .marginplz2 {
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+.article-detail-like{
+  display: flex;
+  justify-content: center;
+}
+.btn_x{
+  display: flex;
+  justify-content: left;
 }
 </style>

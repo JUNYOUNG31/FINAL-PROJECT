@@ -1,6 +1,6 @@
 <template>
   <div class="recommend_container">    
-    <button class="btn btn-primary" @click="recommendmovie">CLICK!!</button>
+    <v-btn color="light-blue lighten-3" @click="recommendmovie">CLICK!!</v-btn>
     <div >
       <div v-for="(movie, idx) in movies_list" 
         :key="idx">
@@ -9,6 +9,9 @@
           <div class="content">
             <h1>{{ movie.title }}</h1>        
             <p>{{ movie.overview }}</p>
+            <a>
+            <router-link :to="{ name: 'RecommendDetail', params: { id : movie.id }}">MOVIE DETAIL</router-link>
+            </a>  
           </div>
         </div>
       </div>
@@ -71,8 +74,11 @@ export default {
           this.movies_list = res.data.results
         })       
       })
+    },    
+  },
+  created() {
+      this.recommendmovie()
     } 
-  }
 }
 </script>
 
@@ -150,7 +156,18 @@ export default {
   -webkit-box-orient: vertical;
 }
 
-.recommendlist .content > a:hover{
+.recommendlist .content a{
+  display: inline-block;
+  text-decoration: none;
+  color: white;
+  background: #0009;
+  padding: 10px 15px;
+}
+
+.recommendlist .content a a:hover{
   background: lightskyblue;
 }
+/* .recommendlist .content > a:hover{
+  background: lightskyblue;
+} */
 </style>

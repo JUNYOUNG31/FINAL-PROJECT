@@ -1,8 +1,10 @@
 <template>  
   <div>
-  <span class="article_name">
-  <router-link :to="{ name: 'ArticleDetail', params: { id : articleItem.id }}">{{ articleItem.title }}</router-link>
-  </span>
+    <div class="article_name">
+      <span>
+        <router-link :to="{ name: 'ArticleDetail', params: { id : articleItem.id }}">{{ articleItem.title }}</router-link>
+      </span>
+    </div>
   </div>
 </template>
 
@@ -58,4 +60,16 @@ export default {
 </script>
 
 <style >
+.article_name a{
+  text-decoration: none;   
+}
+.article_name a:link{
+  color: white;   
+}
+.article_name a:visited{
+  color: white;   
+}
+.article_name a:hover{
+  color: lightskyblue;   
+}
 </style>

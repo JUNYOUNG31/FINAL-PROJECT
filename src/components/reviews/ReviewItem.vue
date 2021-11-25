@@ -1,13 +1,11 @@
 <template>
-<div>
-  <div class="review_name">
-    <span>    
-    <router-link :to="{ name: 'ReviewDetail', params: { id : reviewItem.id }}">{{ reviewItem.title }}</router-link>
-    </span>
+  <div>
+    <div class="review_name">
+      <span>    
+        <router-link :to="{ name: 'ReviewDetail', params: { id : reviewItem.id }}">{{ reviewItem.title }}</router-link>
+      </span>
+    </div>  
   </div>
-  
-</div>
-
 </template>
 
 <script>

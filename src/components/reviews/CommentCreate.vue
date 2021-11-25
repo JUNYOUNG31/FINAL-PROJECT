@@ -46,8 +46,7 @@ export default {
         url: `${SERVER_URL}accounts/`, 
         headers: this.setToken()
       }) 
-      .then(res => {
-        
+      .then(res => {        
         this.commentItem.currentUser = res.data.username    
         console.log(this.commentItem.currentUser)
       })
@@ -71,7 +70,6 @@ export default {
   },
 }
 </script>
-
 <style>
 .commentform1{
   display: flex;

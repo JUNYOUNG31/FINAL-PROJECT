@@ -62,7 +62,7 @@
 <script>
 import { mapGetters } from 'vuex'
 export default {
-  name: 'MovieDetail',
+  name: 'RecommendDetail',
   data () {
       return {
         movie_id : this.$route.params.id,
@@ -71,7 +71,7 @@ export default {
     },
   methods : {
     golist() {
-      this.$router.push({name: 'MovieList'})
+      this.$router.push({name: 'Recommend'})
     }
   },
   computed: {

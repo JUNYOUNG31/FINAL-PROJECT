@@ -7,18 +7,16 @@
           <h1>{{ movie.title }}</h1>        
           <p>{{ movie.overview }}</p>    
           <!-- <p>{{ movie.genre_ids }}</p> -->
-          <div>
-          <movie-detail
-          :movie="moviedetail">   
-          </movie-detail>
-          </div>          
+          <a>
+            <router-link :to="{ name: 'MovieDetail', params: { id : movie_pk }}">MOVIE DETAIL</router-link>
+          </a>          
         </div>
     </div>
   </div>
 </template>
 
 <script>
-import MovieDetail from '@/components/movies/MovieDetail'
+// import MovieDetail from '@/components/movies/MovieDetail'
 export default {
   name: 'MovieItem',
   props: {
@@ -27,12 +25,12 @@ export default {
       required: true
     },
   },
-  components: {
-    MovieDetail
-  },
+  // components: {
+  //   MovieDetail
+  // },
   data () {
       return {
-        moviedetail: this.movie
+        movie_pk: this.movie.pk
       }
     },
 }
@@ -111,8 +109,15 @@ export default {
   -webkit-line-clamp: 3; 
   -webkit-box-orient: vertical;
 }
+.movielist .content a a{
+  display: inline-block;
+  text-decoration: none;
+  color: white;
+  background: #0009;
+  padding: 10px 15px;
+}
 
-.movielist .content a:hover{
+.movielist .content a a:hover{
   background: lightskyblue;
 }
 </style>

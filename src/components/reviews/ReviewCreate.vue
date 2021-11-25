@@ -59,10 +59,8 @@
           <large>평점에 따라 추천영화가 달라질 수 있습니다.</large>
         </v-card-text>
         <v-card-actions>          
-          <v-btn
-          
+          <v-btn          
           color="light-blue accent-"
-
           @click="dialog = false"
           >
             취소

@@ -1,12 +1,12 @@
 <template>
-<div community_container>
-  <div class="Community">
+<div class="community_container">
+  <div class="community">
     <h2>Community</h2>
     <span v-if="isLogin">
-      <article-create>
-      </article-create>    
       <article-list>        
       </article-list>
+      <article-create>
+      </article-create>    
     </span>    
     <router-view @login="isLogin = true"/>      
   </div>
@@ -39,10 +39,11 @@ export default {
 </script>
 
 <style>
-.Community h2{
+.community > h2{
   font-family: 'Bebas Neue', cursive;
   color: lightskyblue
 }
+
 .community_container {
   display: flex;
   flex-direction: column;
@@ -51,7 +52,7 @@ export default {
   background-color: #0009;
   border-radius: 5px;
   box-sizing: border-box;
-  width:900px;
+  width: 900px;
   margin: 0;
   max-width: 1000px;
   padding: 10px 30px 20px;
