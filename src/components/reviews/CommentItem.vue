@@ -3,25 +3,35 @@
     <template>
       <v-list class="plzmin">
         <v-list-item class="marginminus">
-        <v-list-item-content class="marginminus2"> 
-        
-        <v-text-field v-model="commentItem.content"></v-text-field>
-        
-        </v-list-item-content>         
+        <v-container class="likespace">            
+        <v-row>
+          <v-col cols="11">
+        <v-list-item-content class="marginminus2">        
+        <v-text-field v-model="commentItem.content"></v-text-field>        
+        </v-list-item-content>     
+          </v-col>
+            <v-col cols="1">    
+        <v-list-item-subtitle v-if="commentLiked" class="comment-detail-like">
+          <i @click="toggleLike" style="color: crimson" class="fas fa-heart comment-detail-like-button"></i> {{ likeUser }}
+        </v-list-item-subtitle>
+        <v-list-item-subtitle v-else class="comment-detail-like">
+          <i @click="toggleLike" class="fas fa-heart comment-detail-like-button"></i> {{ likeUser}}
+        </v-list-item-subtitle>    
+ </v-col>
+          </v-row>
+          </v-container>
+              
+
+
+
         </v-list-item>
         <v-list-item class="marginminus">
-        <v-list-item-subtitle>username: {{review.user.username}} ----- 작성일 : {{ comment.created_at | moment('YYYY-MM-DD HH:mm') }} ----- 수정일 : {{ comment.updated_at | moment('YYYY-MM-DD HH:mm') }}</v-list-item-subtitle>
+        <v-list-item-subtitle>username: {{currentUser.username}} ----- 작성일 : {{ comment.created_at | moment('YYYY-MM-DD HH:mm') }} ----- 수정일 : {{ comment.updated_at | moment('YYYY-MM-DD HH:mm') }}</v-list-item-subtitle>
       
-        <div v-if="commentLiked" class="comment-detail-like">
-          <i @click="toggleLike" style="color: crimson" class="fas fa-heart comment-detail-like-button"></i> {{ likeUser.length }}
-        </div>
-        <div v-else class="comment-detail-like">
-          <i @click="toggleLike" class="fas fa-heart comment-detail-like-button"></i> {{ likeUser.length }}
-        </div>    
 
       
-        <v-btn class="btn btn-primary" @click="updateComment">UPDATE</v-btn>
-        <v-btn class="btn btn-danger" @click="deleteComment">DELETE</v-btn>
+        <v-btn x-small class="btn btn-primary" @click="updateComment">UPDATE</v-btn>
+        <v-btn x-small class="btn btn-danger" @click="deleteComment">DELETE</v-btn>
         </v-list-item>
         <v-divider></v-divider>
       </v-list>
@@ -51,7 +61,7 @@ export default {
         content: this.comment.content,      
       }, 
       currentUser: null,
-      likeUser: null,
+      likeUser: [],
       commentLiked: null,
     }
   },
@@ -91,8 +101,15 @@ export default {
         console.log("12312412421412421421")
         this.currentUser = res.data
         console.log(this.likeUser)
+        console.log("213")
         console.log(this.currentUser)
-        this.commentLiked = !!this.likeUser.some(user => user.username === this.currentUser.username)
+        if (this.currentUser in this.likeUser) {
+          this.commentLiked = true
+        }
+        else {
+          this.commentLiked = false
+        }
+        // this.commentLiked = !!this.likeUser.some(user => user === this.currentUser.username)
       })
       .catch(err => console.log(err))
     },
@@ -140,17 +157,16 @@ export default {
   created() {
     this.getCurrentUser()
     this.getReviewComment()
-    console.log(this.comment)
   }
 }
 </script>
 
 <style>
 .marginminus {
-  height: 30px;
-  box-sizing: border-box;
+  height: 30px;  
+  box-sizing:border-box;
   padding: 0;
-  margin-left: 5px;
+  margin-left: 12px;
 }
 .marginminus2 {
   height: 50px;
@@ -163,5 +179,17 @@ export default {
 }
 .plzmin .v-list-item {
   min-height: 45px;
+}
+.likespace{
+  
+  margin: 0;
+  padding: 0;
+}
+.likespace .row .col{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
 }
 </style>

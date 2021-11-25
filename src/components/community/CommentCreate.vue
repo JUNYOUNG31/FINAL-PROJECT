@@ -7,7 +7,7 @@
         maxlength="100"
         hint="This field uses maxlength attribute"
         label="Comments"
-      ></v-text-field> 
+        ></v-text-field> 
       <v-btn  class="btn btn-primary" @click="makeCreate">댓글 작성</v-btn>
     </div> 
 </template>

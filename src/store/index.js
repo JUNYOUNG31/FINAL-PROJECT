@@ -299,7 +299,8 @@ export default new Vuex.Store({
       }) 
       .then(res => {       
         console.log(res)
-        commit('UPDATE_ARTICLE')               
+        commit('UPDATE_ARTICLE')     
+              
       })
     },
     deleteArticle({commit}, deleteItem) {
@@ -310,7 +311,7 @@ export default new Vuex.Store({
       }) 
       .then(res => {       
         console.log(res)
-        commit('DELETE_ARTICLE')                      
+        commit('DELETE_ARTICLE')                                
       })
     },
 
@@ -351,7 +352,7 @@ export default new Vuex.Store({
       })
       .then((res) => {
         commit('UPDATE_ARTICLE_COMMENT', res.data)
-        router.push({name:'Community'})
+        router.push({name:'ArticleDetail', params:{id: objs.article_id }})    
       })
       .catch(err => console.log(err))
     },
@@ -363,7 +364,7 @@ export default new Vuex.Store({
       })
       .then((res) => {
         commit('DELETE_ARTICLE_COMMENT', res.data)
-        router.push({name:'Community'})
+        router.push({name:'ArticleDetail', params:{id: objs.article_id }}) 
       })
       .catch(err => console.log(err))
     },

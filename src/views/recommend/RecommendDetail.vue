@@ -1,7 +1,7 @@
 <template>
   <div class="detailbtn">
-    <div v-for="movie in movies" :key="movie.pk">   
-      <div v-if="movie_id == movie.pk">
+    <div>   
+      <div>
         <v-row>
           <v-card dark>
             <v-toolbar dark>   
@@ -34,7 +34,7 @@
                       <span>{{genre.name}}</span>
                       </v-span>                   
                     </v-list-item>
-                    <v-list-item-subtitle :rank="movie.vote_average">Rank</v-list-item-subtitle>
+                    <v-list-item-subtitle>Rank</v-list-item-subtitle>
                     <v-rating
                       v-model="rank"                  
                       color="light-blue accent-"
@@ -60,25 +60,36 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import axios from 'axios'
+const SERVER_URL = 'http://127.0.0.1:8000/'
 export default {
   name: 'RecommendDetail',
   data () {
       return {
         movie_id : this.$route.params.id,
-        rank : null
+        rank : null,
+        movie : null
       }
     },
   methods : {
     golist() {
       this.$router.push({name: 'Recommend'})
-    }
-  },
-  computed: {
-    ...mapGetters(['movies'])
+    },
+    getMoviesDetail() {
+        axios({
+          method: 'GET',
+          url: `${SERVER_URL}movies/${this.$route.params.id}/`,
+        })
+        .then(res => {
+          this.movie = res.data
+          this. rank = (Math.round(this.movie.vote_average))/2
+          console.log(this.movie)
+        })
+        .catch(err => console.log(err))
+      },
   },
   created() {
-    this.$store.dispatch('getMovies')
+    this.getMoviesDetail()
   },
 }
 </script>

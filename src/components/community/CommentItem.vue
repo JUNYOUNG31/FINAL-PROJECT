@@ -12,10 +12,10 @@
             </v-col>
             <v-col cols="1">
               <v-list-item-subtitle v-if="commentLiked" class="comment-detail-like">
-        <i @click="toggleLike" style="color: crimson" class="fas fa-heart comment-detail-like-button"></i> {{ likeUser.length }}
+        <i @click="toggleLike" style="color: crimson" class="fas fa-heart comment-detail-like-button"></i> {{ likeUser }}
         </v-list-item-subtitle>
         <v-list-item-subtitle v-else class="comment-detail-like">
-        <i @click="toggleLike" class="fas fa-heart comment-detail-like-button"></i> {{ likeUser.length }}
+        <i @click="toggleLike" class="fas fa-heart comment-detail-like-button"></i> {{ likeUser }}
         </v-list-item-subtitle> 
             </v-col>
           </v-row>
@@ -81,7 +81,8 @@ export default {
       .then(res => {
         console.log(res)
         this.currentUser = res.data
-        this.commentLiked = !!this.likeUser.some(user => user.username === this.currentUser.username)
+        this.commentLiked = 0
+        // !!this.likeUser.some(user => user.username === this.currentUser.username)
       })
       .catch(err => console.log(err))
     },
@@ -130,7 +131,7 @@ export default {
       const commentItemSet = {
         commentItem: this.commentItem,
         comment_id: this.comment.id,
-        article_id: this.article,
+        article_id: this.article.id,
         token: this.setToken()
       }
       console.log(commentItemSet)
@@ -139,7 +140,7 @@ export default {
     deleteComment() {
       const commentItemSet = {
         comment_id: this.comment.id,
-        article_id: this.article,
+        article_id: this.article.id,
         token: this.setToken()
       }
       this.$store.dispatch('deleteArticleComment', commentItemSet)

@@ -13,8 +13,8 @@
 </template>
 
 <script>
-import axios from 'axios'
-const SERVER_URL = 'http://127.0.0.1:8000/'
+// import axios from 'axios'
+// const SERVER_URL = 'http://127.0.0.1:8000/'
 export default {
   name: 'CommentCreate',
   props: {
@@ -27,7 +27,6 @@ export default {
     return {
       commentItem: {
         content: null,
-        user: null,
       },
       rules: [v => v.length <= 100 || 'Max 100 characters']
     }
@@ -40,18 +39,18 @@ export default {
       }
       return config
     },
-    getCurrentUser() {
-      axios({
-        method: 'GET',
-        url: `${SERVER_URL}accounts/`, 
-        headers: this.setToken()
-      }) 
-      .then(res => {        
-        this.commentItem.user = res.data.id    
-        console.log(this.commentItem.user)
-      })
-      .catch(err => console.log(err))
-    },    
+    // getCurrentUser() {
+    //   axios({
+    //     method: 'GET',
+    //     url: `${SERVER_URL}accounts/`, 
+    //     headers: this.setToken()
+    //   }) 
+    //   .then(res => {        
+    //     this.commentItem.currentUser = res.data.username    
+    //     console.log(this.commentItem.currentUser)
+    //   })
+    //   .catch(err => console.log(err))
+    // },    
     createComment() {
       const commentItemSet = {
         commentItem: this.commentItem,
@@ -61,10 +60,10 @@ export default {
       console.log(commentItemSet)
       this.$store.dispatch('createComment', commentItemSet)
       this.commentItem.content = null
-      this.commentItem.user = null
+      // this.commentItem.currentUser = null
     },
     makeCreate () {
-      this.getCurrentUser()
+      // this.getCurrentUser()
       this.createComment()
     }
   },
