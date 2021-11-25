@@ -53,12 +53,11 @@ class ReviewSerializer(serializers.ModelSerializer):
 
 
 class CommentSerializer(serializers.ModelSerializer):
-    user = UserSerializer()
-    like_users = UserSerializer(many=True)
+    
     class Meta:
         model = Comment
-        fields = ('id', 'content', 'created_at', 'updated_at', 'like_users', 'user' )
-        read_only_fields = ('review',  ) 
+        fields = ('id', 'content', 'created_at', 'updated_at',  )
+        read_only_fields = ( 'review', 'user','like_users', ) 
 
 
 class MovieRecommendSerializer(serializers.ModelSerializer):

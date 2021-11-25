@@ -97,12 +97,12 @@ def create_comment(request, review_pk):
         return Response(serializer.data, status=status.HTTP_200_OK)
     elif request.method == 'POST':
         print(request.data)
+        print(review)
         serializer = CommentSerializer(data=request.data)
         print(serializer)
-        print("111111111111111111111111111")
         if serializer.is_valid(raise_exception=True):
             serializer.save(review=review, user=request.user)
-            print(serializer.date)
+            print('11111')
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 # 단일 comment 조회, 수정, 삭제
