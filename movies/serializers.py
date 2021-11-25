@@ -8,7 +8,7 @@ User = get_user_model()
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id','username','age']
+        fields = ['id','username']
 
 
 class MovieListSerializer(serializers.ModelSerializer):
@@ -53,11 +53,12 @@ class ReviewSerializer(serializers.ModelSerializer):
 
 
 class CommentSerializer(serializers.ModelSerializer):
-
+    user = UserSerializer()
+    like_users = UserSerializer(many=True)
     class Meta:
         model = Comment
-        fields = ('id', 'content', 'created_at', 'updated_at', 'like_users')
-        read_only_fields = ('review', 'user')
+        fields = ('id', 'content', 'created_at', 'updated_at', 'like_users', 'user' )
+        read_only_fields = ('review',  ) 
 
 
 class MovieRecommendSerializer(serializers.ModelSerializer):
