@@ -68,12 +68,9 @@ npm run serve
 
 
 * 모델 : 영화, 유저, 리뷰, 장르, 댓글
-* Rank (추천 알고리즘)
-  * 로그인한 유저의 리뷰에서 평점을  저장할때 3점 이상일 경우 : movieid 를 출력해 추천 API 실행
-    * 3점이상인 리뷰가 2개 이상일 경우 : random 으로 movieid 를 출력해 추천 API 실행
-  * 로그인한 유저의 리뷰의 모든 평점이 3점 미만일 경우: popular API 실행
-
-
+* 추가 사항
+  * 게시판을 만들기위해서 이후에 article 모델을 추가하였다.
+  * my page에 연결하기위해 user 와 review와 article에  like user 가 M:N 관계설정
 
 
 
@@ -105,17 +102,40 @@ npm run serve
 
 
 
+### 사용자 인증
+
+* JWT 사용
+  * 필요한 데이터 마다 Token 으로 인증
+
+
+
+### 추천 알고리즘
+
+* 로그인한 유저의 리뷰에서 평점을  저장할때 3점 이상일 경우 : movieid 를 출력해 추천 API 실행
+  * 3점이상인 리뷰가 2개 이상일 경우 : random 으로 movieid 를 출력해 추천 API 실행
+* 로그인한 유저의 리뷰의 모든 평점이 3점 미만일 경우: popular API 실행
+
+
+
+### 완료 내용
+
 ```
-mypage, 추천알고리즘, 좋아요 구현완료
-back 에는 profile 과 comment의 좋아요 기능을 구현했지만
+Home & signup & login & logout
+영화 페이지
+리뷰와 게시판 페이지 & 댓글 기능
+추천 알고리즘
+마이페이지
+```
+
+
+
+### 미완성 내용
+
+```
+profile 과 comment의 좋아요 기능을 구현했지만
 front 에는 data 다루는 법이 익숙하지 않아서 구현하지 못함
+css 부분도 전체적으로 부족한 느낌
 ```
-
-
-
-
-
-
 
 
 
