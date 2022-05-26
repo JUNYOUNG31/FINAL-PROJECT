@@ -63,7 +63,7 @@ npm run serve
 
 # ERD
 
-![ERD](readme.assets/ERD-16378476781841.jpg)
+![ERD-16378476781841](https://user-images.githubusercontent.com/87454934/170535489-0e5817d1-28ec-41fb-9cd9-74f9a2e714ed.jpg)
 
 
 
@@ -78,25 +78,25 @@ npm run serve
 
 > Home & 로그인 & 회원가입
 
-![preview1](readme.assets/preview1.gif)
+![preview1](https://user-images.githubusercontent.com/87454934/170535499-f4aa7fa8-7bb5-476f-a9eb-193a7e46ac03.gif)
 
 
 
 >영화 페이지 & 영화 상세 페이지
 
-![preview2](readme.assets/preview2.gif)
+![preview2](https://user-images.githubusercontent.com/87454934/170535504-16b625ae-f282-4791-b58d-c403d67118c5.gif)
 
 
 
 >리뷰 페이지 & 리뷰 작성 및 상세 페이지 & 추천 페이지
 
-![preview3](readme.assets/preview3.gif)
+![preview3](https://user-images.githubusercontent.com/87454934/170535507-9e138fca-3b49-4dd4-a372-b91549d8013e.gif)
 
 
 
 > 게시판 페이지 & 게시판 작성 및 상세 페에지 & 마이페이지
 
-![preview4](readme.assets/preview4.gif)
+![preview4](https://user-images.githubusercontent.com/87454934/170535510-0c01d740-659f-4c40-bcb2-8a1a63535389.gif)
 
 
 
