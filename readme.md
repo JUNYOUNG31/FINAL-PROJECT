@@ -78,29 +78,21 @@ npm run serve
 
 > Home & 로그인 & 회원가입
 
-![preview1](https://user-images.githubusercontent.com/87454934/170535499-f4aa7fa8-7bb5-476f-a9eb-193a7e46ac03.gif)
-
-
+![image](C:\Users\PARK\Desktop\multiplus\img\image.gif)
 
 >영화 페이지 & 영화 상세 페이지
 
-![preview2](https://user-images.githubusercontent.com/87454934/170535504-16b625ae-f282-4791-b58d-c403d67118c5.gif)
+![image (1)](C:\Users\PARK\Desktop\multiplus\img\image (1).gif)
 
 
 
 >리뷰 페이지 & 리뷰 작성 및 상세 페이지 & 추천 페이지
 
-![preview3](https://user-images.githubusercontent.com/87454934/170535507-9e138fca-3b49-4dd4-a372-b91549d8013e.gif)
-
-
+![image (2)](C:\Users\PARK\Desktop\multiplus\img\image (2).gif)
 
 > 게시판 페이지 & 게시판 작성 및 상세 페에지 & 마이페이지
 
-![preview4](https://user-images.githubusercontent.com/87454934/170535510-0c01d740-659f-4c40-bcb2-8a1a63535389.gif)
-
-
-
-
+![image (3)](C:\Users\PARK\Desktop\multiplus\img\image (3).gif)
 
 ### 사용자 인증
 
